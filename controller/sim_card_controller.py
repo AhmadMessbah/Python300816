@@ -65,7 +65,7 @@ class SimCardController:
         try:
             sim_card_da = SimCardDa()
             return True, sim_card_da.find_by_owner(
-                self.validator.sim_card_validator(owner, "Invalid Owner")
+                self.validator.owner_validator(owner, "Invalid Owner")
             )
         except Exception as e:
             return False, str(e)
