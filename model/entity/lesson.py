@@ -8,3 +8,4 @@ class Lesson(Base):
         self.grade = grade
         self.teacher = teacher
         self.start_day = start_day
+
