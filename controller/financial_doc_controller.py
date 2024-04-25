@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from model.da.financial_doc_da import Financial_Doc_Da
 from model.entity.financial_doc import FinancialDoc
 from model.tools.validator import Validator
@@ -7,12 +9,13 @@ class FinancialDoc_Controller:
     def __init__(self):
         self.validator = Validator()
 
-    def save(self, amount, date_time, doc_type):
+    def save(self, amount, doc_type, description):
         try:
             financial_doc = FinancialDoc(
                 self.validator.amount_validator(amount, "Invalid amount"),
-                self.validator.date_time_validator(date_time, "Invalid date time"),
-                self.validator.doc_type_validator(doc_type, "Invalid document type")
+                datetime.now(),
+                self.validator.doc_type_validator(doc_type, "Invalid document type"),
+                description
             )
             financial_doc_da = Financial_Doc_Da()
             financial_doc_da.save(financial_doc)
@@ -20,11 +23,11 @@ class FinancialDoc_Controller:
         except Exception as e:
             return False, str(e)
 
-    def edit(self, financial_doc_id, amount, date_time, doc_type):
+    def edit(self, financial_doc_id, amount, doc_type):
         try:
             financial_doc = FinancialDoc(
                 self.validator.amount_validator(amount, "Invalid amount"),
-                self.validator.date_time_validator(date_time, "Invalid date time"),
+                datetime.now(),
                 self.validator.doc_type_validator(doc_type, "Invalid document type")
             )
             financial_doc = FinancialDoc(amount, date_time, doc_type)
