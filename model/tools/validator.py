@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 
 class Validator:
@@ -8,4 +9,14 @@ class Validator:
         else:
             raise ValueError(message)
 
+    def date_validator(self, year, month, day, message):
+        try:
+            return datetime(year, month, day)
+        except:
+            raise ValueError(message)
 
+    def grade_validator(self, grade, message):
+        if re.match(r"^[a-zA-Z\s]{2,15}$", grade):
+            return grade
+        else:
+            raise ValueError(message)
