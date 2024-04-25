@@ -3,7 +3,7 @@ from model.entity.lesson import Lesson
 from model.tools.validator import Validator
 
 
-class PersonController:
+class LessonController:
     def __init__(self):
         self.validator = Validator()
 
@@ -17,7 +17,7 @@ class PersonController:
             )
             lesson_da = LessonDa()
             lesson_da.save(lesson)
-            return True, f"Person saved successfully\n{lesson}"
+            return True, f"Lesson saved successfully\n{lesson}"
         except Exception as e:
             return False, str(e)
 
