@@ -39,26 +39,25 @@ class Validator:
         else:
             raise ValueError(message)
 
-
-    def Number_Validator(self, number, message):
+    def number_validator(self, number, message):
         if re.match(r"^[0-9]{2,11}$", number):
             return number
         else:
             raise ValueError(message)
 
-    def Operator_Validator(self, operator, message):
-        if re.match(r"^[a-zA-Z\s]{2,20}$", operator):
+    def operator_validator(self, operator, message):
+        if isinstance(operator, str) and operator in ("irancell", "mci", "rightel", "shatel"):
             return operator
         else:
             raise ValueError(message)
 
-    def Price_Validator(self, price, message):
+    def price_validator(self, price, message):
         if re.match(r"^[0-9]{2,11}$", price):
             return price
         else:
             raise ValueError(message)
 
-    def Owner_Validator(self, owner, message):
+    def owner_validator(self, owner, message):
         if re.match(r"^[a-zA-Z\s]{5,50}$", owner):
             return owner
         else:
