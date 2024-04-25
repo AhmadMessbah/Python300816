@@ -5,15 +5,15 @@ from model.entity.user import User
 class UserDa(Da):
     def save(self, user):
         self.connect()
-        self.cursor.execute("INSERT INTO USER_TBL(username, password, status, locked) VALUES(%s,%s,%s,%s)",
+        self.cursor.execute("INSERT INTO USER_TBL(USERNAME, PASSWORD, STATUS, LOCKED) VALUES(%s,%s,%s,%s)",
                             [user.username, user.password, user.status, user.locked])
         self.connection.commit()
         self.disconnect()
 
-    def edit(self, user, status, locked):
+    def edit(self, user):
         self.connect()
-        self.cursor.execute("UPDATE USER_TBL SET username=%s, password=%s, status=%s, locked=%s  WHERE ID=%s",
-                            [user.username, user.password, user.user_id, status, locked])
+        self.cursor.execute("UPDATE USER_TBL SET USERNAME=%s, PASSWORD=%s, STATUS=%s, LOCKED=%s  WHERE ID=%s",
+                            [user.username, user.password, user.status, user.locked, user.user_id])
         self.connection.commit()
         self.disconnect()
 
@@ -34,6 +34,8 @@ class UserDa(Da):
             for user_tuple in user_tuple_list:
                 user = User(user_tuple[1], user_tuple[2])
                 user.user_id = user_tuple[0]
+                user.status = user_tuple[3]
+                user.locked = user_tuple[4]
                 user_list.append(user)
             return user_list
         else:
@@ -47,6 +49,8 @@ class UserDa(Da):
         if user_tuple:
             user = User(user_tuple[1], user_tuple[2])
             user.user_id = user_tuple[0]
+            user.status = user_tuple[3]
+            user.locked = user_tuple[4]
             return user
         else:
             raise ValueError("No User Found !")
@@ -61,6 +65,8 @@ class UserDa(Da):
             for user_tuple in user_tuple_list:
                 user = User(user_tuple[1], user_tuple[2])
                 user.user_id = user_tuple[0]
+                user.status = user_tuple[3]
+                user.locked = user_tuple[4]
                 user_list.append(user)
             return user_list
         else:
