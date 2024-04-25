@@ -1,0 +1,2 @@
+class SimCardDa(Da):
+    pass

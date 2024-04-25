@@ -1,5 +1,5 @@
-from model.da.sim_card_db import SimCardDb
-from model.entity.sim_card import sim_card
+from model.da.sim_card_da import SimCardDa
+from model.entity.sim_card import sim_card, SimCard
 from model.tools.validator import Validator
 
 
@@ -9,7 +9,7 @@ class SimCardController:
 
     def save(self, number, operator, price, owner):
         try:
-            sim_card = sim_card(
+            sim_card = SimCard(
                 self.validator.sim_card_validator(number, "Invalid Number"),
                 self.validator.sim_card_validator(operator, "Invalid Name"),
                 self.validator.sim_card_validator(price, "Invalid Value"),
