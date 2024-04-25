@@ -1,5 +1,5 @@
 from model.da.sim_card_da import SimCardDa
-from model.entity.sim_card import sim_card, SimCard
+from model.entity.sim_card import SimCard
 from model.tools.validator import Validator
 
 
