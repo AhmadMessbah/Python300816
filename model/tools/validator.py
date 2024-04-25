@@ -22,17 +22,16 @@ class Validator:
             raise ValueError(message)
 
     def amount_validator(self, amount, message):
-        if amount > 0:
+        if isinstance(amount, int) and amount > 0:
             return amount
         else:
             raise ValueError(message)
 
     def doc_type_validator(self, doc_type, message):
-        if doc_type == "income" or doc_type == "outcome":
+        if doc_type in ("income", "outcome"):
             return doc_type
         else:
             raise ValueError(message)
-
 
     def grade_validator(self, grade, message):
         if re.match(r"^[a-zA-Z\s]{2,15}$", grade):
