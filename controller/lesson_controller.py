@@ -3,7 +3,7 @@ from model.entity.lesson import Lesson
 from model.tools.validator import Validator
 
 
-class PersonController:
+class LessonController:
     def __init__(self):
         self.validator = Validator()
 
@@ -17,7 +17,7 @@ class PersonController:
             )
             lesson_da = LessonDa()
             lesson_da.save(lesson)
-            return True, f"Person saved successfully\n{lesson}"
+            return True, f"Lesson saved successfully\n{lesson}"
         except Exception as e:
             return False, str(e)
 
@@ -29,7 +29,7 @@ class PersonController:
                 self.validator.name_validator(teacher, "Invalid Teacher Name"),
                 self.validator.date_validator(year, month, day, "Invalid Date")
             )
-            lesson = Lesson(name, grade, teacher, start_day) //TODO درسته؟
+            lesson = Lesson(name, grade, teacher, start_day) //TODO مشکل اینجاست
             lesson.lesson_id = lesson_id
             lesson_da = LessonDa()
             old_lesson = lesson_da.find_by_id(lesson_id)
