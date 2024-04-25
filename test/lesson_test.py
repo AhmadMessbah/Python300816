@@ -9,7 +9,7 @@ l_controller = LessonController()
 # status, message = l_controller.edit(1, "math", "elementary", "Hafez", 2018, 12, 25)
 
 # TEST PASSED , remove
-# status, message = l_controller.remove(1)
+# status, message = l_controller.remove(2)
 
 # TEST PASSED , find_all
 # status, message = l_controller.find_all()
@@ -21,7 +21,7 @@ l_controller = LessonController()
 # status, message = l_controller.find_by_name("math")
 
 # TEST PASSED , find_by_teacher
-# status, message = l_controller.find_by_name("Hafez")
+# status, message = l_controller.find_by_teacher("Hafez")
 
 
 # if status:

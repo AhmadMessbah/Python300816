@@ -60,7 +60,7 @@ class LessonDa(Da):
             lesson_list = []
             for lesson_tuple in lesson_tuple_list:
                 lesson = Lesson(lesson_tuple[1], lesson_tuple[2], lesson_tuple[3], lesson_tuple[4])
-                lesson.person_id = lesson_tuple[0]
+                lesson.lesson_id = lesson_tuple[0]
                 lesson_list.append(lesson)
             return lesson_list
         else:
@@ -75,7 +75,7 @@ class LessonDa(Da):
             lesson_list = []
             for lesson_tuple in lesson_tuple_list:
                 lesson = Lesson(lesson_tuple[1], lesson_tuple[2], lesson_tuple[3], lesson_tuple[4])
-                lesson.person_id = lesson_tuple[0]
+                lesson.lesson_id = lesson_tuple[0]
                 lesson_list.append(lesson)
             return lesson_list
         else:

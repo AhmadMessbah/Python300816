@@ -61,6 +61,8 @@ class LessonController:
             lesson_da = LessonDa()
             return True, lesson_da.find_by_id(lesson_id)
         except Exception as e:
+            e.with_traceback()
+
             return False, str(e)
 
     def find_by_name(self, name):
