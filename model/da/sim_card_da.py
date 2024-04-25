@@ -1,4 +1,5 @@
 from model.da.da import Da
+from model.entity.sim_card import SimCard
 
 
 class SimCardDa(Da):
@@ -36,7 +37,7 @@ class SimCardDa(Da):
         if sim_card_tuple_list:
             sim_card_list = []
             for sim_card_tuple in sim_card_tuple_list:
-                sim_card = SimCardDa(sim_card_tuple[1], sim_card_tuple[2])
+                sim_card = SimCard(sim_card_tuple[1], sim_card_tuple[2],sim_card_tuple[3],sim_card_tuple[4])
                 sim_card.person_id = sim_card_tuple[0]
                 sim_card_list.append(sim_card)
             return sim_card_list
@@ -49,7 +50,7 @@ class SimCardDa(Da):
         sim_card_tuple = self.cursor.fetchone()
         self.disconnect()
         if sim_card_tuple:
-            sim_card = SimCardDa(sim_card_tuple[1], sim_card_tuple[2])
+            sim_card = SimCard(sim_card_tuple[1], sim_card_tuple[2],sim_card_tuple[3],sim_card_tuple[4])
             sim_card.sim_card_id = sim_card_tuple[0]
             return sim_card
         else:
@@ -63,7 +64,7 @@ class SimCardDa(Da):
         if sim_card_tuple_list:
             sim_card_list = []
             for sim_card_tuple in sim_card_tuple_list:
-                sim_card = SimCardDa(sim_card_tuple[1], sim_card_tuple[2])
+                sim_card = SimCard(sim_card_tuple[1], sim_card_tuple[2],sim_card_tuple[3],sim_card_tuple[4])
                 sim_card.sim_card_id = sim_card_tuple[0]
                 sim_card_list.append(sim_card)
             return sim_card_list
