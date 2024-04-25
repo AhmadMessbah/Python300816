@@ -1,5 +1,5 @@
 from model.da.da import Da
-from model.entity.product import Products
+from model.entity.product import Product
 
 
 class ProductDa(Da):
@@ -17,10 +17,10 @@ class ProductDa(Da):
         self.connection.commit()
         self.disconnect()
 
-    def remove(self, product):
+    def remove(self, product_id):
         self.connect()
         self.cursor.execute("DELETE FROM product_tbl WHERE ID=%s",
-                            [product.product_id])
+                            [product_id])
         self.connection.commit()
         self.disconnect()
 
@@ -30,23 +30,23 @@ class ProductDa(Da):
         products_tuple_list = self.cursor.fetchall()
         self.disconnect()
         if products_tuple_list:
-            products_list = []
-            for products_tuple in products_tuple_list:
-                product = Products(products_tuple[1], products_tuple[2], products_tuple[3], products_tuple[4])
-                product.product_id = products_tuple[0]
-                products_list.append(product)
-                return products_list
-            else:
-                raise ValueError("No products found !")
+            product_list = []
+            for product_tuple in products_tuple_list:
+                product = Product(product_tuple[1], product_tuple[2], product_tuple[3], product_tuple[4])
+                product.product_id = product_tuple[0]
+                product_list.append(product)
+            return product_list
+        else:
+            raise ValueError("No products found !")
 
     def find_by_id(self, product_id):
         self.connect()
         self.cursor.execute("SELECT * FROM product_tbl WHERE ID=%s", [product_id])
-        products_tuple = self.cursor.fetchone()
+        product_tuple = self.cursor.fetchone()
         self.disconnect()
-        if products_tuple:
-            product = Products(products_tuple[1], products_tuple[2], products_tuple[3], products_tuple[4])
-            product.product_id = products_tuple[0]
+        if product_tuple:
+            product = Product(product_tuple[1], product_tuple[2], product_tuple[3], product_tuple[4])
+            product.product_id = product_tuple[0]
             return product
         else:
             raise ValueError("No products found !")
@@ -54,14 +54,11 @@ class ProductDa(Da):
     def find_by_serial(self, serial):
         self.connect()
         self.cursor.execute("SELECT * FROM product_tbl WHERE serial=%S", [serial])
-        products_tuple_list = self.cursor.fetchall()
+        product_tuple = self.cursor.fetchone()
         self.disconnect()
-        if products_tuple_list:
-            product_list = []
-        for products_tuple in products_tuple_list:
-            product = Products(products_tuple[3])
-            product.product_id = products_tuple[0]
-            product_list.append(product)
-            return product_list
+        if product_tuple:
+            product = Product(product_tuple[1], product_tuple[2], product_tuple[3], product_tuple[4])
+            product.product_id = product_tuple[0]
+            return product
         else:
-            raise ValueError("no products found !")
+            raise ValueError("No Products Found !")

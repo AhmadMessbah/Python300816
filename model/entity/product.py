@@ -1,7 +1,7 @@
 from model.entity.base import Base
 
 
-class Products(Base):
+class Product(Base):
     def __init__(self, name, brand, serial, buy_price):
         self.product_id = None
         self.name = name

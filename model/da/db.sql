@@ -56,3 +56,14 @@ create table military_tbl
     city       nvarchar(30) not null,
     organ      nvarchar(30) not null
 );
+
+# User
+create table user_tbl(
+    id int primary key auto_increment,
+    username nvarchar(30) not null,
+    password nvarchar(30) not null,
+    status tinyint not null ,
+    locked tinyint not null
+);
+
+
