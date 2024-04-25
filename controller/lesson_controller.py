@@ -36,13 +36,12 @@ class LessonController:
             lesson_da.edit(lesson)
             return True, (f"Lesson edited successfully\nFrom : {old_lesson}\nTo: {lesson}")
         except Exception as e:
-            e.with_traceback()
             return False, str(e)
 
     def remove(self, lesson_id):
         try:
             lesson_da = LessonDa()
-            lesson = lesson_da.find_by_id(lesson_da)
+            lesson = lesson_da.find_by_id(lesson_id)
             lesson_da.remove(lesson_id)
             return True, f"Lesson removed successfully\n{lesson}"
         except Exception as e:
@@ -53,6 +52,8 @@ class LessonController:
             lesson_da = LessonDa()
             return True, lesson_da.find_all()
         except Exception as e:
+            e.with_traceback()
+
             return False, str(e)
 
     def find_by_id(self, lesson_id):
