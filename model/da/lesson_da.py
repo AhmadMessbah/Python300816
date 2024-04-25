@@ -50,3 +50,33 @@ class LessonDa(Da):
             return lesson
         else:
             raise ValueError("No lesson Found !")
+
+    def find_by_name(self, name):
+        self.connect()
+        self.cursor.execute("SELECT * FROM lesson_tbl WHERE NAME=%s", [name])
+        lesson_tuple_list = self.cursor.fetchall()
+        self.disconnect()
+        if lesson_tuple_list:
+            lesson_list = []
+            for lesson_tuple in lesson_tuple_list:
+                lesson = Lesson(lesson_tuple[1], lesson_tuple[2], lesson_tuple[3], lesson_tuple[4])
+                lesson.person_id = lesson_tuple[0]
+                lesson_list.append(lesson)
+            return lesson_list
+        else:
+            raise ValueError("No Lesson Found !")
+
+    def find_by_teacher(self, teacher):
+        self.connect()
+        self.cursor.execute("SELECT * FROM lesson_tbl WHERE TEACHER=%s", [teacher])
+        lesson_tuple_list = self.cursor.fetchall()
+        self.disconnect()
+        if lesson_tuple_list:
+            lesson_list = []
+            for lesson_tuple in lesson_tuple_list:
+                lesson = Lesson(lesson_tuple[1], lesson_tuple[2], lesson_tuple[3], lesson_tuple[4])
+                lesson.person_id = lesson_tuple[0]
+                lesson_list.append(lesson)
+            return lesson_list
+        else:
+            raise ValueError("No Lesson Found !")
