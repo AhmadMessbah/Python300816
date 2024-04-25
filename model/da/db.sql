@@ -45,3 +45,14 @@ create table sim_card_tbl(
     price int not null,
     owner nvarchar(40) not null
 );
+
+-- MilitaryRecord
+create table military_tbl
+(
+    id         int primary key auto_increment,
+    serial_num int,
+    start_date datetime,
+    end_date   datetime,
+    city       nvarchar(30) not null,
+    organ      nvarchar(30) not null
+);
