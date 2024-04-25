@@ -12,10 +12,10 @@ l_controller = LessonController()
 # status, message = l_controller.remove(1)
 
 # TEST PASSED , find_all
-# status, lesson_list = l_controller.find_all()
+status, message = l_controller.find_all()
 
 # TEST PASSED , find_by_id
-status, message = l_controller.find_by_id(2)
+# status, message = l_controller.find_by_id(2)
 
 # TEST PASSED , find_by_name
 # status, lesson_list = l_controller.find_by_name("math")
