@@ -7,12 +7,14 @@ class UserController:
     def __init__(self):
         self.validator = UserValidator()
 
-    def save(self, username, password):
+    def save(self, username, password, status, locked):
         try:
             user = User(
                 self.validator.username_validator(username, "Invalid Username"),
                 self.validator.password_validator(password, "Invalid Password")
             )
+            user.status = status
+            user.locked = locked
             user_da = UserDa()
             user_da.save(user)
             return True, f"User saved successfully\n{user}"
