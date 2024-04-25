@@ -6,16 +6,16 @@ l_controller = LessonController()
 # status, message = l_controller.save("math", "elementary", "Mesbah", 2018, 12, 25)
 
 # TEST PASSED , edit
-status, message = l_controller.edit(1, "math", "elementary", "Hafez", 2018, 12, 25)
+# status, message = l_controller.edit(1, "math", "elementary", "Hafez", 2018, 12, 25)
 
 # TEST PASSED , remove
-# status, message =  l_controller.remove(1)
+# status, message = l_controller.remove(1)
 
 # TEST PASSED , find_all
 # status, lesson_list = l_controller.find_all()
 
 # TEST PASSED , find_by_id
-# status, lesson = l_controller.find_by_id(4)
+status, message = l_controller.find_by_id(2)
 
 # TEST PASSED , find_by_name
 # status, lesson_list = l_controller.find_by_name("math")
