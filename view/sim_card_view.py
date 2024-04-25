@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter.messagebox as msg
-from sim_card.controller.sim_card_controller import SimCardController
+from controller.sim_card_controller import SimCardController
 
 
 class PersonView:

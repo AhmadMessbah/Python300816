@@ -10,10 +10,10 @@ class SimCardController:
     def save(self, number, operator, price, owner):
         try:
             sim_card = SimCard(
-                self.validator.sim_card_validator(number, "Invalid Number"),
-                self.validator.sim_card_validator(operator, "Invalid Name"),
-                self.validator.sim_card_validator(price, "Invalid Value"),
-                self.validator.sim_card_validator(owner, "Invalid Input")
+                self.validator.number_validator(number, "Invalid Number"),
+                self.validator.operator_validator(operator, "Invalid Name"),
+                self.validator.price_validator(price, "Invalid Value"),
+                self.validator.owner_validator(owner, "Invalid Input")
             )
             sim_card_da = SimCardDa()
             sim_card_da.save(sim_card)
@@ -24,12 +24,12 @@ class SimCardController:
     def edit(self, sim_card_id, number, operator, price, owner):
         try:
             sim_card = SimCard(
-                self.validator.sim_card_validator(number, "Invalid Number"),
-                self.validator.sim_card_validator(operator, "Invalid Name"),
-                self.validator.sim_card_validator(price, "Invalid Value"),
-                self.validator.sim_card_validator(owner, "Invalid Input")
+                self.validator.number_validator(number, "Invalid Number"),
+                self.validator.operator_validator(operator, "Invalid Name"),
+                self.validator.price_validator(price, "Invalid Value"),
+                self.validator.owner_validator(owner, "Invalid Input")
             )
-            sim_card = sim_card(number, operator, price, owner)
+            sim_card = SimCard(number, operator, price, owner)
             sim_card.sim_card_id = sim_card_id
             sim_card_da = SimCardDa()
             old_sim_card = sim_card_da.find_by_id(sim_card_id)
