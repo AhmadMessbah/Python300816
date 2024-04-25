@@ -1,5 +1,6 @@
 create database mft;
 
+-- Person
 create table person_tbl
 (
     id     int primary key auto_increment,
@@ -7,6 +8,7 @@ create table person_tbl
     family nvarchar(30) not null
 );
 
+-- Lesson
 create table lesson_tbl
 (
     id        int primary key auto_increment,
@@ -16,6 +18,7 @@ create table lesson_tbl
     start_day datetime
 );
 
+-- Product
 create table product_tbl
 (
     id        int primary key auto_increment,
