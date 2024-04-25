@@ -29,7 +29,7 @@ class LessonController:
                 self.validator.name_validator(teacher, "Invalid Teacher Name"),
                 self.validator.date_validator(year, month, day, "Invalid Date")
             )
-            lesson = Lesson(name, grade, teacher, start_day) //TODO مشکل اینجاست
+
             lesson.lesson_id = lesson_id
             lesson_da = LessonDa()
             old_lesson = lesson_da.find_by_id(lesson_id)
