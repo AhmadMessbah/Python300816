@@ -5,7 +5,8 @@ from controller.lesson_controller import LessonController
 
 
 class LessonView:
-    def table_select(self):
+
+    def table_select(self, event):
         selected = self.table.focus()
         selected_lesson = self.table.item(selected)["values"]
         self.id.set(selected_lesson[0])
@@ -37,7 +38,8 @@ class LessonView:
             month = start_day.month
             day = start_day.day
 
-            self.table.insert("", END, values=(lesson.lesson_id, lesson.name, lesson.grade, lesson.teacher, year, month, day))
+            self.table.insert("", END,
+                              values=(lesson.lesson_id, lesson.name, lesson.grade, lesson.teacher, year, month, day))
 
     def save_click(self):
         status, message = self.controller.save(self.name.get(),
@@ -76,6 +78,16 @@ class LessonView:
         else:
             msg.showerror("Remove Error", message)
 
+    def find_all_click(self):
+        status, message = self.controller.find_all()
+        if status:
+            msg.showinfo("Find All Lessons", message)
+            self.reset_form()
+        else:
+            msg.showerror("Find All Error", message)
+
+
+
     def __init__(self):
         self.controller = LessonController()
         win = Tk()
@@ -84,8 +96,8 @@ class LessonView:
 
         # center form
         x = (win.winfo_screenwidth() - 1160) // 2
-        y = (win.winfo_screenheight() - 215) // 2
-        win.geometry(f"1160x215+{x}+{y}")
+        y = (win.winfo_screenheight() - 255) // 2
+        win.geometry(f"1160x255+{x}+{y}")
 
         # id(lesson_id)
         Label(win, text="ID").place(x=20, y=20)
@@ -136,6 +148,8 @@ class LessonView:
         self.table.column(5, width=80)
         self.table.column(6, width=80)
         self.table.column(7, width=80)
+        self.table.bind("<ButtonRelease>", self.table_select)
+        self.table.bind("<KeyRelease>", self.table_select)
 
         button_new = Button(win, text="New", width=15, command=self.reset_form, bg='#86CA93', fg='black')
         button_new.place(x=1025, y=20)
@@ -149,8 +163,17 @@ class LessonView:
         button_remove = Button(win, text="Remove", width=15, command=self.remove_click, bg='#F23C3C', fg='black')
         button_remove.place(x=1025, y=140)
 
-        # self.table.bind("<ButtonRelease>", self.table_select)
-        self.table.bind("<KeyRelease>")
+        button_find_all = Button(win, text="Find All", width=15, command=self.find_all_click)
+        button_find_all.place(x=250, y=220)
+
+        button_find_by_id = Button(win, text="Find By ID", width=15, )
+        button_find_by_id.place(x=250, y=220)
+
+        button_find_by_name = Button(win, text="Find By Name", width=15, )
+        button_find_by_name.place(x=380, y=220)
+
+        button_find_by_teacher = Button(win, text="Find By Teacher", width=15, )
+        button_find_by_teacher.place(x=510, y=220)
 
         self.reset_form()
 

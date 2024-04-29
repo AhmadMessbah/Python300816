@@ -2,8 +2,8 @@ from controller.lesson_controller import LessonController
 
 l_controller = LessonController()
 
-# TEST PASSED , save
-# status, message = l_controller.save("math", "elementary", "Mesbah", 2018, 12, 25)
+# # TEST PASSED , save
+# status, message = l_controller.save("java", "elementary", "Oloomi", 2018, 12, 25)
 
 # TEST PASSED , edit
 # status, message = l_controller.edit(1, "math", "elementary", "Hafez", 2018, 12, 25)
@@ -12,23 +12,23 @@ l_controller = LessonController()
 # status, message = l_controller.remove(2)
 
 # TEST PASSED , find_all
-# status, message = l_controller.find_all()
+# status, lesson_list = l_controller.find_all()
 
 # TEST PASSED , find_by_id
-# status, message = l_controller.find_by_id(2)
+# status, lesson = l_controller.find_by_id(20)
 
 # TEST PASSED , find_by_name
-# status, message = l_controller.find_by_name("math")
+# status, lesson_list = l_controller.find_by_name("python")
 
 # TEST PASSED , find_by_teacher
-# status, message = l_controller.find_by_teacher("Hafez")
+# status, lesson_list = l_controller.find_by_teacher("oloomi")
 
-
+# #
 # if status:
 #     # msg.showinfo()
 #     print("Info")
-#     print(message)
+#     print(lesson_list)
 # else:
 #     # msg.showerror()
 #     print("Error")
-#     print(message)
+#     print(lesson_list)
