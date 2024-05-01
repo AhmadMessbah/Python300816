@@ -1,4 +1,4 @@
-create database mft;
+create database test;
 
 create table person_tbl
 (
@@ -23,4 +23,12 @@ create table product_tbl
     brand     nvarchar(30) not null,
     serial    nvarchar(20) not null,
     buy_price float
+);
+
+create table driving_license_tbl (
+    id int primary key auto_increment,
+    serial_number varchar(255),
+    date timestamp,
+    city varchar(255),
+    expire_date timestamp
 );

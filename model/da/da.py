@@ -1,6 +1,5 @@
 import mysql.connector
 
-
 class Da:
     def __init__(self):
         self.connection = None
@@ -10,8 +9,8 @@ class Da:
         self.connection = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="root123",
-            database="mft"
+            password="1234",
+            database="test"
         )
         self.cursor = self.connection.cursor()
 
