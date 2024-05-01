@@ -25,7 +25,6 @@ class PersonController:
                 self.validator.name_validator(name, "Invalid Name"),
                 self.validator.name_validator(family, "Invalid Family")
             )
-            person = Person(name, family)
             person.person_id = person_id
             person_da = PersonDa()
             old_person = person_da.find_by_id(person_id)
