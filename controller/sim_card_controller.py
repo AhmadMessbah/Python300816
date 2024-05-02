@@ -41,4 +41,3 @@ class SimCardController:
     @exception_handling
     def find_by_owner(cls, owner):
         return True, cls.sim_card_da.find_by_owner(owner)
-
