@@ -27,7 +27,7 @@ class FinancialDoc(Base):
     def set_description(self, description):
         self._description =  description
 
-    amount = property(get_amount, set_amount)
+    amount = property(get_amount, set_description)
     doc_type = property(get_doc_type, set_doc_type)
     description = property(get_description, set_description)
 
