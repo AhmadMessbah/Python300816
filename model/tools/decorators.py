@@ -1,8 +1,15 @@
+from model.tools.logging import Logger
+
+
 def exception_handling(function):
     def inner(*args, **kwargs):
         try:
-            return function(*args, **kwargs)
+            output = function(*args, **kwargs)
+            Logger.info(f"{function.__qualname__} - {args[1:]} returned {output[1]}")
+            return output
         except Exception as e:
+            Logger.error(f"Function - {args, kwargs} Has Error {e}")
             return False, str(e)
 
     return inner
+

@@ -21,12 +21,3 @@ p_controller = UserController()
 # status, user_list = p_controller.find_by_username("edfs")
 #
 #
-#
-# if status:
-#     # msg.showinfo()
-#     print("Info")
-#     print(user_list)
-# else:
-#     # msg.showerror()
-#     print("Error")
-#     print(user_list)

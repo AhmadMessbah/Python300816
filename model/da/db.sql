@@ -15,7 +15,7 @@ create table lesson_tbl
     name      nvarchar(30) not null,
     grade     nvarchar(15) not null,
     teacher   nvarchar(30) not null,
-    start_day datetime
+    start_day date
 );
 
 -- Product
@@ -74,4 +74,13 @@ create table driving_license_tbl (
     date timestamp,
     city varchar(255),
     expire_date timestamp
+);
+
+create table medical_record(
+    id int primary key auto_increment,
+    disease nvarchar(20) not null ,
+    medicine nvarchar(20) not null ,
+    datee date,
+    doctor nvarchar(20),
+    status bool not null
 );

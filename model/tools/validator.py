@@ -1,5 +1,5 @@
 import re
-from datetime import datetime
+from datetime import datetime,date
 
 
 class Validator:
@@ -11,9 +11,11 @@ class Validator:
             raise ValueError(message)
 
     @classmethod
-    def date_validator(cls, year, month, day, message):
+    def date_validator(cls, date_tuple, message):
+        if isinstance(date_tuple, date):
+            return date_tuple
         try:
-            return datetime(year, month, day)
+            return datetime(*date_tuple).date()
         except:
             raise ValueError(message)
 
