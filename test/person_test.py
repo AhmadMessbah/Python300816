@@ -18,13 +18,3 @@ status, message = PersonController.save("REZA","REZAII")
 # TEST PASSED
 # status, message = PersonController.find_by_family("alipour")
 
-
-
-# if status:
-#     # msg.showinfo()
-#     print("Info")
-#     print(message)
-# else:
-#     # msg.showerror()
-#     print("Error")
-#     print(message)

@@ -14,11 +14,3 @@ status, sim_card = sim_card_controller.find_by_id(3)
 
 status, sim_card_list = sim_card_controller.find_by_owner("SinaMrf")
 
-if status:
-    # msg.showinfo()
-    print("Info")
-    print(message)
-else:
-    # msg.showerror()
-    print("Error")
-    print(message)
