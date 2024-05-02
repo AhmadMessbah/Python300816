@@ -2,7 +2,7 @@ from model.da.da import Da
 from model.entity.financial_doc import FinancialDoc
 
 
-class Financial_Doc_Da(Da):
+class FinancialDocDa(Da):
     def save(self, financial_doc):
         self.connect()
         self.cursor.execute("INSERT INTO FinancialDoc_tbl(AMOUNT, DATE_TIME, DOC_TYPE, DESCRIPTION) VALUES(%s,%s,%s,%s)",
