@@ -7,6 +7,7 @@ class Logger:
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(message)s",
+        encoding="UTF-8",
         handlers=[
             logging.FileHandler("d:/logging.log"),
             logging.StreamHandler(sys.stdout)
