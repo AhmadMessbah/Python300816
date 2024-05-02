@@ -11,9 +11,9 @@ class Validator:
             raise ValueError(message)
 
     @classmethod
-    def date_validator(cls, year, month, day, message):
+    def date_validator(cls, date_tuple, message):
         try:
-            return datetime(year, month, day)
+            return datetime(*date_tuple)
         except:
             raise ValueError(message)
 
