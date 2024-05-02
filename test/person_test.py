@@ -20,11 +20,11 @@ from controller.person_controller import PersonController
 
 
 
-if status:
-    # msg.showinfo()
-    print("Info")
-    print(message)
-else:
-    # msg.showerror()
-    print("Error")
-    print(message)
+# if status:
+#     # msg.showinfo()
+#     print("Info")
+#     print(message)
+# else:
+#     # msg.showerror()
+#     print("Error")
+#     print(message)
