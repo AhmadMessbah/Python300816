@@ -1,7 +1,6 @@
 from model.da.lesson_da import LessonDa
 from model.entity.lesson import Lesson
 from model.tools.decorators import exception_handling
-from model.tools.validator import Validator
 
 
 class LessonController:

@@ -1,13 +1,13 @@
 from controller.lesson_controller import LessonController
 
 # # TEST PASSED , save
-status, message = LessonController.save("java", "elementary", "Oloomi", 2018, 12, 25)
+# status, message = LessonController.save("Windows", "elementary", "Oloomi", 2021, 5, 25)
 
 # TEST PASSED , edit
-# status, message = l_controller.edit(1, "math", "elementary", "Hafez", 2018, 12, 25)
+# status, message = LessonController.edit(6, "math", "elementary", "Hafez", 2021, 5, 10)
 
 # TEST PASSED , remove
-# status, message = l_controller.remove(2)
+status, message = LessonController.remove(8)
 
 # TEST PASSED , find_all
 # status, lesson_list = l_controller.find_all()
