@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from model.da.financialdocda import FinancialDocDa
+from model.da.financial_doc_da import FinancialDocDa
 from model.entity.financial_doc import FinancialDoc
 from model.tools.decorators import exception_handling
 
