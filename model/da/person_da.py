@@ -53,7 +53,7 @@ class PersonDa(Da):
 
     def find_by_family(self, family):
         self.connect()
-        self.cursor.execute("SELECT * FROM PERSON_TBL WHERE FAMILY=%s", [family])
+        self.cursor.execute("SELECT * FROM PERSON_TBL WHERE FAMILY LIKE %s", [family+"%"])
         person_tuple_list = self.cursor.fetchall()
         self.disconnect()
         if person_tuple_list:

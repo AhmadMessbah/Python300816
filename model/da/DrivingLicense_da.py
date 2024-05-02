@@ -5,15 +5,18 @@ from ..entity.DrivingLicense import DrivingLicense
 class DrivingLicenseDa(Da):
     def save(self, drivinnglicence):
         self.connect()
-        self.cursor.execute("INSERT INTO driving_license_tbl(CITY, DATE , SERIAL_NUMBER , EXPIRE_DATE) VALUES(%s,%s, %s, %s)",
-                            [drivinnglicence.city,drivinnglicence.date , drivinnglicence.serial_number, drivinnglicence.expire_date] )
+        self.cursor.execute(
+            "INSERT INTO driving_license_tbl(CITY, DATE , SERIAL_NUMBER , EXPIRE_DATE) VALUES(%s,%s, %s, %s)",
+            [drivinnglicence.city, drivinnglicence.date, drivinnglicence.serial_number, drivinnglicence.expire_date])
         self.connection.commit()
         self.disconnect()
 
     def edit(self, drivinnglicence):
         self.connect()
-        self.cursor.execute("UPDATE driving_license_tbl SET CITY=%S, DATE=$S, SERIAL_NUMBER=%S , expire_date=%s WHERE ID=%s",
-                            [drivinnglicence.city, drivinnglicence.date, drivinnglicence.serial_number,drivinnglicence.expire_date, drivinnglicence.id])
+        self.cursor.execute(
+            "UPDATE driving_license_tbl SET CITY=%S, DATE=$S, SERIAL_NUMBER=%S , expire_date=%s WHERE ID=%s",
+            [drivinnglicence.city, drivinnglicence.date, drivinnglicence.serial_number, drivinnglicence.expire_date,
+             drivinnglicence.id])
         self.connection.commit()
         self.disconnect()
 
@@ -45,7 +48,8 @@ class DrivingLicenseDa(Da):
         drivnglicenc_tuple = self.cursor.fetchone()
         self.disconnect()
         if drivnglicenc_tuple:
-            drivingLicense = DrivingLicense(drivnglicenc_tuple[1], drivnglicenc_tuple[2], drivnglicenc_tuple[3], drivnglicenc_tuple[4])
+            drivingLicense = DrivingLicense(drivnglicenc_tuple[1], drivnglicenc_tuple[2], drivnglicenc_tuple[3],
+                                            drivnglicenc_tuple[4])
             drivingLicense.id = drivnglicenc_tuple[0]
             return drivingLicense
         else:
@@ -57,7 +61,8 @@ class DrivingLicenseDa(Da):
         drivnglicenc_tuple = self.cursor.fetchone()
         self.disconnect()
         if drivnglicenc_tuple:
-            drivingLicense = DrivingLicense(drivnglicenc_tuple[1], drivnglicenc_tuple[2], drivnglicenc_tuple[3], drivnglicenc_tuple[4])
+            drivingLicense = DrivingLicense(drivnglicenc_tuple[1], drivnglicenc_tuple[2], drivnglicenc_tuple[3],
+                                            drivnglicenc_tuple[4])
             drivingLicense.id = drivnglicenc_tuple[0]
             return drivingLicense
         else:
