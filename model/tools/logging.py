@@ -1,5 +1,3 @@
-import os
-
 import logging
 import sys
 
@@ -21,4 +19,5 @@ class Logger:
     @classmethod
     def error(cls, message):
         logging.error(message)
+
 
