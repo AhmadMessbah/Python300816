@@ -1,7 +1,7 @@
 from controller.person_controller import PersonController
 
 # TEST PASSED
-# status, message = PersonController.save("REZA","REZAII")
+status, message = PersonController.save("REZA","REZAII")
 
 # TEST PASSED
 # status, message =  PersonController.edit(6,"alireza","alipour")
