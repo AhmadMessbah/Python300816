@@ -2,7 +2,7 @@ from controller.sim_card_controller import SimCardController
 
 sim_card_controller = SimCardController()
 
-status, message = sim_card_controller.save("09107777777", "SinaMrf")
+status, message = sim_card_controller.save("09107777777", "irancell", 200, "SinMrf")
 
 # status, message = sim_card_controller.edit(2, "09124444444", "MahyaAhm")
 #
