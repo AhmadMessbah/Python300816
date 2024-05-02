@@ -10,8 +10,8 @@ class FinancialDoc_Controller:
 
     @classmethod
     @exception_handling
-    def save(cls, amount, doc_type,description):
-        financial_doc = FinancialDoc(amount,doc_type )
+    def save(cls, amount, doc_type, description):
+        financial_doc = FinancialDoc(amount,doc_type,description )
         cls.financial_doc_da.save(financial_doc)
         return True, f"financial_doc saved successfully\n{financial_doc}"
 
