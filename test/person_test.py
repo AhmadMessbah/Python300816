@@ -1,7 +1,7 @@
 from controller.person_controller import PersonController
 
 # TEST PASSED
-status, message =  PersonController.save("REZA","REZAII")
+print(PersonController.save("REZA","REZAII"))
 
 # TEST PASSED
 # status, message =  PersonController.edit(6,"alireza","alipour")
@@ -20,11 +20,11 @@ status, message =  PersonController.save("REZA","REZAII")
 
 
 
-if status:
-    # msg.showinfo()
-    print("Info")
-    print(message)
-else:
-    # msg.showerror()
-    print("Error")
-    print(message)
+# if status:
+#     # msg.showinfo()
+#     print("Info")
+#     print(message)
+# else:
+#     # msg.showerror()
+#     print("Error")
+#     print(message)
