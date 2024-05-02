@@ -53,7 +53,7 @@ class LessonDa(Da):
 
     def find_by_name(self, name):
         self.connect()
-        self.cursor.execute("SELECT * FROM LESSON_TBL WHERE NAME=%s", [name])
+        self.cursor.execute("SELECT * FROM LESSON_TBL WHERE NAME LIKE %s", [name+"%"])
         lesson_tuple_list = self.cursor.fetchall()
         self.disconnect()
         if lesson_tuple_list:
@@ -68,7 +68,7 @@ class LessonDa(Da):
 
     def find_by_teacher(self, teacher):
         self.connect()
-        self.cursor.execute("SELECT * FROM LESSON_TBL WHERE TEACHER=%s", [teacher])
+        self.cursor.execute("SELECT * FROM LESSON_TBL WHERE TEACHER LIKE %s", [teacher+"%"])
         lesson_tuple_list = self.cursor.fetchall()
         self.disconnect()
         if lesson_tuple_list:

@@ -25,6 +25,7 @@ class LessonView:
         self.year.set(2024)
         self.month.set(1)
         self.day.set(1)
+        self.find_name.set("")
         self.refresh_table()
 
     def refresh_table(self):
@@ -33,10 +34,10 @@ class LessonView:
 
         status, lessons = self.controller.find_all()
         for lesson in lessons:
-            start_day = lesson.start_day
-            year = start_day.year
-            month = start_day.month
-            day = start_day.day
+            start_date = lesson.start_day
+            year = start_date.year
+            month = start_date.month
+            day = start_date.day
 
             self.table.insert("", END,
                               values=(lesson.lesson_id, lesson.name, lesson.grade, lesson.teacher, year, month, day))
@@ -78,15 +79,43 @@ class LessonView:
         else:
             msg.showerror("Remove Error", message)
 
-    def find_all_click(self):
-        status, message = self.controller.find_all()
+    def find_name_click(self, event):
+        status, message = self.controller.find_by_name(self.find_name.get())
         if status:
-            msg.showinfo("Find All Lessons", message)
-            self.reset_form()
+            for item in self.table.get_children():
+                self.table.delete(item)
+
+            for lesson in message:
+                start_date = lesson.start_day
+                year = start_date.year
+                month = start_date.month
+                day = start_date.day
+
+                self.table.insert("", END,
+                                  values=(
+                                      lesson.lesson_id, lesson.name, lesson.grade, lesson.teacher, year, month, day))
         else:
-            msg.showerror("Find All Error", message)
+            msg.showerror("Find Error", message)
+            self.reset_form()
 
+    def find_teacher_click(self, event):
+        status, message = self.controller.find_by_teacher(self.find_teacher.get())
+        if status:
+            for item in self.table.get_children():
+                self.table.delete(item)
 
+            for lesson in message:
+                start_date = lesson.start_day
+                year = start_date.year
+                month = start_date.month
+                day = start_date.day
+
+                self.table.insert("", END,
+                                  values=(
+                                      lesson.lesson_id, lesson.name, lesson.grade, lesson.teacher, year, month, day))
+        else:
+            msg.showerror("Find Error", message)
+            self.reset_form()
 
     def __init__(self):
         self.controller = LessonController()
@@ -163,17 +192,19 @@ class LessonView:
         button_remove = Button(win, text="Remove", width=15, command=self.remove_click, bg='#F23C3C', fg='black')
         button_remove.place(x=1025, y=140)
 
-        button_find_all = Button(win, text="Find All", width=15, command=self.find_all_click)
-        button_find_all.place(x=250, y=220)
+        # Find By Name
+        Label(win, text="Find By Name").place(x=250, y=220)
+        self.find_name = StringVar()
+        self.entry = Entry(win, textvariable=self.find_name)
+        self.entry.place(x=350, y=220)
+        self.entry.bind("<KeyRelease>", self.find_name_click)
 
-        button_find_by_id = Button(win, text="Find By ID", width=15, )
-        button_find_by_id.place(x=250, y=220)
-
-        button_find_by_name = Button(win, text="Find By Name", width=15, )
-        button_find_by_name.place(x=380, y=220)
-
-        button_find_by_teacher = Button(win, text="Find By Teacher", width=15, )
-        button_find_by_teacher.place(x=510, y=220)
+        # Find By Teacher
+        Label(win, text="Find By Teacher").place(x=550, y=220)
+        self.find_teacher = StringVar()
+        self.entry = Entry(win, textvariable=self.find_teacher)
+        self.entry.place(x=650, y=220)
+        self.entry.bind("<KeyRelease>", self.find_teacher_click)
 
         self.reset_form()
 
