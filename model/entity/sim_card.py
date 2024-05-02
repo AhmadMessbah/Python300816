@@ -11,7 +11,7 @@ class SimCard(Base):
         self.owner = owner
 
     def get_number(self):
-        return self.set_number()
+        return self._number
 
     def set_number(self, number):
         self._number = Validator.number_validator(number, "Invalid Number")
@@ -28,7 +28,7 @@ class SimCard(Base):
     def set_price(self, price):
         self._price = Validator.price_validator(price, "Invalid Price")
 
-    def get_owner(self, owner):
+    def get_owner(self):
         return self._owner
 
     def set_owner(self, owner):
