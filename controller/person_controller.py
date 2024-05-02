@@ -1,6 +1,7 @@
 from model.da.person_da import PersonDa
 from model.entity.person import Person
 from model.tools.decorators import exception_handling
+from model.tools.logging import Logger
 
 
 class PersonController:
@@ -11,7 +12,7 @@ class PersonController:
     def save(cls, name, family):
         person = Person(name, family)
         cls.person_da.save(person)
-        return True, f"Person saved successfully\n{person}"
+        return True, f"Person saved successfully {person}"
 
     @classmethod
     @exception_handling
@@ -20,14 +21,14 @@ class PersonController:
         person.person_id = person_id
         old_person = cls.person_da.find_by_id(person_id)
         cls.person_da.edit(person)
-        return True, (f"Person edited successfully\nFrom : {old_person}\nTo: {person}")
+        return True, (f"Person edited successfullyFrom : {old_person}\nTo: {person}")
 
     @classmethod
     @exception_handling
     def remove(cls, person_id):
         person = cls.person_da.find_by_id(person_id)
         cls.person_da.remove(person_id)
-        return True, f"Person removed successfully\n{person}"
+        return True, f"Person removed successfully {person}"
 
     @classmethod
     @exception_handling

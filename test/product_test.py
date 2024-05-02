@@ -1,3 +1,4 @@
+from controller.person_controller import PersonController
 from controller.product_controller import ProductController
 
 
@@ -12,7 +13,8 @@ from controller.product_controller import ProductController
 # status , message = ProductController.edit("4","A51","samsung12","XD568","2000")
 
 # TEST PASSED
-status, message = ProductController.remove(4)
+PersonController.save("Mohsen", "Akbari")
+status, message = ProductController.remove(1400)
 
 # TEST PASSED
 # status,message = person_list = ProductController.find_all()
