@@ -10,8 +10,8 @@ class UserController:
     @exception_handling
     def save(cls, username, password, status, locked):
         user = User(username, password)
-        cls.user.status = status
-        cls.user.locked = locked
+        user.status = status
+        user.locked = locked
         cls.user_da.save(user)
         return True, f"User saved successfully\n{user}"
 
