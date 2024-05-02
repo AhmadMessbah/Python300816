@@ -22,7 +22,7 @@ class FinancialDoc_Controller:
         financial_doc.financial_doc_id = financial_doc_id
         old_financial_doc = cls.financial_doc_da.find_by_id(financial_doc_id)
         cls.financial_doc_da.edit(financial_doc)
-        return True, (f"financial_doc edited successfull\nFrom : {old_financial_doc}\nTo: {financial_doc}")
+        return True, (f"financial_doc edited successfully\nFrom : {old_financial_doc}\nTo: {financial_doc}")
 
     @classmethod
     @exception_handling
