@@ -46,4 +46,5 @@ class Lesson(Base):
     name = property(get_name, set_name)
     family = property(get_grade, set_grade)
     grade = property(get_grade, set_grade)
+    teacher = property(get_teacher, set_teacher)
     start_day = property(get_start_day, set_start_day)
