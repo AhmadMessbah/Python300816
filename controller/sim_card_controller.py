@@ -6,15 +6,15 @@ class SimCardController:
     sim_card_da = SimCardDa()
     @classmethod
     @exception_handling
-    def save(cls, sim_card_id, number, operator, price, owner):
-        sim_card = SimCard(sim_card_id, number, operator, price, owner)
+    def save(cls, number, operator, price, owner):
+        sim_card = SimCard(number, operator, price, owner)
         cls.sim_card_da.save(sim_card)
         return True, f"SimCard saved successfully\n{sim_card}"
 
     @classmethod
     @exception_handling
     def edit(cls, sim_card_id, number, operator, price, owner):
-        sim_card = SimCard(sim_card_id, number, operator, price, owner)
+        sim_card = SimCard( number, operator, price, owner)
         sim_card.sim_card_id = sim_card_id
         old_sim_card = cls.sim_card_da.find_by_id(sim_card_id)
         cls.sim_card_da.edit(sim_card)
