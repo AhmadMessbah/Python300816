@@ -1,71 +1,44 @@
 from model.da.sim_card_da import SimCardDa
 from model.entity.sim_card import SimCard
-from model.tools.validator import Validator
-
+from model.tools.decorators import exception_handling
 
 class SimCardController:
-    def __init__(self):
-        self.validator = Validator()
+    sim_card_da = SimCardDa()
+    @classmethod
+    @exception_handling
+    def save(cls, sim_card_id, number, operator, price, owner):
+        sim_card = SimCard(sim_card_id, number, operator, price, owner)
+        cls.sim_card_da.save(sim_card)
+        return True, f"SimCard saved successfully\n{sim_card}"
 
-    def save(self, number, operator, price, owner):
-        try:
-            sim_card = SimCard(
-                self.validator.number_validator(number, "Invalid Number"),
-                self.validator.operator_validator(operator, "Invalid Name"),
-                self.validator.price_validator(price, "Invalid Value"),
-                self.validator.owner_validator(owner, "Invalid Input")
-            )
-            sim_card_da = SimCardDa()
-            sim_card_da.save(sim_card)
-            return True, f"SimCard saved successfully\n{sim_card}"
-        except Exception as e:
-            return False, str(e)
+    @classmethod
+    @exception_handling
+    def edit(cls, sim_card_id, number, operator, price, owner):
+        sim_card = SimCard(sim_card_id, number, operator, price, owner)
+        sim_card.sim_card_id = sim_card_id
+        old_sim_card = cls.sim_card_da.find_by_id(sim_card_id)
+        cls.sim_card_da.edit(sim_card)
+        return True, (f"SimCard edited successfully\nFrom : {old_sim_card}\nTo: {sim_card}")
 
-    def edit(self, sim_card_id, number, operator, price, owner):
-        try:
-            sim_card = SimCard(
-                self.validator.number_validator(number, "Invalid Number"),
-                self.validator.operator_validator(operator, "Invalid Name"),
-                self.validator.price_validator(price, "Invalid Value"),
-                self.validator.owner_validator(owner, "Invalid Input")
-            )
-            sim_card = SimCard(number, operator, price, owner)
-            sim_card.sim_card_id = sim_card_id
-            sim_card_da = SimCardDa()
-            old_sim_card = sim_card_da.find_by_id(sim_card_id)
-            sim_card_da.edit(sim_card)
-            return True, (f"SimCard edited successfully\nFrom : {old_sim_card}\nTo: {sim_card}")
-        except Exception as e:
-            return False, str(e)
+    @classmethod
+    @exception_handling
+    def remove(cls, sim_card_id):
+        sim_card = cls.sim_card_da.find_by_id(sim_card_id)
+        cls.sim_card_da.remove(sim_card_id)
+        return True, f"sim_card removed successfully\n{sim_card}"
 
-    def remove(self, sim_card_id):
-        try:
-            sim_card_da = SimCardDa()
-            sim_card = sim_card_da.find_by_id(sim_card_id)
-            sim_card_da.remove(sim_card_id)
-            return True, f"sim_card removed successfully\n{sim_card}"
-        except Exception as e:
-            return False, str(e)
+    @classmethod
+    @exception_handling
+    def find_all(cls):
+        return True, cls.sim_card_da.find_all()
 
-    def find_all(self):
-        try:
-            sim_card_da = SimCardDa()
-            return True, sim_card_da.find_all()
-        except Exception as e:
-            return False, str(e)
+    @classmethod
+    @exception_handling
+    def find_by_id(cls, sim_card_id):
+        return True, cls.sim_card_da.find_by_id(sim_card_id)
 
-    def find_by_id(self, sim_card_id):
-        try:
-            sim_card_da = SimCardDa()
-            return True, sim_card_da.find_by_id(sim_card_id)
-        except Exception as e:
-            return False, str(e)
+    @classmethod
+    @exception_handling
+    def find_by_owner(cls, owner):
+        return True, cls.sim_card_da.find_by_owner(owner)
 
-    def find_by_owner(self, owner):
-        try:
-            sim_card_da = SimCardDa()
-            return True, sim_card_da.find_by_owner(
-                self.validator.owner_validator(owner, "Invalid Owner")
-            )
-        except Exception as e:
-            return False, str(e)
