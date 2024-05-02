@@ -1,66 +1,45 @@
 from model.da.person_da import PersonDa
 from model.entity.person import Person
-from model.tools.validator import Validator
+from model.tools.decorators import exception_handling
 
 
 class PersonController:
-    def __init__(self):
-        self.validator = Validator()
+    person_da = PersonDa()
 
-    def save(self, name, family):
-        try:
-            person = Person(
-                self.validator.name_validator(name, "Invalid Name"),
-                self.validator.name_validator(family, "Invalid Family")
-            )
-            person_da = PersonDa()
-            person_da.save(person)
-            return True, f"Person saved successfully\n{person}"
-        except Exception as e:
-            return False, str(e)
+    @classmethod
+    @exception_handling
+    def save(cls, name, family):
+        person = Person(name, family)
+        cls.person_da.save(person)
+        return True, f"Person saved successfully\n{person}"
 
-    def edit(self, person_id, name, family):
-        try:
-            person = Person(
-                self.validator.name_validator(name, "Invalid Name"),
-                self.validator.name_validator(family, "Invalid Family")
-            )
-            person.person_id = person_id
-            person_da = PersonDa()
-            old_person = person_da.find_by_id(person_id)
-            person_da.edit(person)
-            return True, (f"Person edited successfully\nFrom : {old_person}\nTo: {person}")
-        except Exception as e:
-            return False, str(e)
+    @exception_handling
+    @classmethod
+    def edit(cls, person_id, name, family):
+        person = Person(name, family)
+        person.person_id = person_id
+        old_person = cls.person_da.find_by_id(person_id)
+        cls.person_da.edit(person)
+        return True, (f"Person edited successfully\nFrom : {old_person}\nTo: {person}")
 
-    def remove(self, person_id):
-        try:
-            person_da = PersonDa()
-            person = person_da.find_by_id(person_id)
-            person_da.remove(person_id)
-            return True, f"Person removed successfully\n{person}"
-        except Exception as e:
-            return False, str(e)
+    @exception_handling
+    @classmethod
+    def remove(cls, person_id):
+        person = cls.person_da.find_by_id(person_id)
+        cls.person_da.remove(person_id)
+        return True, f"Person removed successfully\n{person}"
 
-    def find_all(self):
-        try:
-            person_da = PersonDa()
-            return True, person_da.find_all()
-        except Exception as e:
-            return False, str(e)
+    @exception_handling
+    @classmethod
+    def find_all(cls):
+        return True, cls.person_da.find_all()
 
-    def find_by_id(self, person_id):
-        try:
-            person_da = PersonDa()
-            return True, person_da.find_by_id(person_id)
-        except Exception as e:
-            return False, str(e)
+    @exception_handling
+    @classmethod
+    def find_by_id(cls, person_id):
+        return True, cls.person_da.find_by_id(person_id)
 
-    def find_by_family(self, family):
-        try:
-            person_da = PersonDa()
-            return True, person_da.find_by_family(
-                self.validator.name_validator(family, "Invalid Family")
-            )
-        except Exception as e:
-            return False, str(e)
+    @exception_handling
+    @classmethod
+    def find_by_family(cls, family):
+        return True, cls.person_da.find_by_family(family)

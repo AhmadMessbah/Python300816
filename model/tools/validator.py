@@ -3,62 +3,87 @@ from datetime import datetime
 
 
 class Validator:
-    def name_validator(self, name, message):
-        if re.match(r"^[a-zA-Z\s]{2,30}$", name):
+    @classmethod
+    def name_validator(cls, name, message):
+        if isinstance(name, str) and re.match(r"^[a-zA-Z\s]{2,30}$", name):
             return name
         else:
             raise ValueError(message)
 
-    def date_validator(self, year, month, day, message):
+    @classmethod
+    def date_validator(cls, year, month, day, message):
         try:
             return datetime(year, month, day)
         except:
             raise ValueError(message)
 
-    def date_time_validator(self, year, month, day, hour, minute, second, message):
+    @classmethod
+    def date_time_validator(cls, year, month, day, hour, minute, second, message):
         try:
             return datetime(year, month, day, hour, minute, second)
         except:
             raise ValueError(message)
 
-    def amount_validator(self, amount, message):
+    @classmethod
+    def amount_validator(cls, amount, message):
         if isinstance(amount, int) and amount > 0:
             return amount
         else:
             raise ValueError(message)
 
-    def doc_type_validator(self, doc_type, message):
+    @classmethod
+    def doc_type_validator(cls, doc_type, message):
         if doc_type in ("income", "outcome"):
             return doc_type
         else:
             raise ValueError(message)
 
-    def grade_validator(self, grade, message):
+    @classmethod
+    def grade_validator(cls, grade, message):
         if re.match(r"^[a-zA-Z\s]{2,15}$", grade):
             return grade
         else:
             raise ValueError(message)
 
-    def number_validator(self, number, message):
-        if re.match(r"^[0-9]{2,11}$", number):
+    @classmethod
+    def phone_number_validator(cls, number, message):
+        if re.match(r"^(09|\+989)\d{9}$", number):
             return number
         else:
             raise ValueError(message)
 
-    def operator_validator(self, operator, message):
-        if isinstance(operator, str) and operator in ("irancell", "mci", "rightel", "shatel"):
+    @classmethod
+    def operator_validator(cls, operator, message):
+        if isinstance(operator, str) and operator.lower() in ("irancell", "mci", "rightel", "shatel"):
             return operator
         else:
             raise ValueError(message)
 
-    def price_validator(self, price, message):
-        if re.match(r"^[0-9]{2,11}$", price):
+    @classmethod
+    def price_validator(cls, price, message):
+        if isinstance(price, int) and price >= 0:
             return price
         else:
             raise ValueError(message)
 
-    def owner_validator(self, owner, message):
+    @classmethod
+    def owner_validator(cls, owner, message):
         if re.match(r"^[a-zA-Z\s]{5,50}$", owner):
             return owner
+        else:
+            raise ValueError(message)
+
+
+    @classmethod
+    def username_validator(cls, username, message):
+        if re.match(r"^[\w@!#$%^&*\s]{2,30}$", username):
+            return username
+        else:
+            raise ValueError(message)
+
+    @classmethod
+    def password_validator(cls, password, message):
+        if re.match(r"^[\w@!#$%^&*\s]{8,16}$", password):
+            return password
         else:
             raise ValueError(message)
