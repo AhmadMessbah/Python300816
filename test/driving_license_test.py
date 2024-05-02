@@ -20,13 +20,3 @@ drivingLicenseController = DrivingLicenseController()
 # TEST PASSED
 # status, drivingLicense = drivingLicenseController.find_by_serial_number("1234")
 
-
-
-# if status:
-#     # msg.showinfo()
-#     print("Info")
-#     print(message)
-# else:
-#     # msg.showerror()
-#     print("Error")
-#     print(message)

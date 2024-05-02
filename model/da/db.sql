@@ -15,7 +15,7 @@ create table lesson_tbl
     name      nvarchar(30) not null,
     grade     nvarchar(15) not null,
     teacher   nvarchar(30) not null,
-    start_day datetime
+    start_day date
 );
 
 -- Product
