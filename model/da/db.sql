@@ -49,12 +49,12 @@ create table sim_card_tbl(
 -- MilitaryRecord
 create table military_tbl
 (
-    id         int primary key auto_increment,
-    serial_num int,
-    start_date datetime,
-    end_date   datetime,
-    city       nvarchar(30) not null,
-    organ      nvarchar(30) not null
+    id            int primary key auto_increment,
+    serial_number int not null,
+    start_date    date not null,
+    end_date      date not null,
+    city          varchar(30) not null,
+    organ         varchar(60) not null
 );
 
 # User
