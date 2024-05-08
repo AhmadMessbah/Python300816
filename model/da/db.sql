@@ -50,7 +50,7 @@ create table sim_card_tbl(
 create table military_tbl
 (
     id            int primary key auto_increment,
-    serial_number int not null,
+    serial_number varchar(11) not null,
     city          varchar(30) not null,
     organ         varchar(30) not null,
     start_date    date not null,
