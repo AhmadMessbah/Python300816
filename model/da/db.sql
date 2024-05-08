@@ -53,8 +53,8 @@ create table military_tbl
     serial_number int not null,
     start_date    date not null,
     end_date      date not null,
-    city          varchar(60) not null,
-    organ         varchar(60) not null
+    city          varchar(30) not null,
+    organ         varchar(30) not null
 );
 
 # User
