@@ -1,214 +1,119 @@
 from tkinter import *
-import tkinter.ttk as ttk
 import tkinter.messagebox as msg
 from controller.lesson_controller import LessonController
+from view.component.label_text import TextWithLabel
+from view.component.table import Table
 
 
-class LessonView:
-
-    def table_select(self, event):
-        selected = self.table.focus()
-        selected_lesson = self.table.item(selected)["values"]
-        self.id.set(selected_lesson[0])
-        self.name.set(selected_lesson[1])
-        self.grade.set(selected_lesson[2])
-        self.teacher.set(selected_lesson[3])
-        self.year.set(selected_lesson[4])
-        self.month.set(selected_lesson[5])
-        self.day.set(selected_lesson[6])
-
-    def reset_form(self):
-        self.id.set(0)
-        self.name.set("")
-        self.grade.set("")
-        self.teacher.set("")
-        self.year.set(2024)
-        self.month.set(1)
-        self.day.set(1)
-        self.find_name.set("")
-        self.refresh_table()
-
-    def refresh_table(self):
-        for item in self.table.get_children():
-            self.table.delete(item)
-
-        status, lessons = self.controller.find_all()
-        for lesson in lessons:
-            start_date = lesson.start_day
-            year = start_date.year
-            month = start_date.month
-            day = start_date.day
-
-            self.table.insert("", END,
-                              values=(lesson.lesson_id, lesson.name, lesson.grade, lesson.teacher, year, month, day))
-
-    def save_click(self):
-        status, message = self.controller.save(self.name.get(),
-                                               self.grade.get(),
-                                               self.teacher.get(),
-                                               self.year.get(),
-                                               self.month.get(),
-                                               self.day.get()
-                                               )
-        if status:
-            msg.showinfo("Save", message)
-            self.reset_form()
-        else:
-            msg.showerror("Save Error", message)
-
-    def edit_click(self):
-        status, message = self.controller.edit(self.id.get(),
-                                               self.name.get(),
-                                               self.grade.get(),
-                                               self.teacher.get(),
-                                               self.year.get(),
-                                               self.month.get(),
-                                               self.day.get()
-                                               )
-        if status:
-            msg.showinfo("Edit", message)
-            self.reset_form()
-        else:
-            msg.showerror("Edit Error", message)
-
-    def remove_click(self):
-        status, message = self.controller.remove(self.id.get())
-        if msg.askyesno("Remove", "Are you sure?"):
-            msg.showinfo("Remove", message)
-            self.reset_form()
-        else:
-            msg.showerror("Remove Error", message)
-
-    def find_name_click(self, event):
-        status, message = self.controller.find_by_name(self.find_name.get())
-        if status:
-            for item in self.table.get_children():
-                self.table.delete(item)
-
-            for lesson in message:
-                start_date = lesson.start_day
-                year = start_date.year
-                month = start_date.month
-                day = start_date.day
-
-                self.table.insert("", END,
-                                  values=(
-                                      lesson.lesson_id, lesson.name, lesson.grade, lesson.teacher, year, month, day))
-        else:
-            msg.showerror("Find Error", message)
-            self.reset_form()
-
-    def find_teacher_click(self, event):
-        status, message = self.controller.find_by_teacher(self.find_teacher.get())
-        if status:
-            for item in self.table.get_children():
-                self.table.delete(item)
-
-            for lesson in message:
-                start_date = lesson.start_day
-                year = start_date.year
-                month = start_date.month
-                day = start_date.day
-
-                self.table.insert("", END,
-                                  values=(
-                                      lesson.lesson_id, lesson.name, lesson.grade, lesson.teacher, year, month, day))
-        else:
-            msg.showerror("Find Error", message)
-            self.reset_form()
-
-    def __init__(self):
-        self.controller = LessonController()
-        win = Tk()
-        win.title("Panel")
-        # win.wm_protocol("WM_DELETE_WINDOW", exit_click)
-
-        # center form
-        x = (win.winfo_screenwidth() - 1160) // 2
-        y = (win.winfo_screenheight() - 255) // 2
-        win.geometry(f"1160x255+{x}+{y}")
-
-        # id(lesson_id)
-        Label(win, text="ID").place(x=20, y=20)
-        self.id = IntVar()
-        Entry(win, textvariable=self.id, state="readonly").place(x=100, y=20)
-
-        # name
-        Label(win, text="Name").place(x=20, y=60)
-        self.name = StringVar()
-        Entry(win, textvariable=self.name).place(x=100, y=60)
-
-        # grade
-        Label(win, text="Grade").place(x=20, y=100)
-        self.grade = StringVar()
-        Entry(win, textvariable=self.grade).place(x=100, y=100)
-
-        # teacher
-        Label(win, text="Teacher").place(x=20, y=140)
-        self.teacher = StringVar()
-        Entry(win, textvariable=self.teacher).place(x=100, y=140)
-
-        # date
-        Label(win, text="Year").place(x=20, y=180)
-        Label(win, text="/Month").place(x=90, y=180)
-        Label(win, text="/Day").place(x=165, y=180)
-        self.year = IntVar()
-        self.month = IntVar()
-        self.day = IntVar()
-        Entry(win, textvariable=self.year, width=4).place(x=60, y=180)
-        Entry(win, textvariable=self.month, width=2).place(x=145, y=180)
-        Entry(win, textvariable=self.day, width=2).place(x=205, y=180)
-
-        # table
-        self.table = ttk.Treeview(win, columns=(1, 2, 3, 4, 5, 6, 7), show="headings", height=8)
-        self.table.place(x=250, y=20)
-        self.table.heading(1, text="Id")
-        self.table.heading(2, text="Name")
-        self.table.heading(3, text="Grade")
-        self.table.heading(4, text="Teacher")
-        self.table.heading(5, text="Year")
-        self.table.heading(6, text="Month")
-        self.table.heading(7, text="Day")
-
-        self.table.column(1, width=60)
-        self.table.column(2, width=150)
-        self.table.column(3, width=150)
-        self.table.column(4, width=150)
-        self.table.column(5, width=80)
-        self.table.column(6, width=80)
-        self.table.column(7, width=80)
-        self.table.bind("<ButtonRelease>", self.table_select)
-        self.table.bind("<KeyRelease>", self.table_select)
-
-        button_new = Button(win, text="New", width=15, command=self.reset_form, bg='#86CA93', fg='black')
-        button_new.place(x=1025, y=20)
-
-        button_save = Button(win, text="Save", width=15, command=self.save_click)
-        button_save.place(x=1025, y=60)
-
-        button_edit = Button(win, text="Edit", width=15, command=self.edit_click)
-        button_edit.place(x=1025, y=100)
-
-        button_remove = Button(win, text="Remove", width=15, command=self.remove_click, bg='#F23C3C', fg='black')
-        button_remove.place(x=1025, y=140)
-
-        # Find By Name
-        Label(win, text="Find By Name").place(x=250, y=220)
-        self.find_name = StringVar()
-        self.entry = Entry(win, textvariable=self.find_name)
-        self.entry.place(x=350, y=220)
-        self.entry.bind("<KeyRelease>", self.find_name_click)
-
-        # Find By Teacher
-        Label(win, text="Find By Teacher").place(x=550, y=220)
-        self.find_teacher = StringVar()
-        self.entry = Entry(win, textvariable=self.find_teacher)
-        self.entry.place(x=650, y=220)
-        self.entry.bind("<KeyRelease>", self.find_teacher_click)
-
-        self.reset_form()
-
-        win.mainloop()
+def reset_form():
+    id.variable.set("0")
+    name.variable.set("")
+    grade.variable.set("")
+    teacher.variable.set("")
+    year.variable.set(2024)
+    month.variable.set(1)
+    day.variable.set(1)
+    status, lesson_list = LessonController.find_all()
+    if status:
+        table.refresh_table(lesson_list)
 
 
-ui = LessonView()
+def select_row(lesson):
+    id.variable.set(lesson[0])
+    name.variable.set(lesson[1])
+    grade.variable.set(lesson[2])
+    teacher.variable.set(lesson[3])
+    year.variable.set(lesson[4])
+    month.variable.set(lesson[5])
+    day.variable.set(lesson[6])
+
+
+def save_click():
+    status, message = LessonController.save(name.variable.get(),
+                                            grade.variable.get(),
+                                            teacher.variable.get(),
+                                            year.variable.get(),
+                                            month.variable.get(),
+                                            day.variable.get()
+                                            )
+    if status:
+        msg.showinfo("Save Lesson", "Lesson Saved")
+        reset_form()
+    else:
+        msg.showerror("Save Error", message)
+
+
+def edit_click():
+    status, message = LessonController.edit(id.variable.get(),
+                                            name.variable.get(),
+                                            grade.variable.get(),
+                                            teacher.variable.get(),
+                                            year.variable.get(),
+                                            month.variable.get(),
+                                            day.variable.get()
+                                            )
+    if status:
+        msg.showinfo("Edit Lesson", "Lesson Edited")
+        reset_form()
+    else:
+        msg.showerror("Edit Error", message)
+
+
+def remove_click():
+    status, message = LessonController.remove(id.variable.get())
+    if status:
+        msg.showinfo("Remove Lesson", "Lesson Removed")
+        reset_form()
+    else:
+        msg.showerror("Remove Error", message)
+
+
+def find_by_name(event):
+    status, lesson_list = LessonController.find_by_name(search_name.variable.get())
+    if status:
+        table.refresh_table(lesson_list)
+
+
+def find_by_teacher(event):
+    status, lesson_list = LessonController.find_by_teacher(search_teacher.variable.get())
+    if status:
+        table.refresh_table(lesson_list)
+
+
+win = Tk()
+win.title("Panel")
+
+# center form
+x = (win.winfo_screenwidth() - 1050) // 2
+y = (win.winfo_screenheight() - 300) // 2
+win.geometry(f"1050x300+{x}+{y}")
+
+id = TextWithLabel(win, "ID", 20, 20, disabled=True)
+name = TextWithLabel(win, "Name", 20, 60)
+grade = TextWithLabel(win, "Grade", 20, 100)
+teacher = TextWithLabel(win, "Teacher", 20, 140)
+
+year = TextWithLabel(win, "Year", 20, 180, 30, "", 4)
+month = TextWithLabel(win, "/Month", 90, 180, 45, "", 2)
+day = TextWithLabel(win, "/Day", 165, 180, 30, "", 2)
+
+search_name = TextWithLabel(win, "Find By Name", 250, 260, 100)
+search_name.text_box.bind("<KeyRelease>", find_by_name)
+search_teacher = TextWithLabel(win, "Find By Teacher", 550, 260, 100)
+search_teacher.text_box.bind("<KeyRelease>", find_by_teacher)
+
+table = Table(win,
+              ["Id", "Name", "Grade", "Teacher", "Year", "Month", "Day"],
+              [60, 150, 150, 150, 80, 80, 80],
+              250,
+              20,
+              select_row)
+
+Button(win, text="New", width=10, command=reset_form, bg='#86CA93', fg='black').place(x=20, y=220)
+Button(win, text="Save", width=10, command=save_click).place(x=120, y=220)
+Button(win, text="Edit", width=10, command=edit_click).place(x=20, y=260)
+Button(win, text="Remove", width=10, command=remove_click, bg='#F23C3C', fg='black').place(x=120, y=260)
+
+reset_form()
+
+win.mainloop()
