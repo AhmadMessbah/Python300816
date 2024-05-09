@@ -68,7 +68,7 @@ class ProductView:
     def __init__(self, user):
         self.user = user
         win = Tk()
-        win.geometry("600x300")
+        win.geometry("800x300")
         win.title("Product")
 
         self.id = TextWithLabel(win, "Id", 20, 20, disabled=True)
