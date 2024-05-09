@@ -19,6 +19,7 @@ class MilitaryView:
         self.end_year.variable.set("")
         self.end_month.variable.set("")
         self.end_day.variable.set("")
+        self.soldier_id.variable.set("")
         status, military_list = MilitaryController.find_all()
         if status:
             self.table.refresh_table(military_list)
@@ -36,6 +37,7 @@ class MilitaryView:
         self.end_year.variable.set(int(military[5][0:4]))
         self.end_month.variable.set(int(military[5][5:7]))
         self.end_day.variable.set(int(military[5][8:]))
+        self.soldier_id.variable.set(military[6])
 
     def save_click(self):
         status, message = MilitaryController.save(self.serial_number.variable.get(),
@@ -47,7 +49,7 @@ class MilitaryView:
                                                   self.end_year.variable.get(),
                                                   self.end_month.variable.get(),
                                                   self.end_day.variable.get(),
-                                                  self.soldier.variable.get())
+                                                  self.soldier_id.variable.get())
         if status:
             msg.showinfo("Save Record", "Record Saved")
             self.reset_form()
@@ -65,7 +67,7 @@ class MilitaryView:
                                                   self.end_year.variable.get(),
                                                   self.end_month.variable.get(),
                                                   self.end_day.variable.get(),
-                                                  self.soldier.variable.get())
+                                                  self.soldier_id.variable.get())
         if status:
             msg.showinfo("Edit Record", "Record Edited")
             self.reset_form()
@@ -106,8 +108,8 @@ class MilitaryView:
         win.geometry(f"910x300+{x}+{y}")
 
         # WIDGETS
-        self.soldier = TextWithLabel(win, "Soldier", 20, 20, width=5 )
-        self.id = TextWithLabel(win, "ID", 20, 20, disabled=True)
+        self.soldier_id = TextWithLabel(win, "Soldier", 140, 20, distance=40, width=5 )
+        self.id = TextWithLabel(win, "ID", 20, 20, disabled=True, width=5)
         self.serial_number = TextWithLabel(win, "Serial", 20, 60)
         self.city = TextWithLabel(win, "City", 20, 100)
         self.organ = TextWithLabel(win, "Organ", 20, 140)
