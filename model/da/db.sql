@@ -35,6 +35,7 @@ create view mft.product_count as
 select person_id, count(person_id) as count_product from mft.product_tbl
 group by person_id;
 
+
 # FinancialDoc
 create table FinancialDoc_tbl(
     id int primary key auto_increment,
