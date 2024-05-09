@@ -26,11 +26,8 @@ class Table:
 
         if data_list:
             for data in data_list:
-                # self.table.insert("", END, values=tuple(data.__dict__.values()))
-                # print(data)
-                year, month, day = data._start_day.year, data._start_day.month, data._start_day.day
-                self.table.insert("", END,
-                                   values=(data.lesson_id, data._name, data._grade, data._teacher, year, month, day))
+                self.table.insert("", END, values=tuple(data.__dict__.values()))
+
 
     def select_table(self, event):
         data = self.table.item(self.table.focus())["values"]
@@ -42,7 +39,10 @@ class Table:
 
         if data_list:
             for data in data_list:
-                year, month, day = data._start_day.year, data._start_day.month, data._start_day.day
+                year = data._start_day.year
+                month = data._start_day.month
+                day = data._start_day.day
                 self.table.insert("", END,
-                                   values=(data.lesson_id, data._name, data._grade, data._teacher, year, month, day))
+                                  values=(data.lesson_id, data._name, data._grade, data._teacher, year, month, day))
+
 

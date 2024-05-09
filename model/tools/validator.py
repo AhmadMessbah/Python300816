@@ -14,6 +14,13 @@ class Validator:
     def date_validator(cls, date_tuple, message):
         if isinstance(date_tuple, date):
             return date_tuple
+
+        y, m, d = date_tuple
+        year = int(y)
+        month = int(m)
+        day = int(d)
+        date_tuple = (year, month, day)
+
         try:
             return datetime(*date_tuple).date()
         except:
