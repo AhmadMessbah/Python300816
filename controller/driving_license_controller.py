@@ -1,5 +1,5 @@
-from model.da.DrivingLicense_da import DrivingLicenseDa
-from model.entity.DrivingLicense import DrivingLicense
+from model.da.driving_license_da import DrivingLicenseDa
+from model.entity.driving_license import DrivingLicense
 from model.tools.validator import Validator
 
 
