@@ -46,7 +46,8 @@ class MilitaryView:
                                                   self.start_day.variable.get(),
                                                   self.end_year.variable.get(),
                                                   self.end_month.variable.get(),
-                                                  self.end_day.variable.get())
+                                                  self.end_day.variable.get(),
+                                                  self.soldier.variable.get())
         if status:
             msg.showinfo("Save Record", "Record Saved")
             self.reset_form()
@@ -63,7 +64,8 @@ class MilitaryView:
                                                   self.start_day.variable.get(),
                                                   self.end_year.variable.get(),
                                                   self.end_month.variable.get(),
-                                                  self.end_day.variable.get())
+                                                  self.end_day.variable.get(),
+                                                  self.soldier.variable.get())
         if status:
             msg.showinfo("Edit Record", "Record Edited")
             self.reset_form()
@@ -104,7 +106,7 @@ class MilitaryView:
         win.geometry(f"910x300+{x}+{y}")
 
         # WIDGETS
-        #self.soldier = TextWithLabel(win, "Soldier", 20, 20, width=5 )
+        self.soldier = TextWithLabel(win, "Soldier", 20, 20, width=5 )
         self.id = TextWithLabel(win, "ID", 20, 20, disabled=True)
         self.serial_number = TextWithLabel(win, "Serial", 20, 60)
         self.city = TextWithLabel(win, "City", 20, 100)
