@@ -59,7 +59,9 @@ create table military_tbl
     city          varchar(30) not null,
     organ         varchar(30) not null,
     start_date    date not null,
-    end_date      date not null
+    end_date      date not null,
+    person_id int,
+    foreign key (person_id) references person_tbl(id)
 );
 
 # User

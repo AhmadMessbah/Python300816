@@ -3,13 +3,14 @@ from model.tools.validator import Validator
 
 
 class Military(Base):
-    def __init__(self, serial_number, city, organ, start_date, end_date):
+    def __init__(self, serial_number, city, organ, start_date, end_date, person=None):
         self.military_id = None
         self.serial_number = serial_number
         self.city = city
         self.organ = organ
         self.start_date = start_date
         self.end_date = end_date
+        self.person = person
 
     def get_serial_number(self):
         return self._serial_number
@@ -41,6 +42,11 @@ class Military(Base):
     def set_end_date(self, end_date):
         self._end_date = Validator.date_validator(end_date, "Invalid End Date")
 
+    def get_person(self):
+        return self._person
+
+    def set_person(self, person):
+        self._person = person
 
 
     serial_number = property(get_serial_number , set_serial_number)
@@ -48,3 +54,4 @@ class Military(Base):
     organ = property(get_organ, set_organ)
     start_date = property(get_start_date, set_start_date)
     end_date = property(get_end_date, set_end_date)
+    person = property(get_person, set_person)
