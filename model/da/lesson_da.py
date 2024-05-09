@@ -16,10 +16,10 @@ class LessonDa(Da):
             raise ValueError("Error in Teacher Or Cant Save Any More !!!")
 
     def edit(self, lesson):
-        if (lesson.teacher and self.find_teacher_count_by_teacher_id(lesson.teacher.teacher_id) < 10):
+        if (lesson.teacher and self.find_teacher_count_by_teacher_id(lesson.teacher.person_id) < 10):
             self.connect()
             self.cursor.execute("UPDATE LESSON_TBL SET NAME=%s, GRADE=%s, START_DAY=%s, TEACHER_ID=%s WHERE ID=%s",
-                                [lesson.name, lesson.grade, lesson.start_day, lesson.teacher_id, lesson.lesson_id])
+                                [lesson.name, lesson.grade, lesson.start_day, lesson.teacher.person_id, lesson.lesson_id])
             self.connection.commit()
             self.disconnect()
         else:
