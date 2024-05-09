@@ -9,7 +9,7 @@ class Da:
         self.connection = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="mft123",
+            password="root123",
             database="mft"
         )
         self.cursor = self.connection.cursor()

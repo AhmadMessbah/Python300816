@@ -12,21 +12,22 @@ class LoginView:
     def login_click(self):
         ret, user = UserController.find_by_username_and_password(self.username.variable.get(), self.password.variable.get())
         if ret:
-            main_view = MainView(self, user)
+            self.win.destroy()
+            main_view = MainView( user)
         else:
             msg.showerror("Login Error", "Access Denid !!!")
 
 
     def __init__(self):
-        win = Tk()
-        win.geometry("710x310")
-        win.title("User")
+        self.win = Tk()
+        self.win.geometry("250x250")
+        self.win.title("User")
 
 
-        self.username = TextWithLabel(win, "Username", 20, 60)
-        self.password = TextWithLabel(win, "Password", 20, 100)
+        self.username = TextWithLabel(self.win, "Username", 20, 40)
+        self.password = TextWithLabel(self.win, "Password", 20, 100)
 
 
-        Button(win, text="Login", width=8, command=self.login_click).place(x=100, y=260)
+        Button(self.win, text="Login", width=10, command=self.login_click).place(x=80, y=180)
 
-        win.mainloop()
+        self.win.mainloop()
