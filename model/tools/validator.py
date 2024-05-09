@@ -96,3 +96,10 @@ class Validator:
             return password
         else:
             raise ValueError(message)
+
+    @classmethod
+    def serial_validator(cls, serial_number, message):
+        if isinstance(serial_number, str) and re.match(r"^[0-9]{11}$", serial_number):
+            return serial_number
+        else:
+            raise ValueError(message)
