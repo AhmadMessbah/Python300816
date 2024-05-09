@@ -1,8 +1,11 @@
+from datetime import datetime
 from tkinter import *
 import tkinter.messagebox as msg
 from controller.lesson_controller import LessonController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
+
+
 
 
 def reset_form():
@@ -15,7 +18,7 @@ def reset_form():
     day.variable.set(1)
     status, lesson_list = LessonController.find_all()
     if status:
-        table.refresh_table_lesson(lesson_list)
+        table.refresh_table(lesson_list)
 
 
 def select_row(lesson):
@@ -23,9 +26,10 @@ def select_row(lesson):
     name.variable.set(lesson[1])
     grade.variable.set(lesson[2])
     teacher.variable.set(lesson[3])
-    year.variable.set(lesson[4])
-    month.variable.set(lesson[5])
-    day.variable.set(lesson[6])
+    lesson_date = datetime.strptime(lesson[4], "%Y-%m-%d")
+    year.variable.set(lesson_date.year)
+    month.variable.set(lesson_date.month)
+    day.variable.set(lesson_date.day)
 
 
 def save_click():
@@ -86,7 +90,7 @@ win.title("Panel")
 # center form
 x = (win.winfo_screenwidth() - 1050) // 2
 y = (win.winfo_screenheight() - 300) // 2
-win.geometry(f"1050x300+{x}+{y}")
+win.geometry(f"850x300+{x}+{y}")
 
 id = TextWithLabel(win, "ID", 20, 20, disabled=True)
 name = TextWithLabel(win, "Name", 20, 60)
@@ -103,8 +107,8 @@ search_teacher = TextWithLabel(win, "Find By Teacher", 550, 260, 100)
 search_teacher.text_box.bind("<KeyRelease>", find_by_teacher)
 
 table = Table(win,
-              ["Id", "Name", "Grade", "Teacher", "Year", "Month", "Day"],
-              [60, 150, 150, 150, 80, 80, 80],
+              ["Id", "Name", "Grade", "Teacher", "Date"],
+              [60, 150, 150, 150, 80],
               250,
               20,
               select_row)

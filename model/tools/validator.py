@@ -14,13 +14,6 @@ class Validator:
     def date_validator(cls, date_tuple, message):
         if isinstance(date_tuple, date):
             return date_tuple
-
-        y, m, d = date_tuple
-        year = int(y)
-        month = int(m)
-        day = int(d)
-        date_tuple = (year, month, day)
-
         try:
             return datetime(*date_tuple).date()
         except:
@@ -94,5 +87,12 @@ class Validator:
     def password_validator(cls, password, message):
         if re.match(r"^[\w@!#$%^&*\s]{8,16}$", password):
             return password
+        else:
+            raise ValueError(message)
+
+    @classmethod
+    def serial_validator(cls, serial_number, message):
+        if isinstance(serial_number, str) and re.match(r"^[0-9]{11}$", serial_number):
+            return serial_number
         else:
             raise ValueError(message)
