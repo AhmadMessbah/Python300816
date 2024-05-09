@@ -59,8 +59,8 @@ class FinancialDocView:
         if status:
             self.table.refresh_table(financial_list)
 
-    def __init__(self, user):
-        self.user = user
+    def __init__(self, person):
+        self.person = person
         win = Tk()
         win.geometry("600x300")
         win.title("Financial Document")
@@ -70,8 +70,8 @@ class FinancialDocView:
         self.date_time = TextWithLabel(win, "date time", 20, 100)
         self.search_date_time  = TextWithLabel(win, "date time", 300, 270)
         self.search_date_time.text_box.bind("<KeyRelease>", self.find_by_date)
-        self.doc_type = TextWithLabel(win, "doc type", 20, 60)
-        self.description = TextWithLabel(win, "description", 20, 60)
+        self.doc_type = TextWithLabel(win, "doc type", 20, 140)
+        self.description = TextWithLabel(win, "description", 20, 180)
 
 
         self.table = Table(win,
