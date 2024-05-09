@@ -37,14 +37,18 @@ create table FinancialDoc_tbl(
     description nvarchar(100) not null
 );
 
-# SimCard
-create table sim_card_tbl(
+create table mft.sim_card_tbl(
     id int primary key auto_increment,
-    number nvarchar(11) not null,
+    number nvarchar(11) not null unique ,
     operator nvarchar(20) not null,
     price int not null,
-    owner nvarchar(40) not null
+    owner_id int,
+    FOREIGN KEY (owner_id) REFERENCES mft.user_tbl(id)
 );
+
+create view mft.sim_card_count as
+select owner_id, count(owner_id) as count_sim_card from mft.sim_card_tbl
+group by owner_id;
 
 -- MilitaryRecord
 create table military_tbl
