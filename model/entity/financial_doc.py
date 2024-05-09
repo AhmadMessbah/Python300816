@@ -8,6 +8,7 @@ class FinancialDoc(Base):
         self.date_time = date_time
         self.doc_type = doc_type
         self.description = description
+        self.person = None
 
     def get_amount(self):
         return self._amount

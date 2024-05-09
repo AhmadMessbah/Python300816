@@ -12,12 +12,11 @@ class UserController:
     @exception_handling
     def save(cls, username, password, status, locked, person_id):
         if person_id:
-            person = cls.user_da.find_by_id(person_id)
-            user = User(username, password, status, locked, person)
+            person = cls.person_da.find_by_id(person_id)
+            user = User(username, password, person)
         else:
-            user = User(username, password, status, locked)
+            user = User(username, password)
 
-        user = User(username, password)
         user.status = status
         user.locked = locked
         cls.user_da.save(user)
@@ -25,10 +24,10 @@ class UserController:
 
     @classmethod
     @exception_handling
-    def edit(cls, user_id, username, password):
-        user = User(username, password)
+    def edit(cls, user_id, username, password, status, locked , person_id):
+        person = PersonDa.find_by_id(person_id)
+        user = User(username, password, status, locked , person)
         user.user_id = user_id
-        user_da = UserDa()
         old_user = cls.user_da.find_by_id(user_id)
         cls.user_da.edit(user)
         return True, (f"User edited successfully\nFrom : {old_user}\nTo: {user}")
