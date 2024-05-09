@@ -49,7 +49,7 @@ class MedicalRecordController:
     @classmethod
     @exception_handling
     def find_by_owner_id(cls, patient_id):
-        return True, cls.medical_da.find_by_owner_id(patient_id)
+        return True, cls.medical_da.find_by_patient_id(patient_id)
 
 
 
