@@ -6,83 +6,85 @@ from controller.user_controller import UserController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
 
-
-def reset_form():
-    id.variable.set("")
-    username.variable.set("")
-    password.variable.set("")
-    status, user_list = UserController.find_all()
-    if status:
-        table.refresh_table(user_list)
-
-
-def select_row(user):
-    id.variable.set(user[0])
-    username.variable.set(user[1])
-    password.variable.set(user[2])
+class UserView:
+    def reset_form(self):
+        self.id.variable.set("")
+        self.username.variable.set("")
+        self.password.variable.set("")
+        status, user_list = UserController.find_all()
+        if status:
+            self.table.refresh_table(user_list)
 
 
-def save_click():
-    ret, message = UserController.save(username.variable.get(), password.variable.get(), status.get(),
-                                          locked.get())
-    if ret:
-        msg.showinfo("Save User", "User Saved")
-        reset_form()
-    else:
-        msg.showerror("Save Error", message)
+    def select_row(self,user):
+        self.id.variable.set(user[0])
+        self.username.variable.set(user[1])
+        self.password.variable.set(user[2])
 
 
-def edit_click():
-    ret, message = UserController.edit(id.variable.get(), username.variable.get(), password.variable.get() , locked.get() , status.get())
-    if ret:
-        msg.showinfo("Edit User", "User Edited")
-        reset_form()
-    else:
-        msg.showerror("Edit Error", message)
+    def save_click(self):
+        ret, message = UserController.save(self.username.variable.get(), self.password.variable.get(), self.status.get(),
+                                              self.locked.get())
+        if ret:
+            msg.showinfo("Save User", "User Saved")
+            self.reset_form()
+        else:
+            msg.showerror("Save Error", message)
 
 
-def remove_click():
-    ret, message = UserController.remove(id.variable.get())
-    if status:
-        msg.showinfo("Remove User", "User Removed")
-        reset_form()
-    else:
-        msg.showerror("Remove Error", message)
+    def edit_click(self):
+        ret, message = UserController.edit(self.id.variable.get(), self.username.variable.get(), self.password.variable.get() , self.locked.get() , self.status.get())
+        if ret:
+            msg.showinfo("Edit User", "User Edited")
+            self.reset_form()
+        else:
+            msg.showerror("Edit Error", message)
 
 
-def find_by_username(event):
-    ret, user_list = UserController.find_by_username(search_username.variable.get())
-    if ret:
-        table.refresh_table(user_list)
+    def remove_click(self):
+        ret, message = UserController.remove(self.id.variable.get())
+        if self.status:
+            msg.showinfo("Remove User", "User Removed")
+            self.reset_form()
+        else:
+            msg.showerror("Remove Error", message)
 
 
-win = Tk()
-win.geometry("710x310")
+    def find_by_username(self,event):
+        ret, user_list = UserController.find_by_username(self.search_username.variable.get())
+        if ret:
+            self.table.refresh_table(user_list)
 
-id = TextWithLabel(win, "Id", 20, 20, disabled=True)
-username = TextWithLabel(win, "Username", 20, 60)
-password = TextWithLabel(win, "Password", 20, 100)
-search_username = TextWithLabel(win, "Username", 350, 260)
-search_username.text_box.bind("<KeyRelease>", find_by_username)
+    def __init__(self):
+        win = Tk()
+        win.geometry("710x310")
+        win.title("User")
 
-status = BooleanVar()
-ttk.Checkbutton(text='Active', variable=status).place(x=80, y=140)
-status.set(True)
 
-locked = BooleanVar()
-ttk.Checkbutton(text='Locked', variable=locked).place(x=150, y=140)
+        self.id = TextWithLabel(win, "Id", 20, 20, disabled=True)
+        self.username = TextWithLabel(win, "Username", 20, 60)
+        self.password = TextWithLabel(win, "Password", 20, 100)
+        self.search_username = TextWithLabel(win, "Username", 350, 260)
+        self.search_username.text_box.bind("<KeyRelease>", self.find_by_username)
 
-table = Table(win,
-              ["Id", "Username", "Password", "Status", "Locked"],
-              [60, 100, 110, 60, 60],
-              290,
-              20,
-              select_row)
+        status = BooleanVar()
+        ttk.Checkbutton(text='Active', variable=status).place(x=80, y=140)
+        status.set(True)
 
-Button(win, text="Add", width=8, command=save_click).place(x=20, y=260)
-Button(win, text="Edit", width=8, command=edit_click).place(x=100, y=260)
-Button(win, text="Remove", width=8, command=remove_click).place(x=180, y=260)
+        locked = BooleanVar()
+        ttk.Checkbutton(text='Locked', variable=locked).place(x=150, y=140)
 
-reset_form()
+        self.table = Table(win,
+                      ["Id", "Username", "Password", "Status", "Locked"],
+                      [60, 100, 110, 60, 60],
+                      290,
+                      20,
+                      self.select_row)
 
-win.mainloop()
+        Button(win, text="Add", width=8, command=self.save_click).place(x=20, y=260)
+        Button(win, text="Edit", width=8, command=self.edit_click).place(x=100, y=260)
+        Button(win, text="Remove", width=8, command=self.remove_click).place(x=180, y=260)
+
+        self.reset_form()
+
+        win.mainloop()
