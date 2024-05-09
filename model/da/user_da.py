@@ -73,7 +73,7 @@ class UserDa(Da):
 
     def find_by_username(self, username):
         self.connect()
-        self.cursor.execute("SELECT * FROM USER_TBL WHERE USERNAME LIKE %s", [username+"%"])
+        self.cursor.execute("SELECT * FROM USER_TBL WHERE USERNAME LIKE %s", [username +"%"])
         user_tuple_list = self.cursor.fetchall()
         self.disconnect()
         person_da = PersonDa()
