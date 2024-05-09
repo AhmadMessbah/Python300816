@@ -25,7 +25,7 @@ class LoginView:
 
 
         self.username = TextWithLabel(self.win, "Username", 20, 40)
-        self.password = TextWithLabel(self.win, "Password", 20, 100)
+        self.password = TextWithLabel(self.win, "Password", 20, 90)
 
 
         Button(self.win, text="Login", width=10, command=self.login_click).place(x=80, y=180)
