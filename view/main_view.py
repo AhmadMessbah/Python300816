@@ -1,15 +1,19 @@
 from tkinter import *
 
+from view.financial_doc_view import FinancialDocView
 from view.lesson_view import LessonView
+from view.military_view import MilitaryView
 from view.person_view import PersonView
+from view.product_view import ProductView
 from view.sim_card_view import SimCardView
+from view.user_view import UserView
 
 
 class MainView:
     def person_click(self):
         person_ui = PersonView(None)
     def user_click(self):
-        user_view = UserView(None)
+        user_view = UserView()
     def sim_click(self):
         sim_view= SimCardView(None)
     def military_click(self):
@@ -19,7 +23,7 @@ class MainView:
     def product_click(self):
         product_view = ProductView(None)
     def financial_click(self):
-        financial_view = FinancialView(None)
+        financial_view = FinancialDocView(None)
     def lesson_click(self):
         lesson_view = LessonView(None)
 
