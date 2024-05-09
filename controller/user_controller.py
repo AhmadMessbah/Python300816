@@ -3,7 +3,6 @@ from model.entity.user import User
 from model.tools.decorators import exception_handling
 
 
-
 class UserController:
     user_da = UserDa()
 
@@ -14,26 +13,24 @@ class UserController:
         user.status = status
         user.locked = locked
         cls.user_da.save(user)
-        return True, f"User saved successfully : {user}"
+        return True, f"User saved successfully\n{user}"
 
     @classmethod
     @exception_handling
-    def edit(cls, user_id, username, password, status, locked):
+    def edit(cls, user_id, username, password):
         user = User(username, password)
         user.user_id = user_id
-        user.status = status
-        user.locked = locked
         user_da = UserDa()
         old_user = cls.user_da.find_by_id(user_id)
         cls.user_da.edit(user)
-        return True, (f"User edited successfully From : {old_user} To: {user}")
+        return True, (f"User edited successfully\nFrom : {old_user}\nTo: {user}")
 
     @classmethod
     @exception_handling
     def remove(cls, user_id):
         user = cls.user_da.find_by_id(user_id)
         cls.user_da.remove(user_id)
-        return True, f"User removed successfully{user}"
+        return True, f"User removed successfully\n{user}"
 
     @classmethod
     @exception_handling

@@ -14,8 +14,8 @@ create table lesson_tbl
     id        int primary key auto_increment,
     name      nvarchar(30) not null,
     grade     nvarchar(15) not null,
-    teacher_id   int,
     start_day date,
+    teacher_id   int,
     foreign key (teacher_id) references person_tbl(id)
 );
 
@@ -26,7 +26,9 @@ create table product_tbl
     name      nvarchar(30) not null,
     brand     nvarchar(30) not null,
     serial    nvarchar(20) not null,
-    buy_price float
+    buy_price float,
+    person_id int,
+    FOREIGN KEY (person_id) REFERENCES person_tbl(id)
 );
 
 # FinancialDoc
@@ -74,7 +76,6 @@ create table user_tbl(
 );
 
 
-
 create table driving_license_tbl (
     id int primary key auto_increment,
     serial_number varchar(255),
@@ -89,5 +90,5 @@ create table medical_record(
     medicine nvarchar(20) not null ,
     doctor nvarchar(20),
     patient_id int,
-    FOREIGN KEY (patient_id) REFERENCES mft.person_tbl(id)
+    FOREIGN KEY (patient_id) REFERENCES person_tbl(id)
 );

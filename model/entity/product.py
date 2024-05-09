@@ -3,12 +3,13 @@ from model.tools.validator import Validator
 
 
 class Product(Base):
-    def __init__(self, name, brand, serial, buy_price):
+    def __init__(self, name, brand, serial, buy_price, person = None):
         self.product_id = None
         self.name = name
         self.brand = brand
         self.serial = serial
         self.buy_price = buy_price
+        self.person = person
 
     def get_name(self):
         return self._name
