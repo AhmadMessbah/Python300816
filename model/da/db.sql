@@ -84,7 +84,7 @@ create table medical_record(
     id int primary key auto_increment,
     disease nvarchar(20) not null ,
     medicine nvarchar(20) not null ,
-    datee date,
     doctor nvarchar(20),
-    status bool not null
+    patient_id int,
+    FOREIGN KEY (patient_id) REFERENCES mft.person_tbl(id)
 );
