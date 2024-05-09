@@ -1,5 +1,6 @@
 from tkinter import *
 
+from view.lesson_view import LessonView
 from view.person_view import PersonView
 from view.sim_card_view import SimCardView
 
