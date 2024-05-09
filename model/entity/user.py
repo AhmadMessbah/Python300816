@@ -9,6 +9,7 @@ class User(Base):
         self.password = password
         self.status = True
         self.locked = False
+        self.person = None
 
     def get_username(self):
         return self._username

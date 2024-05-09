@@ -1,19 +1,25 @@
 from datetime import datetime
-
+from model.da.person_da import PersonDa
 from model.da.financial_doc_da import FinancialDocDa
 from model.entity.financial_doc import FinancialDoc
 from model.tools.decorators import exception_handling
 
 
 class FinancialDocController:
-    FinancialDocDa = FinancialDocDa()
+    financial_doc_da = FinancialDocDa()
+    person_da = PersonDa()
 
     @classmethod
     @exception_handling
-    def save(cls, amount, doc_type, description):
-        financial_doc = FinancialDoc(amount, datetime.now(), doc_type, description)
-        cls.FinancialDocDa.save(financial_doc)
-        return True, f"financial_doc saved successfully\n{financial_doc}"
+    def save(cls, amount, doc_type, description, person_id):
+        if person_id:
+            person = cls.person_da.find_by_id(person_id)
+            financial_doc = FinancialDoc(amount, doc_type, datetime.now(), description)
+            financial_doc.person = person
+        else:
+            financial_doc = FinancialDoc(amount, doc_type, datetime.now(), description)
+        cls.financial_doc_da.save(financial_doc)
+        return True, f"financial doc saved successfully\n{financial_doc}"
 
     @classmethod
     @exception_handling
