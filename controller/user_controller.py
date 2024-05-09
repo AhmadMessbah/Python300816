@@ -1,14 +1,22 @@
 from model.da.user_da import UserDa
+from model.da.person_da import PersonDa
 from model.entity.user import User
 from model.tools.decorators import exception_handling
 
 
 class UserController:
     user_da = UserDa()
+    person_da = PersonDa()
 
     @classmethod
     @exception_handling
-    def save(cls, username, password, status, locked):
+    def save(cls, username, password, status, locked, person_id):
+        if person_id:
+            person = cls.user_da.find_by_id(person_id)
+            user = User(username, password, status, locked, person)
+        else:
+            user = User(username, password, status, locked)
+
         user = User(username, password)
         user.status = status
         user.locked = locked
