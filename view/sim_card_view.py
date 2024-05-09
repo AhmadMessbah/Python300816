@@ -3,7 +3,7 @@ import tkinter.messagebox as msg
 from controller.sim_card_controller import SimCardController
 
 
-class PersonView:
+class SimCardView:
     def save_click(self):
         status, message = self.controller.save(self.number.get(),
                                                self.operator.get(),
