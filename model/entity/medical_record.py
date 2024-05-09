@@ -3,12 +3,12 @@ from model.tools.validator import Validator
 
 
 class MedicalRecord(Base):
-    def __init__(self, disease, medicine, doctor,patient):
+    def __init__(self, disease, medicine, doctor, patient=None):
         self.id = None
         self.disease = disease
         self.medicine = medicine
         self.doctor = doctor
-        self.patient_id = None
+        self.patient = patient
 
     def get_disease(self):
         return self._disease
