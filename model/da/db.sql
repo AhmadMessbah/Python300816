@@ -35,7 +35,9 @@ create table FinancialDoc_tbl(
     amount decimal(15,2) not null,
     date_time datetime not null,
     doc_type nvarchar(8) not null,
-    description nvarchar(100) not null
+    description nvarchar(100) not null,
+    person_id int,
+    FOREIGN KEY (person_id) REFERENCES person_tbl(id)
 );
 
 create table mft.sim_card_tbl(
