@@ -69,7 +69,9 @@ create table user_tbl(
     username nvarchar(30) not null,
     password nvarchar(30) not null,
     status tinyint not null ,
-    locked tinyint not null
+    locked tinyint not null ,
+    person_id int,
+    FOREIGN KEY (person_id) REFERENCES person_tbl(id)
 );
 
 
