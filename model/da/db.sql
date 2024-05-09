@@ -16,7 +16,7 @@ create table lesson_tbl
     grade     nvarchar(15) not null,
     teacher_id   int,
     start_day date,
-    foreign key (teacher_id) references mft.person_tbl(id)
+    foreign key (teacher_id) references person_tbl(id)
 );
 
 -- Product
