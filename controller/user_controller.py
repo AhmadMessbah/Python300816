@@ -12,7 +12,7 @@ class UserController:
     @exception_handling
     def save(cls, username, password, status, locked, person_id):
         if person_id:
-            person = cls.user_da.find_by_id(person_id)
+            person = cls.person_da.find_by_id(person_id)
             user = User(username, password, status, locked, person)
         else:
             user = User(username, password, status, locked)

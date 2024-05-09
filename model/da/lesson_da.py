@@ -5,7 +5,6 @@ from model.entity.lesson import Lesson
 
 class LessonDa(Da):
     def save(self, lesson):
-        print(lesson)
         if (lesson.teacher and self.find_teacher_count_by_teacher_id(lesson.teacher.person_id) < 10):
             self.connect()
             self.cursor.execute("INSERT INTO LESSON_TBL(NAME, GRADE, START_DAY, TEACHER_ID) VALUES(%s, %s, %s, %s)",

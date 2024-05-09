@@ -8,7 +8,11 @@ class MilitaryDa(Da):
             self.connect()
             self.cursor.execute(
                 "INSERT INTO MILITARY_TBL(serial_number, city, organ, start_date, end_date, soldier_id) VALUES(%s,%s,%s,%s,%s,%s)",
-                [military.serial_number, military.city, military.organ, military.start_date, military.end_date,
+                [military.serial_number,
+                 military.city,
+                 military.organ,
+                 military.start_date,
+                 military.end_date,
                  military.soldier.soldier_id if military.soldier else None])
             self.connection.commit()
             self.disconnect()
@@ -18,7 +22,13 @@ class MilitaryDa(Da):
     def edit(self, military):
         self.connect()
         self.cursor.execute("UPDATE MILITARY_TBL SET serial_number=%s, city=%s, organ=%s, start_date=%s, end_date=%s WHERE ID=%s",
-                            [military.serial_number, military.city, military.organ, military.start_date, military.end_date, military.military_id])
+                            [military.serial_number,
+                             military.city,
+                             military.organ,
+                             military.start_date,
+                             military.end_date,
+                             military.soldier.soldier_id if military.soldier else None,
+                             military.military_id])
         self.connection.commit()
         self.disconnect()
 
@@ -110,7 +120,6 @@ class MilitaryDa(Da):
             return military_list
         else:
             raise ValueError("No City Information Found !")
-
 
     def find_soldier_count_by_soldier_id(self, soldier_id):
         self.connect()
