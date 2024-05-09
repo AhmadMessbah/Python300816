@@ -49,7 +49,7 @@ class MilitaryView:
                                                   self.end_day.variable.get())
         if status:
             msg.showinfo("Save Record", "Record Saved")
-            reset_form()
+            self.reset_form()
         else:
             msg.showerror("Save Error", message)
 
@@ -99,9 +99,9 @@ class MilitaryView:
         win.title("MilitaryRecord")
 
         # CENTER FORM
-        x = (win.winfo_screenwidth() - 850) // 2
+        x = (win.winfo_screenwidth() - 910) // 2
         y = (win.winfo_screenheight() - 300) // 2
-        win.geometry(f"850x300+{x}+{y}")
+        win.geometry(f"910x300+{x}+{y}")
 
         # WIDGETS
         #self.soldier = TextWithLabel(win, "Soldier", 20, 20, width=5 )
@@ -129,8 +129,8 @@ class MilitaryView:
         self.end_day = TextWithLabel(win, "/", 165, 220, 12, disabled=False, width=4)
 
         self.table = Table(win,
-                      ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date"],
-                      [60, 100, 100, 100, 100, 100],
+                      ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier ID"],
+                      [60, 100, 100, 100, 100, 100, 60],
                       250,
                       20,
                       self.select_row)
