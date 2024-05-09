@@ -37,7 +37,6 @@ def select_row(military):
     end_month.variable.set(int(military[5][5:7]))
     end_day.variable.set(int(military[5][8:]))
 
-#todo
 def save_click():
     status, message = MilitaryController.save(serial_number.variable.get(),
                                               city.variable.get(),
