@@ -4,7 +4,7 @@ from model.entity.military import Military
 
 class MilitaryDa(Da):
     def save(self, military):
-        if (military.soldier and self.find_soldier_count_by_soldier_id(military.soldier.soldier_id) < 2):
+        if (military.soldier and self.find_soldier_count_by_soldier_id(military.soldier.person_id) < 2):
             self.connect()
             self.cursor.execute(
                 "INSERT INTO MILITARY_TBL(serial_number, city, organ, start_date, end_date, soldier_id) VALUES(%s,%s,%s,%s,%s,%s)",
@@ -13,7 +13,7 @@ class MilitaryDa(Da):
                  military.organ,
                  military.start_date,
                  military.end_date,
-                 military.soldier.soldier_id if military.soldier else None])
+                 military.soldier.person_id if military.soldier else None])
             self.connection.commit()
             self.disconnect()
         else:
