@@ -33,16 +33,6 @@ class Table:
         data = self.table.item(self.table.focus())["values"]
         self.select_function(data)
 
-    def refresh_table_lesson(self, data_list):
-        for item in self.table.get_children():
-            self.table.delete(item)
 
-        if data_list:
-            for data in data_list:
-                year = data._start_day.year
-                month = data._start_day.month
-                day = data._start_day.day
-                self.table.insert("", END,
-                                  values=(data.lesson_id, data._name, data._grade, data._teacher, year, month, day))
 
 
