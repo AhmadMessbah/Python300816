@@ -6,7 +6,6 @@ from view.component.label_text import TextWithLabel
 from view.component.table import Table
 
 
-# TODO
 class LessonView:
     def reset_form(self):
         self.id.variable.set("0")
@@ -24,10 +23,10 @@ class LessonView:
         self.id.variable.set(lesson[0])
         self.name.variable.set(lesson[1])
         self.grade.variable.set(lesson[2])
-        lesson_date = datetime.strptime(lesson[3], "%Y-%m-%d")
-        self.year.variable.set(lesson_date.year)
-        self.month.variable.set(lesson_date.month)
-        self.day.variable.set(lesson_date.day)
+        self.lesson_date = datetime.strptime(lesson[3], "%Y-%m-%d")
+        self.year.variable.set(self.lesson_date.year)
+        self.month.variable.set(self.lesson_date.month)
+        self.day.variable.set(self.lesson_date.day)
         self.teacher.variable.set(lesson[4])
 
     def save_click(self):
@@ -51,7 +50,7 @@ class LessonView:
                                                 self.year.variable.get(),
                                                 self.month.variable.get(),
                                                 self.day.variable.get(),
-                                                self.teacher.variable.get(),
+                                                self.teacher.variable.get()
                                                 )
         if status:
             msg.showinfo("Edit Lesson", "Lesson Edited")
@@ -90,11 +89,12 @@ class LessonView:
         self.id = TextWithLabel(win, "ID", 20, 20, disabled=True)
         self.name = TextWithLabel(win, "Name", 20, 60)
         self.grade = TextWithLabel(win, "Grade", 20, 100)
-        self.teacher = TextWithLabel(win, "Teacher", 20, 140)
 
-        self.year = TextWithLabel(win, "Year", 20, 180, 30, "", 4)
-        self.month = TextWithLabel(win, "/Month", 90, 180, 45, "", 2)
-        self.day = TextWithLabel(win, "/Day", 165, 180, 30, "", 2)
+
+        self.year = TextWithLabel(win, "Year", 20, 140, 30, "", 4)
+        self.month = TextWithLabel(win, "/Month", 90, 140, 45, "", 2)
+        self.day = TextWithLabel(win, "/Day", 165, 140, 30, "", 2)
+        self.teacher = TextWithLabel(win, "Teacher", 20, 180)
 
         self.search_name = TextWithLabel(win, "Find By Name", 250, 260, 100)
         self.search_name.text_box.bind("<KeyRelease>", self.find_by_name)
