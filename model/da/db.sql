@@ -32,7 +32,7 @@ create table product_tbl
 );
 
 create view mft.product_count as
-select person_id, count(person_id) as count_product from mft.product_tbl
+select person_id, count(person_id) as count_product from product_tbl
 group by person_id;
 
 
@@ -57,7 +57,7 @@ create table sim_card_tbl(
 );
 
 create view mft.sim_card_count as
-select owner_id, count(owner_id) as count_sim_card from mft.sim_card_tbl
+select owner_id, count(owner_id) as count_sim_card from sim_card_tbl
 group by owner_id;
 
 -- MilitaryRecord
