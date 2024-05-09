@@ -1,8 +1,8 @@
 from controller.lesson_controller import LessonController
 from controller.person_controller import PersonController
 
-# # TEST PASSED , save #TODO
-# status, message = PersonController.save("Arash", "Oloomi")
+# # TEST PASSED
+status, message = PersonController.save("Arash", "Oloomi")
 status, message = LessonController.save("Windows", "elementary", 2021, 5, 25, 1)
 
 # TEST PASSED , edit

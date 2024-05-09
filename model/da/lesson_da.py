@@ -5,10 +5,11 @@ from model.entity.lesson import Lesson
 
 class LessonDa(Da):
     def save(self, lesson):
-        if (lesson.teacher and self.find_teacher_count_by_teacher_id(lesson.teacher.teacher_id) < 10):
+        print(lesson)
+        if (lesson.teacher and self.find_teacher_count_by_teacher_id(lesson.teacher.person_id) < 10):
             self.connect()
             self.cursor.execute("INSERT INTO LESSON_TBL(NAME, GRADE, START_DAY, TEACHER_ID) VALUES(%s, %s, %s, %s)",
-                                [lesson.name, lesson.grade, lesson.start_day, lesson.teacher_id])
+                                [lesson.name, lesson.grade, lesson.start_day, lesson.teacher.person_id])
             self.connection.commit()
             self.disconnect()
         else:
