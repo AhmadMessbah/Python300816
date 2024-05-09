@@ -1,5 +1,5 @@
 from model.da.da import Da
-from ..entity.DrivingLicense import DrivingLicense
+from ..entity.driving_license import DrivingLicense
 
 
 class DrivingLicenseDa(Da):

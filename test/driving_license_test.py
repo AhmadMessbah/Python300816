@@ -1,4 +1,4 @@
-from controller.DrivingLicense_controller import DrivingLicenseController
+from controller.driving_license_controller import DrivingLicenseController
 
 drivingLicenseController = DrivingLicenseController()
 

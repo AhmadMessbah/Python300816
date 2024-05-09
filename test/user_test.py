@@ -1,5 +1,5 @@
 from controller.user_controller import UserController
-
+from view.user_view import UserView
 
 # TEST PASSED
 # UserController.save("REZA", "yuihuh677", 0,1,1)
@@ -19,4 +19,7 @@ from controller.user_controller import UserController
 # TEST
 # print(UserController.find_by_username("ali"))
 
-UserController.find_by_username_and_password('ali', 'ali12345')
+# UserController.find_by_username_and_password('ali', 'ali12345')
+
+
+ui = UserView()

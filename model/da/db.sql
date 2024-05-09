@@ -56,9 +56,9 @@ create table sim_card_tbl(
     FOREIGN KEY (owner_id) REFERENCES user_tbl(id)
 );
 
-# create view mft.sim_card_count as
-# select owner_id, count(owner_id) as count_sim_card from mft.sim_card_tbl
-# group by owner_id;
+create view mft.sim_card_count as
+select owner_id, count(owner_id) as count_sim_card from mft.sim_card_tbl
+group by owner_id;
 
 -- MilitaryRecord
 create table military_tbl
