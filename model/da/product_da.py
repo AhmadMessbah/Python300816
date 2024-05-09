@@ -4,18 +4,16 @@ from model.entity.product import Product
 
 class ProductDa(Da):
     def save(self, product):
-        if (product.name and self.find_product_count_by_person_id(product.product_id)):
-            self.connect()
-            self.cursor.execute("INSERT INTO product_tbl (NAME,BRAND,SERIAL,BUY_PRICE) VALUES (%s,%s,%s,%s)",
-                            [product.name,
-                             product.brand,
-                             product.serial,
-                             product.buy_price,
-                             product.person_id if product.person_id else None])
-            self.connection.commit()
-            self.disconnect()
-        else:
-            raise ValueError("Error in Owner Or Cant Save Any More !!!")
+        self.connect()
+        self.cursor.execute("INSERT INTO product_tbl (NAME,BRAND,SERIAL,BUY_PRICE,PERSON_ID) VALUES (%s,%s,%s,%s,%s)",
+                        [product.name,
+                         product.brand,
+                         product.serial,
+                         product.buy_price,
+                         product.person.person_id if product.person.person_id else None])
+        self.connection.commit()
+        self.disconnect()
+
 
     def edit(self, product):
         if (product.name and self.find_product_count_by_person_id(product.product_id)<3):

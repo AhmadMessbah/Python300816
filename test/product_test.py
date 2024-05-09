@@ -5,7 +5,7 @@ from controller.product_controller import ProductController
 
 
 # TEST PASSED
-# status , message = ProductController.save("iphonx","Apple","jx1616","1000")
+status , message = ProductController.save("iphonx","Apple","123456","1000",1)
 # status , message = ProductController.save("a51","samsung","lk9988","1500")
 
 
@@ -13,8 +13,8 @@ from controller.product_controller import ProductController
 # status , message = ProductController.edit("4","A51","samsung12","XD568","2000")
 
 # TEST PASSED
-PersonController.save("Mohsen", "Akbari")
-status, message = ProductController.remove(1400)
+# PersonController.save("Mohsen", "Akbari")
+# status, message = ProductController.remove(1400)
 
 # TEST PASSED
 # status,message = person_list = ProductController.find_all()
