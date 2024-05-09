@@ -33,7 +33,8 @@ class Product(Base):
         return self._price
 
     def set_buy_price(self, buy_price):
-        self._price = Validator.buy_price_validator(buy_price, "Invalid Price")
+        self._price = buy_price
+
     name = property(get_name, set_name)
     brand = property(get_brand, set_brand)
     serial = property(get_serial, set_serial)

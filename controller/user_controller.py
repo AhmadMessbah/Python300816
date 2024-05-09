@@ -13,32 +13,35 @@ class UserController:
     def save(cls, username, password, status, locked, person_id):
         if person_id:
             person = cls.person_da.find_by_id(person_id)
-            user = User(username, password, status, locked, person)
+            user = User(username, password)
+            user.person = person
         else:
-            user = User(username, password, status, locked)
+            user = User(username, password)
 
-        user = User(username, password)
         user.status = status
         user.locked = locked
         cls.user_da.save(user)
-        return True, f"User saved successfully\n{user}"
+        return True, f"User saved successfully {user}"
 
     @classmethod
     @exception_handling
-    def edit(cls, user_id, username, password):
+    def edit(cls, user_id, username, password, status, locked, person_id):
+        person = cls.person_da.find_by_id(person_id)
         user = User(username, password)
+        user.person = person
+        user.status = status
+        user.locked = locked
         user.user_id = user_id
-        user_da = UserDa()
         old_user = cls.user_da.find_by_id(user_id)
         cls.user_da.edit(user)
-        return True, (f"User edited successfully\nFrom : {old_user}\nTo: {user}")
+        return True, (f"User edited successfully From : {old_user} To: {user}")
 
     @classmethod
     @exception_handling
     def remove(cls, user_id):
         user = cls.user_da.find_by_id(user_id)
         cls.user_da.remove(user_id)
-        return True, f"User removed successfully\n{user}"
+        return True, f"User removed successfully {user}"
 
     @classmethod
     @exception_handling

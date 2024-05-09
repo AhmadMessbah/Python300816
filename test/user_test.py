@@ -2,7 +2,7 @@ from controller.user_controller import UserController
 
 
 # TEST PASSED
-status, message = UserController.save("REZA1", "yuihuh677", 0,1,4)
+UserController.save("REZA", "yuihuh677", 0,1,1)
 
 # TEST PASSED
 # status, message = UserController.edit(1, "ali", "ahmadi1234")

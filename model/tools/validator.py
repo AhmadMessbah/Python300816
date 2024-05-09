@@ -35,7 +35,7 @@ class Validator:
 
     @classmethod
     def doc_type_validator(cls, doc_type, message):
-        if doc_type in ("income", "outcome"):
+        if doc_type.lower() in ("income", "outcome"):
             return doc_type
         else:
             raise ValueError(message)
@@ -92,7 +92,7 @@ class Validator:
 
     @classmethod
     def serial_validator(cls, serial_number, message):
-        if isinstance(serial_number, str) and re.match(r"^[0-9]{11}$", serial_number):
+        if isinstance(serial_number, str) and re.match(r"^\w{2,30}$", serial_number):
             return serial_number
         else:
             raise ValueError(message)

@@ -31,6 +31,11 @@ create table product_tbl
     FOREIGN KEY (person_id) REFERENCES person_tbl(id)
 );
 
+create view mft.product_count as
+select person_id, count(person_id) as count_product from mft.product_tbl
+group by person_id;
+
+
 # FinancialDoc
 create table FinancialDoc_tbl(
     id int primary key auto_increment,
@@ -40,7 +45,6 @@ create table FinancialDoc_tbl(
     description nvarchar(100) not null,
     person_id int,
     FOREIGN KEY (person_id) REFERENCES person_tbl(id)
-
 );
 
 create table sim_card_tbl(
