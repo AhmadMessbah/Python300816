@@ -15,7 +15,7 @@ def reset_form():
     day.variable.set(1)
     status, lesson_list = LessonController.find_all()
     if status:
-        table.refresh_table(lesson_list)
+        table.refresh_table_lesson(lesson_list)
 
 
 def select_row(lesson):
