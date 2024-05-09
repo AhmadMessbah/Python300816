@@ -23,10 +23,10 @@ class LessonView:
         self.id.variable.set(lesson[0])
         self.name.variable.set(lesson[1])
         self.grade.variable.set(lesson[2])
-        self.lesson_date = datetime.strptime(lesson[3], "%Y-%m-%d")
-        self.year.variable.set(self.lesson_date.year)
-        self.month.variable.set(self.lesson_date.month)
-        self.day.variable.set(self.lesson_date.day)
+        lesson_date = datetime.strptime(lesson[3], "%Y-%m-%d")
+        self.year.variable.set(lesson_date.year)
+        self.month.variable.set(lesson_date.month)
+        self.day.variable.set(lesson_date.day)
         self.teacher.variable.set(lesson[4])
 
     def save_click(self):

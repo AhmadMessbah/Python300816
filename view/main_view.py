@@ -28,10 +28,11 @@ class MainView:
     def lesson_click(self):
         lesson_view = LessonView(None)
 
-    def __init__(self):
+    def __init__(self, user):
         win = Tk()
         win.geometry("300x650")
         win.title("Python App")
+        Label(text=user.username).place(x=20, y=50)
 
         Button(win, text="Person",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.person_click).place(x=50, y=50)
         Button(win, text="User",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.user_click).place(x=50, y=120)
