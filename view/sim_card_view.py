@@ -5,7 +5,7 @@ from controller.sim_card_controller import SimCardController
 
 class SimCardView:
     def save_click(self):
-        status, message = self.controller.save(self.number.get(),
+        status, message = SimCardController.save(self.number.get(),
                                                self.operator.get(),
                                                self.price.get(),
                                                self.owner.get()
@@ -15,8 +15,8 @@ class SimCardView:
         else:
             msg.showerror("Save Error", message)
 
-    def __init__(self):
-        self.controller = SimCardController()
+    def __init__(self, user):
+        self.user = user
         print("View")
         win = Tk()
         win.geometry("250x200")

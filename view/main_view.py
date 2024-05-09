@@ -1,19 +1,26 @@
 from tkinter import *
 
 from view.person_view import PersonView
+from view.sim_card_view import SimCardView
 
 
 class MainView:
     def person_click(self):
         person_ui = PersonView(None)
-    def user_click(self):pass
-    def sim_click(self):pass
-    def military_click(self):pass
-    def medical_click(self):pass
-    def product_click(self):pass
-    def financial_click(self):pass
+    def user_click(self):
+        user_view = UserView(None)
+    def sim_click(self):
+        sim_view= SimCardView(None)
+    def military_click(self):
+        military_view = MilitaryView(None)
+    def medical_click(self):
+        medical_view = MedicalView(None)
+    def product_click(self):
+        product_view = ProductView(None)
+    def financial_click(self):
+        financial_view = FinancialView(None)
     def lesson_click(self):
-        lesson_view = LessonView()
+        lesson_view = LessonView(None)
 
     def __init__(self):
         win = Tk()
