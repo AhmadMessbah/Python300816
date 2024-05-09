@@ -32,3 +32,6 @@ from controller.military_controller import MilitaryController
 # TEST PASSED , find_by_serial
 #  status, lesson_list = MilitaryController.find_by_serial_number("0001")
 
+
+status, message = MilitaryController.save("11111111111", "tehran", 2021, 5, 25, 1)
+
