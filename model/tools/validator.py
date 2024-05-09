@@ -35,7 +35,7 @@ class Validator:
 
     @classmethod
     def doc_type_validator(cls, doc_type, message):
-        if doc_type in ("income", "outcome"):
+        if doc_type.lower() in ("income", "outcome"):
             return doc_type
         else:
             raise ValueError(message)
