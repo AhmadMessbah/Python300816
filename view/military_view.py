@@ -104,7 +104,8 @@ class MilitaryView:
         win.geometry(f"850x300+{x}+{y}")
 
         # WIDGETS
-        self.id = TextWithLabel(win, "ID", 20, 20, disabled=True)
+        self.soldier = TextWithLabel(win, "Soldier", 20, 20, width=5 )
+        self.id = TextWithLabel(win, "ID", 20, 20, disabled=True, width=5)
         self.serial_number = TextWithLabel(win, "Serial", 20, 60)
         self.city = TextWithLabel(win, "City", 20, 100)
         self.organ = TextWithLabel(win, "Organ", 20, 140)
