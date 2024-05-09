@@ -35,3 +35,8 @@ from controller.military_controller import MilitaryController
 # TEST PASSED ,
 # status, message = MilitaryController.save("11111111111", "tehran", "police", 2021, 5, 25, 2023,5,25,1)
 
+# TEST PASSED
+#status, message = MilitaryController.edit(2, "11111111111", "tehran", "police", 2021, 5, 25, 2023,5,25,2)
+
+
+
