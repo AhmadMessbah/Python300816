@@ -14,9 +14,8 @@ create table lesson_tbl
     id        int primary key auto_increment,
     name      nvarchar(30) not null,
     grade     nvarchar(15) not null,
-    teacher_id   int,
-    start_day date,
-    foreign key (teacher_id) references person_tbl(id)
+    teacher   nvarchar(30) not null,
+    start_day date
 );
 
 -- Product
@@ -38,18 +37,18 @@ create table FinancialDoc_tbl(
     description nvarchar(100) not null
 );
 
-create table sim_card_tbl(
+create table mft.sim_card_tbl(
     id int primary key auto_increment,
     number nvarchar(11) not null unique ,
     operator nvarchar(20) not null,
     price int not null,
     owner_id int,
-    FOREIGN KEY (owner_id) REFERENCES user_tbl(id)
+    FOREIGN KEY (owner_id) REFERENCES mft.user_tbl(id)
 );
 
-# create view mft.sim_card_count as
-# select owner_id, count(owner_id) as count_sim_card from mft.sim_card_tbl
-# group by owner_id;
+create view mft.sim_card_count as
+select owner_id, count(owner_id) as count_sim_card from mft.sim_card_tbl
+group by owner_id;
 
 -- MilitaryRecord
 create table military_tbl
@@ -59,9 +58,7 @@ create table military_tbl
     city          varchar(30) not null,
     organ         varchar(30) not null,
     start_date    date not null,
-    end_date      date not null,
-    soldier_id int,
-    foreign key (soldier_id) references person_tbl(id)
+    end_date      date not null
 );
 
 # User
@@ -87,7 +84,7 @@ create table medical_record(
     id int primary key auto_increment,
     disease nvarchar(20) not null ,
     medicine nvarchar(20) not null ,
+    datee date,
     doctor nvarchar(20),
-    patient_id int,
-    FOREIGN KEY (patient_id) REFERENCES mft.person_tbl(id)
+    status bool not null
 );

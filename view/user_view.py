@@ -23,9 +23,9 @@ def select_row(user):
 
 
 def save_click():
-    status, message = UserController.save(username.variable.get(), password.variable.get(), status.variable.get(),
-                                          locked.variable.get())
-    if status:
+    ret, message = UserController.save(username.variable.get(), password.variable.get(), status.get(),
+                                          locked.get())
+    if ret:
         msg.showinfo("Save User", "User Saved")
         reset_form()
     else:
@@ -33,8 +33,8 @@ def save_click():
 
 
 def edit_click():
-    status, message = UserController.edit(id.variable.get(), username.variable.get(), password.variable.get())
-    if status:
+    ret, message = UserController.edit(id.variable.get(), username.variable.get(), password.variable.get() , locked.get() , status.get())
+    if ret:
         msg.showinfo("Edit User", "User Edited")
         reset_form()
     else:
@@ -42,7 +42,7 @@ def edit_click():
 
 
 def remove_click():
-    status, message = UserController.remove(id.variable.get())
+    ret, message = UserController.remove(id.variable.get())
     if status:
         msg.showinfo("Remove User", "User Removed")
         reset_form()
@@ -51,8 +51,8 @@ def remove_click():
 
 
 def find_by_username(event):
-    status, user_list = UserController.find_by_username(search_username.variable.get())
-    if status:
+    ret, user_list = UserController.find_by_username(search_username.variable.get())
+    if ret:
         table.refresh_table(user_list)
 
 
@@ -67,7 +67,7 @@ search_username.text_box.bind("<KeyRelease>", find_by_username)
 
 status = BooleanVar()
 ttk.Checkbutton(text='Active', variable=status).place(x=80, y=140)
-status.set("True")
+status.set(True)
 
 locked = BooleanVar()
 ttk.Checkbutton(text='Locked', variable=locked).place(x=150, y=140)
