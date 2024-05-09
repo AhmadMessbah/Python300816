@@ -7,6 +7,7 @@ from view.person_view import PersonView
 from view.product_view import ProductView
 from view.sim_card_view import SimCardView
 from view.user_view import UserView
+from view.military_view import MilitaryView
 
 
 class MainView:
