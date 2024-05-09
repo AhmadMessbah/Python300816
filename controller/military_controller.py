@@ -1,4 +1,5 @@
 from model.da.military_da import MilitaryDa
+from model.da.person_da import PersonDa
 from model.entity.military import Military
 from model.tools.decorators import exception_handling
 from model.tools.logging import Logger
