@@ -57,3 +57,9 @@ class UserController:
     @exception_handling
     def find_by_username(cls, username):
         return True, cls.user_da.find_by_username(username)
+
+
+    @classmethod
+    @exception_handling
+    def find_by_username_and_password(cls, username, password):
+        return True, cls.user_da.find_by_username_and_password(username,password)
