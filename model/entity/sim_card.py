@@ -2,8 +2,9 @@ from model.entity.base import Base
 from model.tools.validator import Validator
 
 
+
 class SimCard(Base):
-    def __init__(self, number, operator, price, owner):
+    def __init__(self, number, operator, price, owner=None):
         self.sim_card_id = None
         self.number = number
         self.operator = operator
@@ -14,7 +15,7 @@ class SimCard(Base):
         return self._number
 
     def set_number(self, number):
-        self._number = Validator.number_validator(number, "Invalid Number")
+        self._number = Validator.phone_number_validator(number, "Invalid Phone Number")
 
     def get_operator(self):
         return self._operator
@@ -32,7 +33,7 @@ class SimCard(Base):
         return self._owner
 
     def set_owner(self, owner):
-        self._owner = Validator.owner_validator(owner, "Invalid Owner")
+        self._owner = owner
 
     number = property(get_number, set_number)
     operator = property(get_operator, set_operator)
