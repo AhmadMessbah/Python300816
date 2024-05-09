@@ -46,10 +46,11 @@ class MilitaryView:
                                                   self.start_day.variable.get(),
                                                   self.end_year.variable.get(),
                                                   self.end_month.variable.get(),
-                                                  self.end_day.variable.get())
+                                                  self.end_day.variable.get(),
+                                                  self.soldier.variable.get())
         if status:
             msg.showinfo("Save Record", "Record Saved")
-            reset_form()
+            self.reset_form()
         else:
             msg.showerror("Save Error", message)
 
@@ -63,7 +64,8 @@ class MilitaryView:
                                                   self.start_day.variable.get(),
                                                   self.end_year.variable.get(),
                                                   self.end_month.variable.get(),
-                                                  self.end_day.variable.get())
+                                                  self.end_day.variable.get(),
+                                                  self.soldier.variable.get())
         if status:
             msg.showinfo("Edit Record", "Record Edited")
             self.reset_form()
@@ -99,13 +101,13 @@ class MilitaryView:
         win.title("MilitaryRecord")
 
         # CENTER FORM
-        x = (win.winfo_screenwidth() - 850) // 2
+        x = (win.winfo_screenwidth() - 910) // 2
         y = (win.winfo_screenheight() - 300) // 2
-        win.geometry(f"850x300+{x}+{y}")
+        win.geometry(f"910x300+{x}+{y}")
 
         # WIDGETS
         self.soldier = TextWithLabel(win, "Soldier", 20, 20, width=5 )
-        self.id = TextWithLabel(win, "ID", 20, 20, disabled=True, width=5)
+        self.id = TextWithLabel(win, "ID", 20, 20, disabled=True)
         self.serial_number = TextWithLabel(win, "Serial", 20, 60)
         self.city = TextWithLabel(win, "City", 20, 100)
         self.organ = TextWithLabel(win, "Organ", 20, 140)
@@ -129,11 +131,11 @@ class MilitaryView:
         self.end_day = TextWithLabel(win, "/", 165, 220, 12, disabled=False, width=4)
 
         self.table = Table(win,
-                      ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date"],
-                      [60, 100, 100, 100, 100, 100],
+                      ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier ID"],
+                      [60, 100, 100, 100, 100, 100, 60],
                       250,
                       20,
-                      select_row)
+                      self.select_row)
 
         Button(win, text="Add", width=5, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
         Button(win, text="Edit", width=5, command=self.edit_click, bg="#e2e2e2").place(x=70, y=260)
