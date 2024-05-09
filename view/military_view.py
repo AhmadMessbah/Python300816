@@ -104,8 +104,8 @@ class MilitaryView:
         win.geometry(f"850x300+{x}+{y}")
 
         # WIDGETS
-        self.soldier = TextWithLabel(win, "Soldier", 20, 20, width=5 )
-        self.id = TextWithLabel(win, "ID", 20, 20, disabled=True, width=5)
+        #self.soldier = TextWithLabel(win, "Soldier", 20, 20, width=5 )
+        self.id = TextWithLabel(win, "ID", 20, 20, disabled=True)
         self.serial_number = TextWithLabel(win, "Serial", 20, 60)
         self.city = TextWithLabel(win, "City", 20, 100)
         self.organ = TextWithLabel(win, "Organ", 20, 140)
@@ -133,7 +133,7 @@ class MilitaryView:
                       [60, 100, 100, 100, 100, 100],
                       250,
                       20,
-                      select_row)
+                      self.select_row)
 
         Button(win, text="Add", width=5, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
         Button(win, text="Edit", width=5, command=self.edit_click, bg="#e2e2e2").place(x=70, y=260)
