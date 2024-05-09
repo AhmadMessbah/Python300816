@@ -14,8 +14,9 @@ create table lesson_tbl
     id        int primary key auto_increment,
     name      nvarchar(30) not null,
     grade     nvarchar(15) not null,
-    teacher   nvarchar(30) not null,
-    start_day date
+    teacher_id   int,
+    start_day date,
+    foreign key (teacher_id) references mft.person_tbl(id)
 );
 
 -- Product
@@ -46,9 +47,9 @@ create table mft.sim_card_tbl(
     FOREIGN KEY (owner_id) REFERENCES mft.user_tbl(id)
 );
 
-create view mft.sim_card_count as
-select owner_id, count(owner_id) as count_sim_card from mft.sim_card_tbl
-group by owner_id;
+# create view mft.sim_card_count as
+# select owner_id, count(owner_id) as count_sim_card from mft.sim_card_tbl
+# group by owner_id;
 
 -- MilitaryRecord
 create table military_tbl
