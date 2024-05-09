@@ -43,7 +43,7 @@ class UserView:
 
     def remove_click(self):
         ret, message = UserController.remove(self.id.variable.get())
-        if self.status:
+        if self.ret:
             msg.showinfo("Remove User", "User Removed")
             self.reset_form()
         else:
@@ -67,12 +67,12 @@ class UserView:
         self.search_username = TextWithLabel(win, "Username", 350, 260)
         self.search_username.text_box.bind("<KeyRelease>", self.find_by_username)
 
-        status = BooleanVar()
-        ttk.Checkbutton(text='Active', variable=status).place(x=80, y=140)
-        status.set(True)
+        self.status = BooleanVar()
+        ttk.Checkbutton(text='Active', variable=self.status).place(x=80, y=140)
+        self.status.set(True)
 
-        locked = BooleanVar()
-        ttk.Checkbutton(text='Locked', variable=locked).place(x=150, y=140)
+        self.locked = BooleanVar()
+        ttk.Checkbutton(text='Locked', variable=self.locked).place(x=150, y=140)
 
         self.table = Table(win,
                       ["Id", "Username", "Password", "Status", "Locked"],
