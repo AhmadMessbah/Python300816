@@ -17,11 +17,11 @@ class FinancialDocView:
             self.table.refresh_table(financial_list)
 
     def select_row(self, financial_doc):
-        self.id.variable.set(financial_list[0])
-        self.amount.variable.set(financial_list[1])
-        self.date_time.variable.set(financial_list[2])
-        self.doc_type.variable.set(financial_list[3])
-        self.description.variable.set(financial_list[4])
+        self.id.variable.set(financial_doc[0])
+        self.amount.variable.set(financial_doc[1])
+        self.date_time.variable.set(financial_doc[2])
+        self.doc_type.variable.set(financial_doc[3])
+        self.description.variable.set(financial_doc[4])
 
     def save_click(self):
         status, message = FinancialDocController.save(self.amount.variable.get(),
@@ -75,7 +75,7 @@ class FinancialDocView:
 
 
         self.table = Table(win,
-                      ["Id", "amount", "date time", ],
+                      ["Id", "amount", "date_time", "doc_type", "description"],
                       [60, 100, 100],
                       250,
                       20,
