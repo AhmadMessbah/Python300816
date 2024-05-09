@@ -108,3 +108,20 @@ class UserDa(Da):
             return user_list
         else:
             raise ValueError("No User Found !")
+
+
+    def find_by_username_and_password(self, username, password):
+        self.connect()
+        self.cursor.execute("SELECT * FROM USER_TBL WHERE USERNAME=%s AND password=%s", [username , password])
+        user_tuple = self.cursor.fetchone()
+        self.disconnect()
+        person_da = PersonDa()
+        if user_tuple:
+                user = User(user_tuple[1], user_tuple[2])
+                user.user_id = user_tuple[0]
+                user.status = user_tuple[3]
+                user.locked = user_tuple[4]
+                user.person = person_da.find_by_id(user_tuple[5])
+                return user
+        else:
+            raise ValueError("No User Found !")

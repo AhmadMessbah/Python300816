@@ -1,3 +1,3 @@
-from view.main_view import MainView
+from view.login_view import LoginView
 
-main = MainView()
+login = LoginView()

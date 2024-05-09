@@ -7,6 +7,7 @@ from view.person_view import PersonView
 from view.product_view import ProductView
 from view.sim_card_view import SimCardView
 from view.user_view import UserView
+from view.military_view import MilitaryView
 
 
 class MainView:
@@ -27,10 +28,11 @@ class MainView:
     def lesson_click(self):
         lesson_view = LessonView(None)
 
-    def __init__(self):
+    def __init__(self, user):
         win = Tk()
         win.geometry("300x650")
         win.title("Python App")
+        Label(text=user.username).place(x=20, y=50)
 
         Button(win, text="Person",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.person_click).place(x=50, y=50)
         Button(win, text="User",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.user_click).place(x=50, y=120)
