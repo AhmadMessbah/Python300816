@@ -2,6 +2,8 @@ from model.da.medical_da import MedicalDa
 from model.da.person_da import PersonDa
 from model.entity.medical_record import MedicalRecord
 from model.tools.decorators import exception_handling
+from model.tools.logging import Logger
+
 
 class MedicalRecordController:
     medical_da = MedicalDa()
@@ -11,7 +13,7 @@ class MedicalRecordController:
     @exception_handling
     def save(cls, disease, medicine, doctor, patient_id):
         if patient_id:
-            patient  = cls.person_da.find_by_id(patient_id)
+            patient = cls.person_da.find_by_id(patient_id)
             medical_record = MedicalRecord(disease, medicine, doctor, patient)
         else:
             medical_record = MedicalRecord(disease, medicine, doctor)
@@ -21,9 +23,9 @@ class MedicalRecordController:
 
     @classmethod
     @exception_handling
-    def edit(cls, id, disease, medicine, doctor, patient_id):
-        patient  = PersonDa.find_by_id(patient_id)
-        medical_record = MedicalRecord( disease, medicine, doctor, patient)
+    def edit(cls,id, disease, medicine, doctor, patient_id):
+        patient =cls.person_da.find_by_id(patient_id)
+        medical_record = MedicalRecord(disease, medicine, doctor, patient)
         medical_record.id = id
         old_record = cls.medical_da.find_by_id(id)
         cls.medical_da.edit(medical_record)
@@ -43,13 +45,11 @@ class MedicalRecordController:
 
     @classmethod
     @exception_handling
-
     def find_by_id(cls, id):
-       return True, cls.medical_da.find_by_id(id)
+        return True, cls.medical_da.find_by_id(id)
+
     @classmethod
     @exception_handling
-    def find_by_owner_id(cls, patient_id):
+    def find_by_patient_id(cls, patient_id):
         return True, cls.medical_da.find_by_patient_id(patient_id)
-
-
 
