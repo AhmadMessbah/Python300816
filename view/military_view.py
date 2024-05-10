@@ -124,11 +124,13 @@ class MilitaryView:
         self.user = user
         win = Tk()
         win.title("MilitaryRecord")
+        win.resizable(width=False, height=False)
 
         # CENTER FORM
-        x = (win.winfo_screenwidth() - 1120) // 2
+        x = (win.winfo_screenwidth() - 1165) // 2
         y = (win.winfo_screenheight() - 300) // 2
-        win.geometry(f"1120x300+{x}+{y}")
+        win.geometry(f"1165x300+{x}+{y}")
+
 
         # WIDGETS
         self.soldier_id = TextWithLabel(win, "Soldier ID", 20, 20, width=6)
@@ -144,9 +146,9 @@ class MilitaryView:
         self.search_organ.text_box.bind("<KeyRelease>", self.find_by_organ)
         self.search_serial_number = TextWithLabel(win, "Find by Serial", 610, 260, distance=85, width=13)
         self.search_serial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
-        self.search_soldier_id = TextWithLabel(win, "Search Soldier ID", 835, 260, distance=100, width=5)
+        self.search_soldier_id = TextWithLabel(win, "Search Soldier ID", 880, 260, distance=100, width=5)
         self.search_soldier_id.text_box.bind("<KeyRelease>", self.find_by_soldier_id)
-        self.search_id = TextWithLabel(win, "Search ID", 990, 260, distance=63, width=5)
+        self.search_id = TextWithLabel(win, "Search ID", 1035, 260, distance=63, width=5)
         self.search_id.text_box.bind("<KeyRelease>", self.find_by_id)
 
         # START DATE
@@ -174,7 +176,7 @@ class MilitaryView:
         # KeyboardInterrupt
         self.table = Table(win,
                            ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier ID"],
-                           [60, 100, 100, 100, 100, 100, 275],
+                           [60, 100, 100, 100, 100, 100, 320],
                            250,
                            20,
                            self.select_row)
