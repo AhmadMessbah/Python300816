@@ -55,27 +55,30 @@ class MilitaryController:
 
     @classmethod
     @exception_handling
-    def find_all(cls):
-        return True, cls.military_da.find_all()
+    def find_all(cls, person_da=PersonDa()):
+        return True, cls.military_da.find_all(person_da)
 
     @classmethod
     @exception_handling
-    def find_by_military_id(cls, military_id):
-        return True, cls.military_da.find_by_military_id(military_id)
+    def find_by_military_id(cls, military_id, person_da=PersonDa()):
+        return True, cls.military_da.find_by_military_id(military_id, person_da)
 
     @classmethod
     @exception_handling
-    def find_by_serial_number(cls, serial_number):
-        return True, cls.military_da.find_by_serial_number(serial_number)
+    def find_by_serial_number(cls, serial_number, person_da=PersonDa()):
+        return True, cls.military_da.find_by_serial_number(serial_number, person_da)
 
     @classmethod
     @exception_handling
-    def find_by_organ(cls, organ):
-        return True, cls.military_da.find_by_organ(organ)
+    def find_by_organ(cls, organ, person_da=PersonDa()):
+        return True, cls.military_da.find_by_organ(organ, person_da)
 
     @classmethod
     @exception_handling
-    def find_by_city(cls, city):
-        return True, cls.military_da.find_by_city(city)
+    def find_by_city(cls, city, person_da):
+        return True, cls.military_da.find_by_city(city, person_da=PersonDa())
+
+    def find_by_soldier_id(cls, soldier_id, person_da):
+        return True, cls.military_da.find_by_soldier_id(soldier_id, person_da=PersonDa())
 
 

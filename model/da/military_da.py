@@ -1,5 +1,4 @@
 from model.da.da import Da
-from model.da.person_da import PersonDa
 from model.entity.military import Military
 
 
@@ -41,12 +40,12 @@ class MilitaryDa(Da):
         self.connection.commit()
         self.disconnect()
 
-    def find_all(self):
+    def find_all(self, person_da):
         self.connect()
         self.cursor.execute("SELECT * FROM MILITARY_TBL")
         military_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        person_da = PersonDa()
+
         if military_tuple_list:
             military_list = []
             for military_tuple in military_tuple_list:
@@ -60,12 +59,12 @@ class MilitaryDa(Da):
         else:
             raise ValueError("No Record Found !")
 
-    def find_by_military_id(self, military_id):
+    def find_by_military_id(self, military_id, person_da):
         self.connect()
         self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE ID=%s", [military_id])
         military_tuple = self.cursor.fetchone()
         self.disconnect()
-        person_da = PersonDa()
+
         if military_tuple:
             military = Military(military_tuple[1], military_tuple[2],
                                 military_tuple[3], military_tuple[4],
@@ -76,12 +75,12 @@ class MilitaryDa(Da):
         else:
             raise ValueError("No Record Found !")
 
-    def find_by_serial_number(self, serial_number):
+    def find_by_serial_number(self, serial_number, person_da):
         self.connect()
         self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE SERIAL_NUMBER LIKE %s", [serial_number + "%"])
         military_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        person_da = PersonDa()
+
         if military_tuple_list:
             military_list = []
             for military_tuple in military_tuple_list:
@@ -95,12 +94,12 @@ class MilitaryDa(Da):
         else:
             raise ValueError("No Serial Information Found !")
 
-    def find_by_organ(self, organ):
+    def find_by_organ(self, organ, person_da):
         self.connect()
         self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE ORGAN LIKE %s", [organ + "%"])
         military_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        person_da = PersonDa()
+
         if military_tuple_list:
             military_list = []
             for military_tuple in military_tuple_list:
@@ -114,12 +113,12 @@ class MilitaryDa(Da):
         else:
             raise ValueError("No Organ Information Found !")
 
-    def find_by_city(self, city):
+    def find_by_city(self, city, person_da):
         self.connect()
         self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE CITY LIKE %s", [city + "%"])
         military_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        person_da = PersonDa()
+
         if military_tuple_list:
             military_list = []
             for military_tuple in military_tuple_list:
@@ -133,12 +132,12 @@ class MilitaryDa(Da):
         else:
             raise ValueError("No City Information Found !")
 
-    def find_by_soldier(self, soldier_id):
+    def find_by_soldier_id(self, soldier_id, person_da):
         self.connect()
         self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE SOLDIER_ID LIKE %s", [soldier_id + "%"])
         military_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        person_da = PersonDa()
+
         if military_tuple_list:
             military_list = []
             for military_tuple in military_tuple_list:

@@ -110,6 +110,11 @@ class MilitaryView:
         if status:
             self.table.refresh_table(military_list)
 
+    def find_by_soldier_id(self, event):
+        status, military_list = MilitaryController.find_by_soldier_id(self.search_soldier_id.variable.get())
+        if status:
+            self.table.refresh_table(military_list)
+
     def find_by_id(self, event):
         status, military_list = MilitaryController.find_by_military_id(self.search_id.variable.get())
         if status:
@@ -121,25 +126,27 @@ class MilitaryView:
         win.title("MilitaryRecord")
 
         # CENTER FORM
-        x = (win.winfo_screenwidth() - 910) // 2
+        x = (win.winfo_screenwidth() - 1120) // 2
         y = (win.winfo_screenheight() - 300) // 2
-        win.geometry(f"910x300+{x}+{y}")
+        win.geometry(f"1120x300+{x}+{y}")
 
         # WIDGETS
-        self.soldier_id = TextWithLabel(win, "Soldier", 20, 20, width=6)
+        self.soldier_id = TextWithLabel(win, "Soldier ID", 20, 20, width=6)
         self.id = TextWithLabel(win, "ID", 140, 20, disabled=True, distance=25, width=6)
         self.serial_number = TextWithLabel(win, "Serial", 20, 60)
         self.city = TextWithLabel(win, "City", 20, 100)
         self.organ = TextWithLabel(win, "Organ", 20, 140)
 
         # SEARCH
-        self.search_city = TextWithLabel(win, "Find By City", 240, 260, distance=80, width=13)
+        self.search_city = TextWithLabel(win, "Find By City", 250, 260, distance=80, width=13)
         self.search_city.text_box.bind("<KeyRelease>", self.find_by_city)
-        self.search_organ = TextWithLabel(win, "Find By Organ", 410, 260, distance=90, width=13)
+        self.search_organ = TextWithLabel(win, "Find By Organ", 425, 260, distance=90, width=13)
         self.search_organ.text_box.bind("<KeyRelease>", self.find_by_organ)
-        self.search_serial_number = TextWithLabel(win, "Find by Serial", 590, 260, distance=80, width=13)
+        self.search_serial_number = TextWithLabel(win, "Find by Serial", 610, 260, distance=85, width=13)
         self.search_serial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
-        self.search_id = TextWithLabel(win, "Find by ID", 765, 260, distance=65, width=6)
+        self.search_soldier_id = TextWithLabel(win, "Search Soldier ID", 835, 260, distance=100, width=5)
+        self.search_soldier_id.text_box.bind("<KeyRelease>", self.find_by_soldier_id)
+        self.search_id = TextWithLabel(win, "Search ID", 990, 260, distance=63, width=5)
         self.search_id.text_box.bind("<KeyRelease>", self.find_by_id)
 
         # START DATE
@@ -167,7 +174,7 @@ class MilitaryView:
         # KeyboardInterrupt
         self.table = Table(win,
                            ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier ID"],
-                           [60, 100, 100, 100, 100, 100, 61],
+                           [60, 100, 100, 100, 100, 100, 275],
                            250,
                            20,
                            self.select_row)
