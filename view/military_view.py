@@ -6,6 +6,7 @@ from model.entity.military import Military
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
 
+
 class MilitaryView:
 
     def reset_form(self):
@@ -24,6 +25,17 @@ class MilitaryView:
         if status:
             self.table.refresh_table(military_list)
 
+    #TODO : Exception in Tkinter callback
+    #Traceback (most recent call last):
+    #  File "C:\Users\Cato\AppData\Local\Programs\Python\Python312\Lib\tkinter\__init__.py", line 1967, in __call__
+    #    return self.func(*args)
+    #           ^^^^^^^^^^^^^^^^
+    #  File "C:\Users\Cato\PycharmProjects\Python300816\view\component\table.py", line 34, in select_table
+    #    self.select_function(data)
+    #  File "C:\Users\Cato\PycharmProjects\Python300816\view\military_view.py", line 29, in select_row
+    #    self.id.variable.set(military[0])
+    #                         ~~~~~~~~^^^
+    # IndexError: string index out of range
     def select_row(self, military):
         self.id.variable.set(military[0])
         self.serial_number.variable.set(str("{:011d}".format(military[1])))
@@ -37,6 +49,7 @@ class MilitaryView:
         self.end_year.variable.set(int(military[5][0:4]))
         self.end_month.variable.set(int(military[5][5:7]))
         self.end_day.variable.set(int(military[5][8:]))
+
         self.soldier_id.variable.set(military[6])
 
     def save_click(self):
@@ -98,7 +111,7 @@ class MilitaryView:
             self.table.refresh_table(military_list)
 
     def find_by_id(self, event):
-        status, military_list = MilitaryController.find_by_id(self.search_id.variable.get())
+        status, military_list = MilitaryController.find_by_military_id(self.search_id.variable.get())
         if status:
             self.table.refresh_table(military_list)
 
@@ -114,7 +127,7 @@ class MilitaryView:
 
         # WIDGETS
         self.soldier_id = TextWithLabel(win, "Soldier", 20, 20, width=6)
-        self.id = TextWithLabel(win, "ID", 140, 20, disabled=True,distance=25, width=6)
+        self.id = TextWithLabel(win, "ID", 140, 20, disabled=True, distance=25, width=6)
         self.serial_number = TextWithLabel(win, "Serial", 20, 60)
         self.city = TextWithLabel(win, "City", 20, 100)
         self.organ = TextWithLabel(win, "Organ", 20, 140)
@@ -140,11 +153,11 @@ class MilitaryView:
         self.end_day = TextWithLabel(win, "/", 165, 220, 12, disabled=False, width=4)
 
         self.table = Table(win,
-                      ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier ID"],
-                      [60, 100, 100, 100, 100, 100, 61],
-                      250,
-                      20,
-                      self.select_row)
+                           ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier ID"],
+                           [60, 100, 100, 100, 100, 100, 61],
+                           250,
+                           20,
+                           self.select_row)
 
         Button(win, text="Add", width=5, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
         Button(win, text="Edit", width=5, command=self.edit_click, bg="#e2e2e2").place(x=70, y=260)
@@ -154,5 +167,3 @@ class MilitaryView:
         self.reset_form()
 
         win.mainloop()
-
-

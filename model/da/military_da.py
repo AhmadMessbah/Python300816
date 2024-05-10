@@ -21,14 +21,15 @@ class MilitaryDa(Da):
 
     def edit(self, military):
         self.connect()
-        self.cursor.execute("UPDATE MILITARY_TBL SET serial_number=%s, city=%s, organ=%s, start_date=%s, end_date=%s, soldier_id=%s WHERE ID=%s",
-                            [military.serial_number,
-                             military.city,
-                             military.organ,
-                             military.start_date,
-                             military.end_date,
-                             military.soldier.person_id if military.soldier else None,
-                             military.military_id])
+        self.cursor.execute(
+            "UPDATE MILITARY_TBL SET serial_number=%s, city=%s, organ=%s, start_date=%s, end_date=%s, soldier_id=%s WHERE ID=%s",
+            [military.serial_number,
+             military.city,
+             military.organ,
+             military.start_date,
+             military.end_date,
+             military.soldier.person_id if military.soldier else None,
+             military.military_id])
         self.connection.commit()
         self.disconnect()
 
@@ -56,7 +57,7 @@ class MilitaryDa(Da):
         else:
             raise ValueError("No Record Found !")
 
-    def find_by_id(self, military_id):
+    def find_by_military_id(self, military_id):
         self.connect()
         self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE ID=%s", [military_id])
         military_tuple = self.cursor.fetchone()
@@ -72,7 +73,7 @@ class MilitaryDa(Da):
 
     def find_by_serial_number(self, serial_number):
         self.connect()
-        self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE SERIAL_NUMBER LIKE %s", [serial_number+"%"])
+        self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE SERIAL_NUMBER LIKE %s", [serial_number + "%"])
         military_tuple_list = self.cursor.fetchall()
         self.disconnect()
         if military_tuple_list:
@@ -130,5 +131,3 @@ class MilitaryDa(Da):
             return int(military[0])
         else:
             return 0
-
-
