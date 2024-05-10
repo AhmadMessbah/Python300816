@@ -131,7 +131,6 @@ class MilitaryView:
         y = (win.winfo_screenheight() - 300) // 2
         win.geometry(f"1165x300+{x}+{y}")
 
-
         # WIDGETS
         self.soldier_id = TextWithLabel(win, "Soldier ID", 20, 20, width=6)
         self.id = TextWithLabel(win, "ID", 140, 20, disabled=True, distance=25, width=6)
