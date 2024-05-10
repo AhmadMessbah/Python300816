@@ -152,6 +152,19 @@ class MilitaryView:
         self.end_month = TextWithLabel(win, "/", 130, 220, 12, disabled=False, width=4)
         self.end_day = TextWithLabel(win, "/", 165, 220, 12, disabled=False, width=4)
 
+        # todo: Exception in Tkinter callback
+        # Traceback (most recent call last):
+        #  File "C:\Users\Cato\AppData\Local\Programs\Python\Python312\Lib\tkinter\__init__.py", line 1967, in __call__
+        #    return self.func(*args)
+        #           ^^^^^^^^^^^^^^^^
+        #  File "C:\Users\Cato\PycharmProjects\Python300816\view\main_view.py", line 21, in military_click
+        #    military_view = MilitaryView(None)
+        #                    ^^^^^^^^^^^^^^^^^^
+        #  File "C:\Users\Cato\PycharmProjects\Python300816\view\military_view.py", line 158, in __init__
+        #    250,
+        #  File "C:\Users\Cato\AppData\Local\Programs\Python\Python312\Lib\tkinter\__init__.py", line 1504, in mainloop
+        #    self.tk.mainloop(n)
+        # KeyboardInterrupt
         self.table = Table(win,
                            ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier ID"],
                            [60, 100, 100, 100, 100, 100, 61],
@@ -167,3 +180,7 @@ class MilitaryView:
         self.reset_form()
 
         win.mainloop()
+
+
+    #TODO (FROM LOG FILE):  2024-05-10 10:27:35,630 - ERROR - MilitaryController.find_by_military_id('',) [RAISED EXCEPTION] : No Record Found !
+    #when trying to search anything, the taken character is set '' instead of the one you have entered.
