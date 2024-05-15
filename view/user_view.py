@@ -21,10 +21,13 @@ class UserView:
         self.id.variable.set(user[0])
         self.username.variable.set(user[1])
         self.password.variable.set(user[2])
-        self.person_id.variable.set(user[3])
+        self.status.set(user[3])
+        self.locked.set(user[4])
+        self.person_id.variable.set(user[5])
 
     def save_click(self):
-        ret, message = UserController.save(self.username.variable.get(), self.password.variable.get(),
+        ret, message = UserController.save(self.username.variable.get(),
+                                           self.password.variable.get(),
                                            self.status.get(),
                                            self.locked.get(),
                                            self.person_id.variable.get())
@@ -35,8 +38,12 @@ class UserView:
             msg.showerror("Save Error", message)
 
     def edit_click(self):
-        ret, message = UserController.edit(self.id.variable.get(), self.username.variable.get(),
-                                           self.password.variable.get(), self.locked.get(), self.status.get(),self.person_id.variable.get())
+        ret, message = UserController.edit(self.id.variable.get(),
+                                           self.username.variable.get(),
+                                           self.password.variable.get(),
+                                           self.locked.get(),
+                                           self.status.get(),
+                                           self.person_id.variable.get())
         if ret:
             msg.showinfo("Edit User", "User Edited")
             self.reset_form()
@@ -64,10 +71,9 @@ class UserView:
         self.id = TextWithLabel(win, "Id", 20, 20, disabled=True)
         self.username = TextWithLabel(win, "Username", 20, 60)
         self.password = TextWithLabel(win, "Password", 20, 100)
-        self.person_id = TextWithLabel(win, "Person_id", 20, 140)
+        self.person_id = TextWithLabel(win, "Person_id", 20, 180)
         self.search_username = TextWithLabel(win, "Username", 350, 260)
         self.search_username.text_box.bind("<KeyRelease>", self.find_by_username)
-
 
         self.status = BooleanVar()
         ttk.Checkbutton(text='Active', variable=self.status).place(x=80, y=140)
@@ -78,7 +84,7 @@ class UserView:
 
         self.table = Table(win,
                            ["Id", "Username", "Password", "Status", "Locked", "person_id"],
-                           [60, 100, 110, 60, 60 ,60],
+                           [60, 100, 110, 60, 60, 60],
                            290,
                            20,
                            self.select_row)
