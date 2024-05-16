@@ -79,7 +79,8 @@ class UserView:
         self.id = TextWithLabel(self.win, "Id", 20, 20, disabled=True)
         self.username = TextWithLabel(self.win, "Username", 20, 60)
         self.password = TextWithLabel(self.win, "Password", 20, 100)
-        self.person_id = TextWithLabel(self.win, "Person_id", 20, 180)
+        self.person_id = TextWithLabel(self.win, "Person_id", 20, 180, disabled=True)
+        self.person_id.variable.set()
         self.search_username = TextWithLabel(self.win, "Username", 350, 260)
         self.search_username.text_box.bind("<KeyRelease>", self.find_by_username)
 
@@ -104,4 +105,5 @@ class UserView:
         self.reset_form()
 
         self.win.mainloop()
+
 
