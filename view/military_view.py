@@ -1,10 +1,9 @@
 from tkinter import *
-import tkinter.ttk as ttk
 import tkinter.messagebox as msg
 from controller.military_controller import MilitaryController
-from model.entity.military import Military
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
+# from view.main_view import MainView
 
 
 class MilitaryView:
