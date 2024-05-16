@@ -80,19 +80,15 @@ class LessonView:
     def close_win(self):
         self.win.destroy()
         main_view = MainView(self.user)
-        
+
     def __init__(self, user):
         self.user = user
         self.win = Tk()
         self.win.title("Lesson Viewer")
 
-        # todo : add these two line
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
-
         # center form
-        x = (self.win.self.winfo_screenwidth() - 1050) // 2
-        y = (self.win.self.winfo_screenheight() - 300) // 2
+        x = (self.win.winfo_screenwidth() - 1050) // 2
+        y = (self.win.winfo_screenheight() - 300) // 2
         self.win.geometry(f"850x300+{x}+{y}")
 
         self.id = TextWithLabel(self.win, "ID", 20, 20, disabled=True)
