@@ -31,7 +31,7 @@ class MedicalView:
         if status:
             msg.showinfo("Save", "record saved successfully!")
         else:
-            msg.showerror("Error", "failed to save record!")
+            msg.showerror("Error", message)
 
     def edit_click(self):
         status, message = MedicalRecordController.edit(self.id.variable.get(), self.disease.variable.get(),
@@ -41,7 +41,7 @@ class MedicalView:
         if status:
             msg.showinfo("Edit", "record edited successfully!")
         else:
-            msg.showerror("Error", "failed to edit record!")
+            msg.showerror("Error", message)
 
     def remove_click(self):
         status, message = MedicalRecordController.remove(self.id.variable.get())
@@ -49,7 +49,7 @@ class MedicalView:
         if status:
             msg.showinfo("Remove", "record deleted successfully!")
         else:
-            msg.showerror("Error", "failed to delete record!")
+            msg.showerror("Error", message)
 
     def search_by_id(self, event):
         status, medical_record_list = MedicalRecordController.find_by_id(self.search_id.variable.get())
@@ -60,30 +60,31 @@ class MedicalView:
         self.user = user
         win = Tk()
         win.title('Medical Record')
-        win.geometry('700x350')
+        win.geometry('660x300')
 
-        self.id = TextWithLabel(win, 'Record ID', 30, 30, 60, disabled=True)
-        self.disease = TextWithLabel(win, 'Disease', 30, 80, 60)
-        self.medicine = TextWithLabel(win, 'Medicine', 30, 130, 60)
-        self.doctor = TextWithLabel(win, 'Doctor', 30, 180, 60)
-        self.patient_id = TextWithLabel(win, 'Patient ID', 30, 230, 60)
-        self.search_id = TextWithLabel(win, 'search ID', 250, 285, 60)
+        self.id = TextWithLabel(win, 'Record ID', 30, 20, 60, disabled=True)
+        self.disease = TextWithLabel(win, 'Disease', 30, 60, 60)
+        self.medicine = TextWithLabel(win, 'Medicine', 30, 100, 60)
+        self.doctor = TextWithLabel(win, 'Doctor', 30, 140, 60)
+        self.patient_id = TextWithLabel(win, 'Patient ID', 30, 180, 60)
+        self.search_id = TextWithLabel(win, 'search ID', 30, 260, 60)
         self.search_id.text_box.bind("<KeyRelease>", self.search_by_id)
 
         self.table = Table(win,
                       ['record ID', 'disease', 'medicine', 'doctor', 'Patient ID'],
                       [70, 70, 70, 70, 100],
                       250,
-                      30,
+                      20,
                       self.select_row)
 
-        Button(win, text='save', width=6, command=self.save_click).place(x=30, y=280)
-        Button(win, text='edit', width=6, command=self.edit_click).place(x=95, y=280)
-        Button(win, text='remove', width=6, command=self.remove_click).place(x=165, y=280)
+        Button(win, text='save', width=6, command=self.save_click).place(x=30, y=220)
+        Button(win, text='edit', width=6, command=self.edit_click).place(x=95, y=220)
+        Button(win, text='remove', width=6, command=self.remove_click).place(x=165, y=220)
 
         self.reset_form()
 
         win.mainloop()
-
-
 MedicalView(None)
+
+
+#todo: problem :edit , search by id
