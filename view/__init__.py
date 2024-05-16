@@ -1,0 +1,13 @@
+# todo : has error
+# from main_view import MainView
+# from financial_doc_view import FinancialDocView
+# from lesson_view import LessonView
+# from medical_view import MedicalView
+# from person_view import PersonView
+# from product_view import ProductView
+# from sim_card_view import SimCardView
+# from user_view import UserView
+# from military_view import MilitaryView
+# from driving_license_view import DrivingLicenseView
+# from car_view import CarView
+# from login_view import LoginView
