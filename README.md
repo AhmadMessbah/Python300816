@@ -20,3 +20,13 @@ Groups and Tasks:
     - DrivingLicense (id, serial_number, date, city, expire_date)               --> AmirReza NaalChi & S.Hanieh MirMoeini
     - MedicalRecord (id, disease, medicine, date, doctor, status)               --> Rashin Yaghooty & Saba Taheri
     - MilitaryRecord (id, serial_number, start_date, end_date, city, organ)     -->  Ali Azhdari & Ali BazrKar
+
+
+Tasks :
+    
+    Complete :
+        - FinancialDoc
+        - Product 
+        - SimCard
+        - Car
+        - DrivingLicense
