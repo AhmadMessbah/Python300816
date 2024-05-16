@@ -50,7 +50,7 @@ class MilitaryView:
         self.end_month.variable.set(int(military[5][5:7]))
         self.end_day.variable.set(int(military[5][8:]))
 
-        self.soldier_id.variable.set(military[6])
+        self.soldier_id.variable.set(int(military[6][14:15]))
 
     def save_click(self):
         status, message = MilitaryController.save(self.serial_number.variable.get(),
@@ -188,6 +188,8 @@ class MilitaryView:
         self.reset_form()
 
         win.mainloop()
+
+MilitaryView(None)
 
 
     #TODO (FROM LOG FILE):  2024-05-10 10:27:35,630 - ERROR - MilitaryController.find_by_military_id('',) [RAISED EXCEPTION] : No Record Found !
