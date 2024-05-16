@@ -40,14 +40,14 @@ class MilitaryController:
                             (int(end_year), int(end_month), int(end_day)),
                             soldier)
         military.military_id = military_id
-        old_military = cls.military_da.find_by_military_id(military_id)
+        old_military = cls.military_da.find_by_id(military_id)
         cls.military_da.edit(military)
         return True, (f"Record edited successfullyFrom : {old_military}\nTo: {military}")
 
     @classmethod
     @exception_handling
     def remove(cls, person_id):
-        military = cls.military_da.find_by_military_id(person_id)
+        military = cls.military_da.find_by_id(person_id)
         cls.military_da.remove(person_id)
         return True, f"Record removed successfully {military}"
 
@@ -58,8 +58,8 @@ class MilitaryController:
 
     @classmethod
     @exception_handling
-    def find_by_military_id(cls, military_id):
-        return True, cls.military_da.find_by_military_id(int(military_id))
+    def find_by_id(cls, military_id):
+        return True, cls.military_da.find_by_id(int(military_id))
 
     @classmethod
     @exception_handling
