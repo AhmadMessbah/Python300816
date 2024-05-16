@@ -31,7 +31,7 @@ class MedicalDa(Da):
                 [medical_record.disease,
                  medical_record.medicine,
                  medical_record.doctor,
-                 medical_record.patient.person_id, medical_record.patient.person_id if medical_record.patient else None,
+                 medical_record.patient.person_id if medical_record.patient else None,
                  medical_record.id])
             self.connection.commit()
             self.disconnect()
@@ -100,10 +100,10 @@ class MedicalDa(Da):
 
     def find_medical_record_count_by_patient_id(self, patient_id):
         self.connect()
-        self.cursor.execute('SELECT * FROM medical_record WHERE patient_id = %s', [patient_id])
+        self.cursor.execute('SELECT count(*) FROM medical_record WHERE patient_id = %s', [patient_id])
         medical_records_count = self.cursor.fetchone()
         self.disconnect()
         if medical_records_count:
-            return int(medical_records_count[1])
+            return int(medical_records_count[0])
         else:
             return 0

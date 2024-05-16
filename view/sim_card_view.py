@@ -85,7 +85,7 @@ class SimCardView:
         self.operator = TextWithLabel(win, "Operator", 20, 60)
         self.price = TextWithLabel(win, "Price", 20, 80)
         self.owner = TextWithLabel(win, "Owner", 20, 100)
-        self.search_owner = TextWithLabel(win, "Owner", 300, 270)
+        self.search_owner = TextWithLabel(win, "Owner", 300, 250)
         self.search_owner.text_box.bind("<KeyRelease>", self.find_by_owner)
 
         self.table = Table(win,

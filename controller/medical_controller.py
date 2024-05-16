@@ -23,11 +23,11 @@ class MedicalRecordController:
 
     @classmethod
     @exception_handling
-    def edit(cls,id, disease, medicine, doctor, patient_id):
-        patient =cls.person_da.find_by_id(patient_id)
+    def edit(cls, id, disease, medicine, doctor, patient_id):
+        patient = cls.person_da.find_by_id(int(patient_id))
         medical_record = MedicalRecord(disease, medicine, doctor, patient)
         medical_record.id = id
-        old_record = cls.medical_da.find_by_id(id)
+        old_record = cls.medical_da.find_by_id(int(id))
         cls.medical_da.edit(medical_record)
         return True, (f"record edited successfully\nFrom : {old_record}\nTo: {medical_record}")
 
@@ -52,4 +52,3 @@ class MedicalRecordController:
     @exception_handling
     def find_by_patient_id(cls, patient_id):
         return True, cls.medical_da.find_by_patient_id(patient_id)
-
