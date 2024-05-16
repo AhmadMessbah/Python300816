@@ -40,11 +40,10 @@ class LessonDa(Da):
         if lesson_tuple_list:
             lesson_list = []
             for lesson_tuple in lesson_tuple_list:
-                teacher = person_da.find_by_id(lesson_tuple[4])
                 lesson = Lesson(lesson_tuple[1],
                                 lesson_tuple[2],
                                 lesson_tuple[3],
-                                teacher.family)
+                                person_da.find_by_id(lesson_tuple[4]))
                 lesson.lesson_id = lesson_tuple[0]
                 lesson_list.append(lesson)
             return lesson_list
@@ -58,11 +57,10 @@ class LessonDa(Da):
         self.disconnect()
         person_da = PersonDa()
         if lesson_tuple:
-            teacher = person_da.find_by_id(lesson_tuple[4])
             lesson = Lesson(lesson_tuple[1],
                             lesson_tuple[2],
                             lesson_tuple[3],
-                            teacher.family)
+                            person_da.find_by_id(lesson_tuple[4]))
             lesson.lesson_id = lesson_tuple[0]
             return lesson
         else:
@@ -77,11 +75,10 @@ class LessonDa(Da):
         if lesson_tuple_list:
             lesson_list = []
             for lesson_tuple in lesson_tuple_list:
-                teacher = person_da.find_by_id(lesson_tuple[4])
                 lesson = Lesson(lesson_tuple[1],
                                 lesson_tuple[2],
                                 lesson_tuple[3],
-                                teacher.family)
+                                person_da.find_by_id(lesson_tuple[4]))
                 lesson.lesson_id = lesson_tuple[0]
                 lesson_list.append(lesson)
             return lesson_list
@@ -97,11 +94,10 @@ class LessonDa(Da):
         if lesson_tuple_list:
             lesson_list = []
             for lesson_tuple in lesson_tuple_list:
-                teacher = person_da.find_by_id(lesson_tuple[4])
                 lesson = Lesson(lesson_tuple[1],
                                 lesson_tuple[2],
                                 lesson_tuple[3],
-                                teacher.family)
+                                person_da.find_by_id(lesson_tuple[4]))
                 lesson.lesson_id = lesson_tuple[0]
                 lesson_list.append(lesson)
             return lesson_list
