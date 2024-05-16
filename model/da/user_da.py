@@ -19,13 +19,12 @@ class UserDa(Da):
     def edit(self, user):
         self.connect()
         self.cursor.execute(
-            "UPDATE USER_TBL SET USERNAME=%s, PASSWORD=%s, STATUS=%s, LOCKED=%s , PERSON_ID=%s  WHERE ID=%s",
+            "UPDATE USER_TBL SET USERNAME=%s, PASSWORD=%s, STATUS=%s, LOCKED=%s  WHERE ID=%s",
             [user.username,
              user.password,
              user.status,
              user.locked,
-             user.user_id,
-             user.person.person_id if user.person else None
+             user.user_id
              ])
         self.connection.commit()
         self.disconnect()

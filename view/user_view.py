@@ -5,6 +5,7 @@ from tkinter import *
 from controller.user_controller import UserController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
+from view.main_view import MainView
 
 
 class UserView:
@@ -12,7 +13,6 @@ class UserView:
         self.id.variable.set("")
         self.username.variable.set("")
         self.password.variable.set("")
-        self.person_id.variable.set("")
         ret, user_list = UserController.find_all()
         if ret:
             self.table.refresh_table(user_list)
@@ -23,7 +23,7 @@ class UserView:
         self.password.variable.set(user[2])
         self.status.set(user[3])
         self.locked.set(user[4])
-        self.person_id.variable.set(user[5])
+
 
     def save_click(self):
         ret, message = UserController.save(self.username.variable.get(),
@@ -41,8 +41,8 @@ class UserView:
         ret, message = UserController.edit(self.id.variable.get(),
                                            self.username.variable.get(),
                                            self.password.variable.get(),
-                                           self.locked.get(),
                                            self.status.get(),
+                                           self.locked.get(),
                                            self.person_id.variable.get())
         if ret:
             msg.showinfo("Edit User", "User Edited")
@@ -63,15 +63,15 @@ class UserView:
         if ret:
             self.table.refresh_table(user_list)
 
-    # def close_win(self):
-    #     self.win.destroy()
-    #     main_view = MainView(self.user)
+    def close_win(self):
+        self.win.destroy()
+        main_view = MainView(self.user)
 
-    def __init__(self):
+    def __init__(self, person):
         self.win = Tk()
-
-        # Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-        # self.win.protocol("WM_DELETE_WINDOW", self.close_win)
+        self.person = person
+        Label(text=self.person.name + " " + self.person.family).place(x=0, y=0)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         self.win.geometry("750x310")
         self.win.title("User")
@@ -79,7 +79,8 @@ class UserView:
         self.id = TextWithLabel(self.win, "Id", 20, 20, disabled=True)
         self.username = TextWithLabel(self.win, "Username", 20, 60)
         self.password = TextWithLabel(self.win, "Password", 20, 100)
-        self.person_id = TextWithLabel(self.win, "Person_id", 20, 180)
+        self.person_id = TextWithLabel(self.win, "Person_id", 20, 180, disabled=True)
+        self.person_id.variable.set(self.person.person_id)
         self.search_username = TextWithLabel(self.win, "Username", 350, 260)
         self.search_username.text_box.bind("<KeyRelease>", self.find_by_username)
 
@@ -104,4 +105,5 @@ class UserView:
         self.reset_form()
 
         self.win.mainloop()
+
 
