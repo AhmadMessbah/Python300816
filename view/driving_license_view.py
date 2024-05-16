@@ -102,4 +102,3 @@ class DrivingLicenseView:
         win.mainloop()
 
 
-DrivingLicenseView(None)

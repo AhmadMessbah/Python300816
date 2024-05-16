@@ -9,7 +9,6 @@ class FinancialDocView:
     def reset_form(self):
         self.id.variable.set("")
         self.amount.variable.set("")
-        self.date_time.variable.set("")
         self.doc_type.variable.set("")
         self.description.variable.set("")
         status, financial_list = FinancialDocController.find_all()
@@ -25,7 +24,7 @@ class FinancialDocView:
 
     def save_click(self):
         status, message = FinancialDocController.save(self.amount.variable.get(),
-                                                      self.date_time.variable.get(),
+                                                      self.date_time.now().variable.get(),
                                                       self.doc_type.variable.get(),
                                                       self.description.variable.get())
         if status:
@@ -62,21 +61,20 @@ class FinancialDocView:
     def __init__(self, person):
         self.person = person
         win = Tk()
-        win.geometry("600x300")
+        win.geometry("800x300")
         win.title("Financial Document")
 
-        self.id = TextWithLabel(win, "Id", 20, 20, disabled=True)
-        self.amount = TextWithLabel(win, "amount", 20, 60)
-        self.date_time = TextWithLabel(win, "date time", 20, 100)
-        self.search_date_time  = TextWithLabel(win, "date time", 300, 270)
+        self.id = TextWithLabel(win, "  Id:", 20, 20, disabled=True)
+        self.amount = TextWithLabel(win, "amount:", 20, 60)
+        self.search_date_time  = TextWithLabel(win, "date time:", 300, 270)
         self.search_date_time.text_box.bind("<KeyRelease>", self.find_by_date)
-        self.doc_type = TextWithLabel(win, "doc type", 20, 140)
-        self.description = TextWithLabel(win, "description", 20, 180)
+        self.doc_type = TextWithLabel(win, "doc type:", 20, 110)
+        self.description = TextWithLabel(win, "description:", 20, 150)
 
 
         self.table = Table(win,
                       ["Id", "amount", "date_time", "doc_type", "description"],
-                      [60, 100, 100,100,100],
+                      [50, 100, 100,100,150],
                       250,
                       20,
                       self.select_row)
@@ -89,4 +87,3 @@ class FinancialDocView:
 
         win.mainloop()
 
-FinancialDocView(None)

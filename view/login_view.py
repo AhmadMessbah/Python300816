@@ -1,10 +1,8 @@
 import tkinter.messagebox as msg
-import tkinter.ttk as ttk
 from tkinter import *
 
 from controller.user_controller import UserController
 from view.component.label_text import TextWithLabel
-from view.component.table import Table
 from view.main_view import MainView
 
 
@@ -27,5 +25,8 @@ class LoginView:
         self.password = TextWithLabel(self.win, "Password", 20, 90)
 
         Button(self.win, text="Login", width=10, command=self.login_click).place(x=80, y=180)
+
+        self.username.variable.set("ahmad")
+        self.password.variable.set("ahmad123")
 
         self.win.mainloop()

@@ -118,4 +118,3 @@ class LessonView:
         win.mainloop()
 
 
-LessonView(None)

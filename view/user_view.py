@@ -63,17 +63,16 @@ class UserView:
         if ret:
             self.table.refresh_table(user_list)
 
-
     def __init__(self):
-        self.win = Tk()
-        self.win.geometry("750x310")
-        self.win.title("User")
+        win = Tk()
+        win.geometry("750x310")
+        win.title("User")
 
-        self.id = TextWithLabel(self.win, "Id", 20, 20, disabled=True)
-        self.username = TextWithLabel(self.win, "Username", 20, 60)
-        self.password = TextWithLabel(self.win, "Password", 20, 100)
-        self.person_id = TextWithLabel(self.win, "Person_id", 20, 180)
-        self.search_username = TextWithLabel(self.win, "Username", 350, 260)
+        self.id = TextWithLabel(win, "Id", 20, 20, disabled=True)
+        self.username = TextWithLabel(win, "Username", 20, 60)
+        self.password = TextWithLabel(win, "Password", 20, 100)
+        self.person_id = TextWithLabel(win, "Person_id", 20, 180)
+        self.search_username = TextWithLabel(win, "Username", 350, 260)
         self.search_username.text_box.bind("<KeyRelease>", self.find_by_username)
 
         self.status = BooleanVar()
@@ -83,20 +82,20 @@ class UserView:
         self.locked = BooleanVar()
         ttk.Checkbutton(text='Locked', variable=self.locked).place(x=150, y=140)
 
-        self.table = Table(self.win,
+        self.table = Table(win,
                            ["Id", "Username", "Password", "Status", "Locked", "person_id"],
                            [60, 100, 110, 60, 60, 60],
                            290,
                            20,
                            self.select_row)
 
-        Button(self.win, text="Add", width=8, command=self.save_click).place(x=20, y=260)
-        Button(self.win, text="Edit", width=8, command=self.edit_click).place(x=100, y=260)
-        Button(self.win, text="Remove", width=8, command=self.remove_click).place(x=180, y=260)
+        Button(win, text="Add", width=8, command=self.save_click).place(x=20, y=260)
+        Button(win, text="Edit", width=8, command=self.edit_click).place(x=100, y=260)
+        Button(win, text="Remove", width=8, command=self.remove_click).place(x=180, y=260)
 
         self.reset_form()
 
-        self.win.mainloop()
+        win.mainloop()
 
 
 UserView()

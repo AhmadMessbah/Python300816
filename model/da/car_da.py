@@ -82,7 +82,7 @@ class CarDa(Da):
         if car_tuple_list:
             car_list = []
             for car_tuple in car_tuple_list:
-                car = CaR(car_tuple[1], car_tuple[2],car_tuple[3],user_da.find_by_id(car_tuple[4]))
+                car = Car(car_tuple[1], car_tuple[2],car_tuple[3],user_da.find_by_id(car_tuple[4]))
                 car.car_id = car_tuple[0]
                 car_list.append(car)
             return car_list

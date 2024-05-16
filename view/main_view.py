@@ -9,7 +9,8 @@ from view.sim_card_view import SimCardView
 from view.user_view import UserView
 from view.military_view import MilitaryView
 from view.driving_license_view import DrivingLicenseView
-# from view.car_view import CarView
+from view.car_view import CarView
+# from view.login_view import LoginView
 
 
 class MainView:
@@ -49,7 +50,7 @@ class MainView:
         self.win = Tk()
         self.win.geometry("300x750")
         self.win.title("Python App")
-        # Label(text=user.person.name + " " + user.person.family).place(x=20, y=20)
+        Label(text=user.person.name + " " + user.person.family).place(x=20, y=20)
 
         Button(self.win, text="Person", width=15, bg="lightblue", height=2, font=("Arial", 15),
                command=self.person_click).place(x=50, y=50)
@@ -74,4 +75,3 @@ class MainView:
 
         self.win.mainloop()
 
-MainView(None)

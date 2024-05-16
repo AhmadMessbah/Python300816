@@ -6,7 +6,7 @@ from view.component.label_text import TextWithLabel
 from view.component.table import Table
 
 
-class PersonView:
+class CarView:
     def reset_form(self):
         self.id.variable.set("")
         self.name.variable.set("")
@@ -52,6 +52,7 @@ class PersonView:
     def __init__(self, user):
         self.user = user
         win = Tk()
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         win.geometry("600x300")
         win.title("Person")
 
