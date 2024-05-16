@@ -86,7 +86,6 @@ class MilitaryView:
             msg.showerror("Remove Error", message)
 
     def find_by_city(self, event):
-        #todo: 2024-05-16 15:33:46,103 - ERROR - MilitaryController.find_by_city('Mas',) [RAISED EXCEPTION] : MilitaryController.find_by_city() missing 1 required positional argument: 'person_da'
         status, military_list = MilitaryController.find_by_city(self.search_city.variable.get())
         if status:
             self.table.refresh_table(military_list)
