@@ -38,7 +38,7 @@ class MilitaryController:
                             organ,
                             (int(start_year), int(start_month), int(start_day)),
                             (int(end_year), int(end_month), int(end_day)),
-                            int(soldier))
+                            soldier)
         military.military_id = military_id
         old_military = cls.military_da.find_by_military_id(military_id)
         cls.military_da.edit(military)

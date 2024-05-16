@@ -167,6 +167,5 @@ class MilitaryView:
         Button(self.win, text="♻️", width=2, command=self.reset_form, bg="#e2e2e2").place(x=193, y=260)
 
         self.reset_form()
-
         self.win.mainloop()
 
