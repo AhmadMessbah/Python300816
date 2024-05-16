@@ -107,16 +107,16 @@ class MilitaryView:
         else:
             self.table.refresh_table(MilitaryController.find_all()[1])
 
-#    def close_win(self):
-#        self.win.destroy()
-#        main_view = MainView(self.user)
+    def close_win(self):
+        self.win.destroy()
+        main_view = MainView(self.user)
 
     def __init__(self, user):
         self.user = user
         self.win = Tk()
 
-#        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-#        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
 
         self.win.title("MilitaryRecord")
@@ -168,5 +168,3 @@ class MilitaryView:
 
         self.reset_form()
         self.win.mainloop()
-
-MilitaryView(None)
