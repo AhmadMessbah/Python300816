@@ -21,7 +21,7 @@ class Product(Base):
         return self._person
 
     def set_person(self, person):
-        self._person = Validator.name_validator(person, "Invalid Person")
+        self._person = person
 
     def get_brand(self):
         return self._brand
@@ -46,3 +46,5 @@ class Product(Base):
     brand = property(get_brand, set_brand)
     serial = property(get_serial, set_serial)
     buy_price = property(get_buy_price, set_buy_price)
+
+

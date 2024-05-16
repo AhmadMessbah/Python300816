@@ -24,8 +24,8 @@ class ProductController:
     @classmethod
     @exception_handling
     def edit(cls, product_id, name, brand, serial, buy_price, person_id):
-        person = PersonDa.find_by_id(person_id)
-        product = Product(name, brand, serial, buy_price, person_id)
+        person = cls.person_da.find_by_id(int(person_id))
+        product = Product(name, brand, serial, buy_price, person)
         product.product_id = product_id
         old_product = cls.product_da.find_by_id(product_id)
         cls.product_da.edit(product)
@@ -50,3 +50,4 @@ class ProductController:
 
     def find_by_person_id(cls, person_id):
         return True, cls.product_da.find_by_person_id(person_id)
+
