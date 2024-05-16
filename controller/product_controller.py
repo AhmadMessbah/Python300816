@@ -47,5 +47,6 @@ class ProductController:
     def find_by_id(cls, product_id):
         return True, cls.product_da.find_by_id(product_id)
 
+    # todo:can not find id from the correct table
     def find_by_person_id(cls, person_id):
         return True, cls.product_da.find_by_person_id(person_id)
