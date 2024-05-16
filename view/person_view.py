@@ -52,8 +52,8 @@ class PersonView:
     def __init__(self, user):
         self.user = user
         # todo : label is on previous form
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win = Tk()
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.geometry("600x300")
         self.win.title("Person")
 
