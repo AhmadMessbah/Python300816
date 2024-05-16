@@ -38,7 +38,7 @@ class MilitaryController:
                             organ,
                             (int(start_year), int(start_month), int(start_day)),
                             (int(end_year), int(end_month), int(end_day)),
-                            int(soldier))
+                            soldier)
         military.military_id = military_id
         old_military = cls.military_da.find_by_military_id(military_id)
         cls.military_da.edit(military)
@@ -54,7 +54,7 @@ class MilitaryController:
     @classmethod
     @exception_handling
     def find_all(cls):
-        return True, cls.military_da.find_all(cls.person_da)
+        return True, cls.military_da.find_all()
 
     @classmethod
     @exception_handling
@@ -75,8 +75,5 @@ class MilitaryController:
     @exception_handling
     def find_by_city(cls, city):
         return True, cls.military_da.find_by_city(city)
-
-    def find_by_soldier_id(cls, soldier_id, person_da=PersonDa()):
-        return True, cls.military_da.find_by_soldier_id(soldier_id)
 
 

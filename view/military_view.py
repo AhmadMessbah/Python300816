@@ -128,7 +128,7 @@ class MilitaryView:
         self.win.geometry(f"1165x300+{x}+{y}")
 
         # WIDGETS
-        self.soldier_id = TextWithLabel(self.win, "Soldier ID", 20, 20, width=6, disabled=True)
+        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, width=6)
         self.id = TextWithLabel(self.win, "ID", 140, 20, disabled=True, distance=25, width=6)
         self.serial_number = TextWithLabel(self.win, "Serial", 20, 60)
         self.city = TextWithLabel(self.win, "City", 20, 100)
@@ -141,7 +141,6 @@ class MilitaryView:
         self.search_organ.text_box.bind("<KeyRelease>", self.find_by_organ)
         self.search_serial_number = TextWithLabel(self.win, "Find by Serial", 610, 260, distance=85, width=13)
         self.search_serial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
-
         self.search_id = TextWithLabel(self.win, "Search ID", 1035, 260, distance=63, width=5)
         self.search_id.text_box.bind("<KeyRelease>", self.find_by_id)
 
@@ -156,7 +155,7 @@ class MilitaryView:
         self.end_day = TextWithLabel(self.win, "/", 165, 220, 12, disabled=False, width=4)
 
         self.table = Table(self.win,
-                           ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier"],
+                           ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Person Information"],
                            [60, 100, 100, 100, 100, 100, 320],
                            250,
                            20,
@@ -168,6 +167,5 @@ class MilitaryView:
         Button(self.win, text="♻️", width=2, command=self.reset_form, bg="#e2e2e2").place(x=193, y=260)
 
         self.reset_form()
-
         self.win.mainloop()
 

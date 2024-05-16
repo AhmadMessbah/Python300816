@@ -92,3 +92,23 @@ class ProductDa(Da):
             return int(product_count[1])
         else:
             return 0
+
+    def find_by_person_id(self, person_id):
+        self.connect()
+        self.cursor.execute("SELECT * FROM product_tbl WHERE person_id=%s", [person_id])
+        products_tuple_list = self.cursor.fetchall()
+        self.disconnect()
+        print(products_tuple_list)
+        person_da = PersonDa()
+        if products_tuple_list:
+            product_list = []
+            for product_tuple in products_tuple_list:
+                product = Product(product_tuple[1],
+                                  product_tuple[2],
+                                  product_tuple[3],
+                                  person_da.find_by_id(product_tuple[4]))
+                product.product_id = product_tuple[0]
+                product_list.append(product)
+            return product_list
+        else:
+            raise ValueError("No products found !")
