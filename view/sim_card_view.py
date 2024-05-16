@@ -1,6 +1,5 @@
 import tkinter.messagebox as msg
 from tkinter import *
-
 from controller.sim_card_controller import SimCardController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
@@ -27,14 +26,19 @@ class SimCardView:
         if status:
             self.table.refresh_table(sim_card_list)
 
+
     def select_row(self, sim_card):
         self.number.variable.set(sim_card[0])
         self.operator.variable.set(sim_card[1])
         self.price.variable.set(sim_card[2])
+        self.owner.variable.set(sim_card[3])
 
     def edit_click(self):
-        status, message = SimCardController.edit(self.number.variable.get(), self.operator.variable.get(),
-                                                 self.price.variable.get())
+        status, message = SimCardController.edit(self.number.variable.get(),
+                                                 self.operator.variable.get(),
+                                                 self.price.variable.get(),
+                                                 self.owner.variable.get()
+                                                 )
         if status:
             msg.showinfo("Edit SimCard", "SimCard Edited")
             self.reset_form()
@@ -77,9 +81,9 @@ class SimCardView:
         Entry(win, textvariable=self.owner).place(x=80, y=140)
 
         self.id = TextWithLabel(win, "Id", 20, 20, disabled=True)
-        self.number = TextWithLabel(win, "PhoneNumber", 20, 60)
+        self.number = TextWithLabel(win, "PhoneNumber", 20, 40)
         self.operator = TextWithLabel(win, "Operator", 20, 60)
-        self.price = TextWithLabel(win, "Price", 20, 100)
+        self.price = TextWithLabel(win, "Price", 20, 80)
         self.owner = TextWithLabel(win, "Owner", 20, 100)
         self.search_owner = TextWithLabel(win, "Owner", 300, 270)
         self.search_owner.text_box.bind("<KeyRelease>", self.find_by_owner)
