@@ -4,6 +4,7 @@ import tkinter.messagebox as msg
 from controller.lesson_controller import LessonController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
+from view.main_view import MainView
 
 
 class LessonView:
@@ -76,45 +77,53 @@ class LessonView:
         if status:
             self.table.refresh_table(lesson_list)
 
+    def close_win(self):
+        self.win.destroy()
+        main_view = MainView(self.user)
+        
     def __init__(self, user):
         self.user = user
-        win = Tk()
-        win.title("Panel")
+        self.win = Tk()
+        self.win.title("Lesson Viewer")
+
+        # todo : add these two line
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         # center form
-        x = (win.winfo_screenwidth() - 1050) // 2
-        y = (win.winfo_screenheight() - 300) // 2
-        win.geometry(f"850x300+{x}+{y}")
+        x = (self.win.self.winfo_screenwidth() - 1050) // 2
+        y = (self.win.self.winfo_screenheight() - 300) // 2
+        self.win.geometry(f"850x300+{x}+{y}")
 
-        self.id = TextWithLabel(win, "ID", 20, 20, disabled=True)
-        self.name = TextWithLabel(win, "Name", 20, 60)
-        self.grade = TextWithLabel(win, "Grade", 20, 100)
+        self.id = TextWithLabel(self.win, "ID", 20, 20, disabled=True)
+        self.name = TextWithLabel(self.win, "Name", 20, 60)
+        self.grade = TextWithLabel(self.win, "Grade", 20, 100)
 
 
-        self.year = TextWithLabel(win, "Year", 20, 140, 30, "", 4)
-        self.month = TextWithLabel(win, "/Month", 90, 140, 45, "", 2)
-        self.day = TextWithLabel(win, "/Day", 165, 140, 30, "", 2)
-        self.teacher = TextWithLabel(win, "Teacher", 20, 180)
+        self.year = TextWithLabel(self.win, "Year", 20, 140, 30, "", 4)
+        self.month = TextWithLabel(self.win, "/Month", 90, 140, 45, "", 2)
+        self.day = TextWithLabel(self.win, "/Day", 165, 140, 30, "", 2)
+        self.teacher = TextWithLabel(self.win, "Teacher", 20, 180)
 
-        self.search_name = TextWithLabel(win, "Find By Name", 250, 260, 100)
+        self.search_name = TextWithLabel(self.win, "Find By Name", 250, 260, 100)
         self.search_name.text_box.bind("<KeyRelease>", self.find_by_name)
-        self.search_teacher = TextWithLabel(win, "Find By Teacher", 550, 260, 100)
+        self.search_teacher = TextWithLabel(self.win, "Find By Teacher", 550, 260, 100)
         self.search_teacher.text_box.bind("<KeyRelease>", self.find_by_teacher)
 
-        self.table = Table(win,
+        self.table = Table(self.win,
                            ["Id", "Name", "Grade", "Date", "Teacher"],
                            [60, 150, 150, 80, 150],
                            250,
                            20,
                            self.select_row)
 
-        Button(win, text="New", width=10, command=self.reset_form, bg='#86CA93', fg='black').place(x=20, y=220)
-        Button(win, text="Save", width=10, command=self.save_click).place(x=120, y=220)
-        Button(win, text="Edit", width=10, command=self.edit_click).place(x=20, y=260)
-        Button(win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=120, y=260)
+        Button(self.win, text="New", width=10, command=self.reset_form, bg='#86CA93', fg='black').place(x=20, y=220)
+        Button(self.win, text="Save", width=10, command=self.save_click).place(x=120, y=220)
+        Button(self.win, text="Edit", width=10, command=self.edit_click).place(x=20, y=260)
+        Button(self.win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=120, y=260)
 
         self.reset_form()
 
-        win.mainloop()
+        self.win.mainloop()
 
 
