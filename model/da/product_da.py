@@ -23,7 +23,7 @@ class ProductDa(Da):
                                  product.brand,
                                  product.serial,
                                  product.buy_price,
-                                 product.person_id if product.person_id else None]
+                                 product.person.person_id if product.person else None]
                                 )
             self.connection.commit()
             self.disconnect()
@@ -40,7 +40,6 @@ class ProductDa(Da):
         self.cursor.execute("SELECT * FROM product_tbl")
         products_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        print(products_tuple_list)
         person_da = PersonDa()
         if products_tuple_list:
             product_list = []
@@ -48,7 +47,8 @@ class ProductDa(Da):
                 product = Product(product_tuple[1],
                                   product_tuple[2],
                                   product_tuple[3],
-                                  person_da.find_by_id(product_tuple[4]))
+                                  product_tuple[4],
+                                  person_da.find_by_id(product_tuple[5]))
                 product.product_id = product_tuple[0]
                 product_list.append(product)
             return product_list
@@ -62,8 +62,11 @@ class ProductDa(Da):
         self.disconnect()
         person_da = PersonDa()
         if product_tuple:
-            product = Product(product_tuple[1], product_tuple[2], product_tuple[3],
-                              person_da.find_by_id(product_tuple[4]))
+            product = Product(product_tuple[1],
+                              product_tuple[2],
+                              product_tuple[3],
+                              product_tuple[4],
+                              person_da.find_by_id(product_tuple[5]))
             product.product_id = product_tuple[0]
             return product
         else:
@@ -76,8 +79,11 @@ class ProductDa(Da):
         self.disconnect()
         person_da = PersonDa()
         if product_tuple:
-            product = Product(product_tuple[1], product_tuple[2], product_tuple[3],
-                              person_da.find_by_id(product_tuple[4]))
+            product = Product(product_tuple[1],
+                              product_tuple[2],
+                              product_tuple[3],
+                              product_tuple[4],
+                              person_da.find_by_id(product_tuple[5]))
             product.product_id = product_tuple[0]
             return product
         else:
@@ -98,7 +104,6 @@ class ProductDa(Da):
         self.cursor.execute("SELECT * FROM product_tbl WHERE person_id=%s", [person_id])
         products_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        print(products_tuple_list)
         person_da = PersonDa()
         if products_tuple_list:
             product_list = []
@@ -106,7 +111,8 @@ class ProductDa(Da):
                 product = Product(product_tuple[1],
                                   product_tuple[2],
                                   product_tuple[3],
-                                  person_da.find_by_id(product_tuple[4]))
+                                  product_tuple[4],
+                                  person_da.find_by_id(product_tuple[5]))
                 product.product_id = product_tuple[0]
                 product_list.append(product)
             return product_list

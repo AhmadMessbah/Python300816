@@ -58,6 +58,11 @@ class FinancialDocView:
         if status:
             self.table.refresh_table(financial_list)
 
+    # todo : add these function and comment
+    # def close_win(self):
+    #     self.win.destroy()
+    #     main_view = MainView(self.person)
+
     def __init__(self, person):
         self.person = person
         win = Tk()

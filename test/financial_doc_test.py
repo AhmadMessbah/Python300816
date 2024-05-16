@@ -16,7 +16,7 @@ da = FinancialDocDa()
 #da.save(doc)
 #da.edit(doc)
 #da.remove(1)
-da.find_all()
+#da.find_all()
 
 
 # f_controller = FinancialDocController()
