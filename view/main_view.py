@@ -8,6 +8,7 @@ from view.product_view import ProductView
 from view.sim_card_view import SimCardView
 from view.user_view import UserView
 from view.military_view import MilitaryView
+from view.driving_license_view import DrivingLicenseView
 
 
 class MainView:
@@ -27,6 +28,8 @@ class MainView:
         financial_view = FinancialDocView(None)
     def lesson_click(self):
         lesson_view = LessonView(None)
+    def driving_license_click(self):
+        driving_license_view = DrivingLicenseView(None)
 
     def __init__(self, user):
         win = Tk()
@@ -42,5 +45,6 @@ class MainView:
         Button(win, text="Product",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.product_click).place(x=50, y=400)
         Button(win, text="Financial",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.financial_click).place(x=50, y=470)
         Button(win, text="Lesson",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.lesson_click).place(x=50, y=540)
+        Button(win, text="DrivingLicense",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.driving_licese_click).place(x=50, y=610)
 
         win.mainloop()
