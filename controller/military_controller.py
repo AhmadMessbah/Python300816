@@ -54,7 +54,7 @@ class MilitaryController:
     @classmethod
     @exception_handling
     def find_all(cls):
-        return True, cls.military_da.find_all(cls.person_da)
+        return True, cls.military_da.find_all()
 
     @classmethod
     @exception_handling

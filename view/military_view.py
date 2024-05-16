@@ -128,7 +128,7 @@ class MilitaryView:
         self.win.geometry(f"1165x300+{x}+{y}")
 
         # WIDGETS
-        self.soldier_id = TextWithLabel(self.win, "Soldier ID", 20, 20, width=6)
+        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, width=6)
         self.id = TextWithLabel(self.win, "ID", 140, 20, disabled=True, distance=25, width=6)
         self.serial_number = TextWithLabel(self.win, "Serial", 20, 60)
         self.city = TextWithLabel(self.win, "City", 20, 100)
@@ -155,7 +155,7 @@ class MilitaryView:
         self.end_day = TextWithLabel(self.win, "/", 165, 220, 12, disabled=False, width=4)
 
         self.table = Table(self.win,
-                           ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier"],
+                           ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Person Information"],
                            [60, 100, 100, 100, 100, 100, 320],
                            250,
                            20,
