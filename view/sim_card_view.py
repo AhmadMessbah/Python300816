@@ -12,7 +12,7 @@ class SimCardView:
         self.operator.variable.set("")
         self.price.variable.set("")
 
-        status, sim_card_list = SimCardController.find_all()
+        status, sim_card_list = SimCardController.find_by_owner_id(self.user.person.person_id)
         if status:
             self.table.refresh_table(sim_card_list)
 

@@ -85,7 +85,7 @@ class Validator:
 
     @classmethod
     def password_validator(cls, password, message):
-        if re.match(r"^[\w@!#$%^&*\s]{8,16}$", password):
+        if re.match(r"^[\w@!#$%^&*\s]{2,16}$", password):
             return password
         else:
             raise ValueError(message)
