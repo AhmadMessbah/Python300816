@@ -27,13 +27,13 @@ class UserController:
     @classmethod
     @exception_handling
     def edit(cls, user_id, username, password, status, locked, person_id):
-        person = cls.person_da.find_by_id(person_id)
+        person = cls.person_da.find_by_id(int(person_id))
         user = User(username, password)
         user.person = person
         user.status = status
         user.locked = locked
-        user.user_id = user_id
-        old_user = cls.user_da.find_by_id(user_id)
+        user.user_id = int(user_id)
+        old_user = cls.user_da.find_by_id(int(user_id))
         cls.user_da.edit(user)
         return True, f"User edited successfully From : {old_user} To: {user}"
 
