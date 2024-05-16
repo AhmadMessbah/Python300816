@@ -13,9 +13,11 @@ class LessonController:
     def save(cls, name, grade, year, month, day, teacher_id):
         if teacher_id:
             teacher = cls.person_da.find_by_id(teacher_id)
-            lesson = Lesson(name, grade, (year, month, day), teacher)
+            d = (int(year), int(month), int(day))
+            lesson = Lesson(name, grade, d, teacher)
         else:
-            lesson = Lesson(name, grade, (year, month, day))
+            d = (int(year), int(month), int(day))
+            lesson = Lesson(name, grade, d)
 
         cls.lesson_da.save(lesson)
         return True, f"Lesson saved successfully\n{lesson}"
