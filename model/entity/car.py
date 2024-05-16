@@ -3,7 +3,7 @@ from model.tools.validator import Validator
 
 
 
-class CaR(Base):
+class Car(Base):
     def __init__(self, model, name, color, owner=None):
         self.card_id = None
         self.model = model
