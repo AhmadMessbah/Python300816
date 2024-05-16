@@ -17,7 +17,7 @@ class ProductView:
         if status:
             self.table.refresh_table(product_list)
 
-    def select_row(self,product):
+    def select_row(self, product):
         self.id.variable.set(product[0])
         self.name.variable.set(product[1])
         self.brand.variable.set(product[2])
@@ -60,7 +60,7 @@ class ProductView:
         else:
             msg.showerror("Remove Error", message)
 
-    def find_by_person_id(self,event):
+    def find_by_person_id(self, event):
         status, product_list = ProductController.find_by_person_id(self.search_person_id.variable.get())
         if status:
             self.table.refresh_table(product_list)
@@ -82,11 +82,11 @@ class ProductView:
         self.search_person_id.text_box.bind("<KeyRelease>", self.find_by_person_id)
 
         self.table = Table(win,
-                      ["Id", "Name", "Brand", "Serial", "Buy_price", "Person_id"],
-                      [60, 100, 100, 100, 100, 60],
-                      250,
-                      20,
-                      self.select_row)
+                           ["Id", "Name", "Brand", "Serial", "Buy_price", "Person_id"],
+                           [60, 100, 100, 100, 100, 60],
+                           250,
+                           20,
+                           self.select_row)
 
         Button(win, text="Add", width=8, command=self.save_click).place(x=20, y=250)
         Button(win, text="Edit", width=8, command=self.edit_click).place(x=100, y=250)
@@ -95,5 +95,6 @@ class ProductView:
         self.reset_form()
 
         win.mainloop()
+
 
 ProductView(None)
