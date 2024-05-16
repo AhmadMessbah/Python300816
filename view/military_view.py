@@ -3,7 +3,7 @@ import tkinter.messagebox as msg
 from controller.military_controller import MilitaryController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
-# from view.main_view import MainView
+from view.main_view import MainView
 
 
 class MilitaryView:
@@ -134,16 +134,16 @@ class MilitaryView:
         if status:
             self.table.refresh_table(military_list)
 
-    # def close_win(self):
-    #     self.win.destroy()
-    #     main_view = MainView(self.user)
+    def close_win(self):
+        self.win.destroy()
+        main_view = MainView(self.user)
 
     def __init__(self, user):
         self.user = user
         self.win = Tk()
 
         Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-        # self.win.protocol("WM_DELETE_WINDOW", self.close_win)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
 
         self.win.title("MilitaryRecord")
