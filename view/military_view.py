@@ -192,3 +192,4 @@ class MilitaryView:
 
     #TODO (FROM LOG FILE):  2024-05-10 10:27:35,630 - ERROR - MilitaryController.find_by_military_id('',) [RAISED EXCEPTION] : No Record Found !
     #when trying to search anything, the taken character is set '' instead of the one you have entered.
+MilitaryView(None)

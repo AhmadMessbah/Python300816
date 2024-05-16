@@ -96,3 +96,4 @@ class ProductView:
 
         win.mainloop()
 
+ProductView(None)

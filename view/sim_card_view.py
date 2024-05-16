@@ -39,3 +39,5 @@ class SimCardView:
         Button(win, text="Save", command=self.save_click).place(x=80, y=150)
 
         win.mainloop()
+
+SimCardView(None)

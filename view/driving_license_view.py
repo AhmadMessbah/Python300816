@@ -100,3 +100,6 @@ class DrivingLicenseView:
         self.reset_form()
 
         win.mainloop()
+
+
+DrivingLicenseView(None)

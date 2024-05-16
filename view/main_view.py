@@ -2,7 +2,7 @@ from tkinter import *
 
 from view.financial_doc_view import FinancialDocView
 from view.lesson_view import LessonView
-from view.military_view import MilitaryView
+from view.medical_view import MedicalView
 from view.person_view import PersonView
 from view.product_view import ProductView
 from view.sim_card_view import SimCardView
@@ -13,7 +13,9 @@ from view.driving_license_view import DrivingLicenseView
 
 class MainView:
     def person_click(self):
-        person_ui = PersonView(None)
+        PersonView(self.user)
+        self.win.destroy()
+        del self.win
     def user_click(self):
         user_view = UserView()
     def sim_click(self):
@@ -32,19 +34,20 @@ class MainView:
         driving_license_view = DrivingLicenseView(None)
 
     def __init__(self, user):
-        win = Tk()
-        win.geometry("300x650")
-        win.title("Python App")
+        self.user = user
+        self.win = Tk()
+        self.win.geometry("300x700")
+        self.win.title("Python App")
         Label(text=user.person.name + " " + user.person.family).place(x=20, y=20)
 
-        Button(win, text="Person",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.person_click).place(x=50, y=50)
-        Button(win, text="User",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.user_click).place(x=50, y=120)
-        Button(win, text="SimCard",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.sim_click).place(x=50, y=190)
-        Button(win, text="Military",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.military_click).place(x=50, y=260)
-        Button(win, text="Medical",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.medical_click).place(x=50, y=330)
-        Button(win, text="Product",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.product_click).place(x=50, y=400)
-        Button(win, text="Financial",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.financial_click).place(x=50, y=470)
-        Button(win, text="Lesson",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.lesson_click).place(x=50, y=540)
-        Button(win, text="DrivingLicense",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.driving_licese_click).place(x=50, y=610)
+        Button(self.win, text="Person",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.person_click).place(x=50, y=50)
+        Button(self.win, text="User",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.user_click).place(x=50, y=120)
+        Button(self.win, text="SimCard",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.sim_click).place(x=50, y=190)
+        Button(self.win, text="Military",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.military_click).place(x=50, y=260)
+        Button(self.win, text="Medical",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.medical_click).place(x=50, y=330)
+        Button(self.win, text="Product",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.product_click).place(x=50, y=400)
+        Button(self.win, text="Financial",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.financial_click).place(x=50, y=470)
+        Button(self.win, text="Lesson",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.lesson_click).place(x=50, y=540)
+        Button(self.win, text="DrivingLicense",width=15 ,bg="lightblue", height=2, font=("Arial", 15), command=self.driving_license_click).place(x=50, y=610)
 
-        win.mainloop()
+        self.win.mainloop()
