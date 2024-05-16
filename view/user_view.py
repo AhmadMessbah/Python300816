@@ -96,3 +96,6 @@ class UserView:
         self.reset_form()
 
         win.mainloop()
+
+
+UserView()

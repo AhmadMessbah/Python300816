@@ -116,3 +116,6 @@ class LessonView:
         self.reset_form()
 
         win.mainloop()
+
+
+LessonView(None)

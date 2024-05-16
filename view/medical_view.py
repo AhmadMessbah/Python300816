@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter.messagebox as msg
+
 from controller.medical_controller import MedicalRecordController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
@@ -14,7 +15,7 @@ class MedicalView:
         self.patient_id.variable.set(medical_record[4])
 
     def reset_form(self):
-        self.id.variable.set('')
+        self.id.variable.set("")
         self.disease.variable.set("")
         self.medicine.variable.set("")
         self.doctor.variable.set("")
@@ -61,15 +62,15 @@ class MedicalView:
         win.title('Medical Record')
         win.geometry('700x350')
 
-        id = TextWithLabel(win, 'Record ID', 30, 30, 60, disabled=True)
-        disease = TextWithLabel(win, 'Disease', 30, 80, 60)
-        medicine = TextWithLabel(win, 'Medicine', 30, 130, 60)
-        doctor = TextWithLabel(win, 'Doctor', 30, 180, 60)
-        patient_id = TextWithLabel(win, 'Patient ID', 30, 230, 60)
-        search_id = TextWithLabel(win, 'search ID', 250, 285, 60)
-        search_id.text_box.bind("<KeyRelease>", self.search_by_id)
+        self.id = TextWithLabel(win, 'Record ID', 30, 30, 60, disabled=True)
+        self.disease = TextWithLabel(win, 'Disease', 30, 80, 60)
+        self.medicine = TextWithLabel(win, 'Medicine', 30, 130, 60)
+        self.doctor = TextWithLabel(win, 'Doctor', 30, 180, 60)
+        self.patient_id = TextWithLabel(win, 'Patient ID', 30, 230, 60)
+        self.search_id = TextWithLabel(win, 'search ID', 250, 285, 60)
+        self.search_id.text_box.bind("<KeyRelease>", self.search_by_id)
 
-        table = Table(win,
+        self.table = Table(win,
                       ['record ID', 'disease', 'medicine', 'doctor', 'Patient ID'],
                       [70, 70, 70, 70, 100],
                       250,
@@ -83,3 +84,6 @@ class MedicalView:
         self.reset_form()
 
         win.mainloop()
+
+
+MedicalView(None)

@@ -6,9 +6,9 @@ from controller.sim_card_controller import SimCardController
 class SimCardView:
     def save_click(self):
         status, message = SimCardController.save(self.number.get(),
-                                               self.operator.get(),
-                                               self.price.get(),
-                                               self.owner.get()
+                                                 self.operator.get(),
+                                                 self.price.get(),
+                                                 self.owner.get()
                                                )
         if status:
             msg.showinfo("Save", message)
@@ -39,3 +39,5 @@ class SimCardView:
         Button(win, text="Save", command=self.save_click).place(x=80, y=150)
 
         win.mainloop()
+
+SimCardView(None)
