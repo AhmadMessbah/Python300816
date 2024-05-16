@@ -76,7 +76,4 @@ class MilitaryController:
     def find_by_city(cls, city):
         return True, cls.military_da.find_by_city(city)
 
-    def find_by_soldier_id(cls, soldier_id, person_da=PersonDa()):
-        return True, cls.military_da.find_by_soldier_id(soldier_id)
-
 
