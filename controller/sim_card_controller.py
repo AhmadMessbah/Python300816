@@ -1,17 +1,19 @@
 from model.da.sim_card_da import SimCardDa
-from model.da.user_da import UserDa
+from model.da.person_da import PersonDa
 from model.entity.sim_card import SimCard
 from model.tools.decorators import exception_handling
 
+
 class SimCardController:
     sim_card_da = SimCardDa()
-    user_da = UserDa()
+    person_da = PersonDa()
 
     @classmethod
     @exception_handling
     def save(cls, number, operator, price, owner_id):
+        price = int(price)
         if owner_id:
-            owner  = cls.user_da.find_by_id(owner_id)
+            owner = cls.person_da.find_by_id(owner_id)
             sim_card = SimCard(number, operator, price, owner)
         else:
             sim_card = SimCard(number, operator, price)
@@ -22,8 +24,9 @@ class SimCardController:
     @classmethod
     @exception_handling
     def edit(cls, sim_card_id, number, operator, price, owner_id):
-        owner  = UserDa.find_by_id(owner_id)
-        sim_card = SimCard( number, operator, price, owner)
+        price = int(price)
+        owner = cls.person_da.find_by_id(owner_id)
+        sim_card = SimCard(number, operator, price, owner)
         sim_card.sim_card_id = sim_card_id
         old_sim_card = cls.sim_card_da.find_by_id(sim_card_id)
         cls.sim_card_da.edit(sim_card)
@@ -32,6 +35,7 @@ class SimCardController:
     @classmethod
     @exception_handling
     def remove(cls, sim_card_id):
+        sim_card_id= int(sim_card_id)
         sim_card = cls.sim_card_da.find_by_id(sim_card_id)
         cls.sim_card_da.remove(sim_card_id)
         return True, f"sim_card removed successfully\n{sim_card}"
