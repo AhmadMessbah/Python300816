@@ -26,4 +26,7 @@ class LoginView:
 
         Button(self.win, text="Login", width=10, command=self.login_click).place(x=80, y=180)
 
+        self.username.variable.set("ahmad")
+        self.password.variable.set("ahmad123")
+
         self.win.mainloop()

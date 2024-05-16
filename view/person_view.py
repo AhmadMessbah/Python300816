@@ -4,7 +4,6 @@ import tkinter.messagebox as msg
 from controller.person_controller import PersonController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
-from view.main_view import MainView
 
 
 class PersonView:
@@ -50,7 +49,6 @@ class PersonView:
         if status:
             self.table.refresh_table(person_list)
 
-    # todo : add these function and comment
     # def close_win(self):
     #     self.win.destroy()
     #     main_view = MainView(self.user)
