@@ -138,60 +138,62 @@ class MilitaryView:
 
     def __init__(self, user):
         self.user = user
-        win = Tk()
-        win.title("MilitaryRecord")
-        win.resizable(width=False, height=False)
+        self.win = Tk()
+        #Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        #todo: label gives error
+        self.win.title("MilitaryRecord")
+        self.win.resizable(width=False, height=False)
 
         # CENTER FORM
-        x = (win.winfo_screenwidth() - 1165) // 2
-        y = (win.winfo_screenheight() - 300) // 2
-        win.geometry(f"1165x300+{x}+{y}")
+        x = (self.win.winfo_screenwidth() - 1165) // 2
+        y = (self.win.winfo_screenheight() - 300) // 2
+        self.win.geometry(f"1165x300+{x}+{y}")
 
         # WIDGETS
-        self.soldier_id = TextWithLabel(win, "Soldier ID", 20, 20, width=6)
+        self.soldier_id = TextWithLabel(self.win, "Soldier ID", 20, 20, width=6)
         #todo: 2024-05-16 15:30:58,455 - ERROR - MilitaryController.save('82111231214', 'Tehran', 'Organ', '2024', '5', '9', '2024', '5', '8', '1') [RAISED EXCEPTION] : int() argument must be a string, a bytes-like object or a real number, not 'Person'
 
-        self.id = TextWithLabel(win, "ID", 140, 20, disabled=True, distance=25, width=6)
-        self.serial_number = TextWithLabel(win, "Serial", 20, 60)
-        self.city = TextWithLabel(win, "City", 20, 100)
-        self.organ = TextWithLabel(win, "Organ", 20, 140)
+        self.id = TextWithLabel(self.win, "ID", 140, 20, disabled=True, distance=25, width=6)
+        self.serial_number = TextWithLabel(self.win, "Serial", 20, 60)
+        self.city = TextWithLabel(self.win, "City", 20, 100)
+        self.organ = TextWithLabel(self.win, "Organ", 20, 140)
 
         # SEARCH
-        self.search_city = TextWithLabel(win, "Find By City", 250, 260, distance=80, width=13)
+        self.search_city = TextWithLabel(self.win, "Find By City", 250, 260, distance=80, width=13)
         self.search_city.text_box.bind("<KeyRelease>", self.find_by_city)
-        self.search_organ = TextWithLabel(win, "Find By Organ", 425, 260, distance=90, width=13)
+        self.search_organ = TextWithLabel(self.win, "Find By Organ", 425, 260, distance=90, width=13)
         self.search_organ.text_box.bind("<KeyRelease>", self.find_by_organ)
-        self.search_serial_number = TextWithLabel(win, "Find by Serial", 610, 260, distance=85, width=13)
+        self.search_serial_number = TextWithLabel(self.win, "Find by Serial", 610, 260, distance=85, width=13)
         self.search_serial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
-        self.search_soldier_id = TextWithLabel(win, "Search Soldier ID", 880, 260, distance=100, width=5)
+        self.search_soldier_id = TextWithLabel(self.win, "Search Soldier ID", 880, 260, distance=100, width=5)
         self.search_soldier_id.text_box.bind("<KeyRelease>", self.find_by_soldier_id)
-        self.search_id = TextWithLabel(win, "Search ID", 1035, 260, distance=63, width=5)
+        self.search_id = TextWithLabel(self.win, "Search ID", 1035, 260, distance=63, width=5)
         self.search_id.text_box.bind("<KeyRelease>", self.find_by_id)
 
         # START DATE
-        self.start_year = TextWithLabel(win, "Start Date", 20, 180, disabled=False, width=8)
-        self.start_month = TextWithLabel(win, "/", 130, 180, 12, disabled=False, width=4)
-        self.start_day = TextWithLabel(win, "/", 165, 180, 12, disabled=False, width=4)
+        self.start_year = TextWithLabel(self.win, "Start Date", 20, 180, disabled=False, width=8)
+        self.start_month = TextWithLabel(self.win, "/", 130, 180, 12, disabled=False, width=4)
+        self.start_day = TextWithLabel(self.win, "/", 165, 180, 12, disabled=False, width=4)
 
         # END DATE
-        self.end_year = TextWithLabel(win, "End Date", 20, 220, disabled=False, width=8)
-        self.end_month = TextWithLabel(win, "/", 130, 220, 12, disabled=False, width=4)
-        self.end_day = TextWithLabel(win, "/", 165, 220, 12, disabled=False, width=4)
+        self.end_year = TextWithLabel(self.win, "End Date", 20, 220, disabled=False, width=8)
+        self.end_month = TextWithLabel(self.win, "/", 130, 220, 12, disabled=False, width=4)
+        self.end_day = TextWithLabel(self.win, "/", 165, 220, 12, disabled=False, width=4)
 
-        self.table = Table(win,
+        self.table = Table(self.win,
                            ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier ID"],
                            [60, 100, 100, 100, 100, 100, 320],
                            250,
                            20,
                            self.select_row)
 
-        Button(win, text="Add", width=5, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
-        Button(win, text="Edit", width=5, command=self.edit_click, bg="#e2e2e2").place(x=70, y=260)
-        Button(win, text="Remove", width=7, command=self.remove_click, bg="#e2e2e2").place(x=125, y=260)
-        Button(win, text="♻️", width=2, command=self.reset_form, bg="#e2e2e2").place(x=193, y=260)
+        Button(self.win, text="Add", width=5, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
+        Button(self.win, text="Edit", width=5, command=self.edit_click, bg="#e2e2e2").place(x=70, y=260)
+        Button(self.win, text="Remove", width=7, command=self.remove_click, bg="#e2e2e2").place(x=125, y=260)
+        Button(self.win, text="♻️", width=2, command=self.reset_form, bg="#e2e2e2").place(x=193, y=260)
 
         self.reset_form()
 
-        win.mainloop()
+        self.win.mainloop()
 
 MilitaryView(None)
