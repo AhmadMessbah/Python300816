@@ -2,8 +2,7 @@ from model.entity.base import Base
 from model.tools.validator import Validator
 
 
-
-class CaR(Base):
+class Car(Base):
     def __init__(self, model, name, color, owner=None):
         self.card_id = None
         self.model = model
@@ -15,7 +14,7 @@ class CaR(Base):
         return self._model
 
     def set_model(self, model):
-        self._model = Validator.phone_model_validator(model, "Invalid model")
+        self._model = Validator.name_validator(model, "Invalid model")
 
     def get_name(self):
         return self._name
@@ -27,7 +26,7 @@ class CaR(Base):
         return self._color
 
     def set_color(self, color):
-        self._color = Validator.color_validator(color, "Invalid color")
+        self._color = Validator.name_validator(color, "Invalid color")
 
     def get_owner(self):
         return self._owner

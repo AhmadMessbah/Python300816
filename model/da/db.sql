@@ -104,3 +104,14 @@ create table medical_record(
     patient_id int,
     FOREIGN KEY (patient_id) REFERENCES person_tbl(id)
 );
+
+-- Car
+create table car_tbl
+(
+    id        int primary key auto_increment,
+    model     nvarchar(15) not null,
+    name      nvarchar(30) not null,
+    color      nvarchar(30) not null,
+    owner_id   int,
+    foreign key (owner_id) references person_tbl(id)
+);
