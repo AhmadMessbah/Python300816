@@ -24,7 +24,6 @@ class UserView:
         self.status.set(user[3])
         self.locked.set(user[4])
 
-
     def save_click(self):
         ret, message = UserController.save(self.username.variable.get(),
                                            self.password.variable.get(),
@@ -105,5 +104,3 @@ class UserView:
         self.reset_form()
 
         self.win.mainloop()
-
-
