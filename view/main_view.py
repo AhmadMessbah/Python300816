@@ -1,36 +1,53 @@
 from tkinter import *
 
-from view import *
-
 class MainView:
     def person_click(self):
+        from view import PersonView
+        self.win.destroy()
         person_view = PersonView(self.user)
 
     def user_click(self):
+        from view import UserView
+        self.win.destroy()
         user_view = UserView()
 
     def sim_click(self):
+        from view import SimCardView
+        self.win.destroy()
         sim_view = SimCardView(self.user)
 
     def military_click(self):
+        from view import MilitaryView
+        self.win.destroy()
         military_view = MilitaryView(self.user)
 
     def medical_click(self):
+        from view import MedicalView
+        self.win.destroy()
         medical_view = MedicalView(self.user)
 
     def product_click(self):
+        from view import ProductView
+        self.win.destroy()
         product_view = ProductView(self.user)
 
     def financial_click(self):
+        from view import FinancialDocView
+        self.win.destroy()
         financial_view = FinancialDocView(self.user)
 
     def lesson_click(self):
+        from view import LessonView
+        self.win.destroy()
         lesson_view = LessonView(self.user)
 
     def car_click(self):
+        from view import CarView
+        self.win.destroy()
         car_view = CarView(self.user)
 
     def driving_license_click(self):
+        from view import  DrivingLicenseView
         driving_license_view = DrivingLicenseView(self.user)
 
     def __init__(self, user):

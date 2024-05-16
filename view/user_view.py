@@ -105,5 +105,3 @@ class UserView:
 
         self.win.mainloop()
 
-
-UserView()

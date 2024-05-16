@@ -4,6 +4,7 @@ import tkinter.messagebox as msg
 from controller.person_controller import PersonController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
+from view.main_view import MainView
 
 
 class PersonView:
@@ -49,9 +50,9 @@ class PersonView:
         if status:
             self.table.refresh_table(person_list)
 
-    # def close_win(self):
-    #     self.win.destroy()
-    #     main_view = MainView(self.user)
+    def close_win(self):
+        self.win.destroy()
+        main_view = MainView(self.user)
 
     def __init__(self, user):
         self.user = user
@@ -59,7 +60,7 @@ class PersonView:
 
         # todo : add these two line
         Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-        # self.win.protocol("WM_DELETE_WINDOW", self.close_win)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         self.win.geometry("600x300")
         self.win.title("Person")
