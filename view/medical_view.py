@@ -1,5 +1,6 @@
 from tkinter import *
 import tkinter.messagebox as msg
+from view.main_view import MainView
 
 from controller.medical_controller import MedicalRecordController
 from view.component.label_text import TextWithLabel
@@ -56,15 +57,15 @@ class MedicalView:
         if status:
             self.table.refresh_table(medical_record_list)
 
-    # def close_win(self):
-    #     self.win.destroy()
-    #     main_view = MainView(self.user)
+    def close_win(self):
+        self.win.destroy()
+        main_view = MainView(self.user)
 
     def __init__(self, user):
         self.user = user
         self.win = Tk()
-        #Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-        # self.win.protocol("WM_DELETE_WINDOW", self.close_win)
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         self.win.title('Medical Record')
         self.win.geometry('660x300')
@@ -91,6 +92,3 @@ class MedicalView:
         self.reset_form()
 
         self.win.mainloop()
-
-MedicalView(None)
-#todo: edit,search id has error

@@ -1,37 +1,54 @@
 from tkinter import *
 
-from view import *
-
 class MainView:
     def person_click(self):
+        self.win.destroy()
+        from view import PersonView
         person_view = PersonView(self.user)
 
     def user_click(self):
+        self.win.destroy()
+        from view import UserView
         user_view = UserView()
 
     def sim_click(self):
+        self.win.destroy()
+        from view import SimCardView
         sim_view = SimCardView(self.user)
 
     def military_click(self):
+        self.win.destroy()
+        from view import MilitaryView
         military_view = MilitaryView(self.user)
 
     def medical_click(self):
+        self.win.destroy()
+        from view import MedicalView
         medical_view = MedicalView(self.user)
 
     def product_click(self):
+        self.win.destroy()
+        from view import ProductView
         product_view = ProductView(self.user)
 
     def financial_click(self):
+        self.win.destroy()
+        from view import FinancialDocView
         financial_view = FinancialDocView(self.user)
 
-    # TODO NameError: name 'LessonView' is not defined.
     def lesson_click(self):
+        self.win.destroy()
+        from view import LessonView
         lesson_view = LessonView(self.user)
 
     def car_click(self):
+        self.win.destroy()
+        from view import CarView
         car_view = CarView(self.user)
 
     def driving_license_click(self):
+        self.win.destroy()
+        from view import DrivingLicenseView
         driving_license_view = DrivingLicenseView(self.user)
 
     def __init__(self, user):
