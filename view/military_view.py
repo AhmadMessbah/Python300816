@@ -19,7 +19,7 @@ class MilitaryView:
         self.end_year.variable.set("")
         self.end_month.variable.set("")
         self.end_day.variable.set("")
-        self.soldier_id.variable.set("")         #self.user.person.person_id
+        self.soldier_id.variable.set(self.user.person.person_id)         #self.user.person.person_id
         status, military_list = MilitaryController.find_all()
         if status:
             self.table.refresh_table(military_list)
