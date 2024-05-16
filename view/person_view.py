@@ -50,6 +50,7 @@ class PersonView:
         if status:
             self.table.refresh_table(person_list)
 
+    # todo :add this function
     def close_win(self):
         self.win.destroy()
         main_view = MainView(self.user)
