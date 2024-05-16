@@ -8,7 +8,7 @@ class TextWithLabel:
         self.x = x
         self.y = y
         self.distance = distance
-        self.variable = StringVar()
+        self.variable = StringVar(master)
 
         Label(master, text=text).place(x=x, y=y)
 

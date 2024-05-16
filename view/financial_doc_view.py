@@ -76,7 +76,7 @@ class FinancialDocView:
 
         self.table = Table(win,
                       ["Id", "amount", "date_time", "doc_type", "description"],
-                      [60, 100, 100],
+                      [60, 100, 100,100,100],
                       250,
                       20,
                       self.select_row)
@@ -89,3 +89,4 @@ class FinancialDocView:
 
         win.mainloop()
 
+FinancialDocView(None)
