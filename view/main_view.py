@@ -73,4 +73,5 @@ class MainView:
                command=self.driving_license_click).place(x=50, y=680)
 
         self.win.mainloop()
+
 MainView(None)
