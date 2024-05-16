@@ -12,6 +12,7 @@ class ProductController:
     @exception_handling
     def save(cls, name, brand, serial, buy_price, person_id):
         if person_id:
+            person_id = int(person_id)
             person = cls.person_da.find_by_id(person_id)
             product = Product(name, brand, serial, buy_price, person)
         else:

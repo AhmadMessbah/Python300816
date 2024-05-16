@@ -10,7 +10,7 @@ from view.user_view import UserView
 from view.military_view import MilitaryView
 from view.driving_license_view import DrivingLicenseView
 from view.car_view import CarView
-from view.login_view import LoginView
+# from view.login_view import LoginView
 
 
 class MainView:
