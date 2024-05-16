@@ -13,14 +13,12 @@ class MedicalView:
         self.disease.variable.set(medical_record[1])
         self.medicine.variable.set(medical_record[2])
         self.doctor.variable.set(medical_record[3])
-        self.patient_id.variable.set(medical_record[4])
 
     def reset_form(self):
         self.id.variable.set("")
         self.disease.variable.set("")
         self.medicine.variable.set("")
         self.doctor.variable.set("")
-        self.patient_id.variable.set("")
         status, medical_records_list = MedicalRecordController.find_all()
         if status:
             self.table.refresh_table(medical_records_list)
@@ -35,9 +33,11 @@ class MedicalView:
             msg.showerror("Error", message)
 
     def edit_click(self):
-        status, message = MedicalRecordController.edit(self.id.variable.get(), self.disease.variable.get(),
+        status, message = MedicalRecordController.edit(self.id.variable.get(),
+                                                       self.disease.variable.get(),
                                                        self.medicine.variable.get(),
-                                                       self.doctor.variable.get(), self.patient_id.variable.get())
+                                                       self.doctor.variable.get(),
+                                                       self.patient_id.variable.get())
         self.reset_form()
         if status:
             msg.showinfo("Edit", "record edited successfully!")
@@ -74,7 +74,8 @@ class MedicalView:
         self.disease = TextWithLabel(self.win, 'Disease', 30, 60, 60)
         self.medicine = TextWithLabel(self.win, 'Medicine', 30, 100, 60)
         self.doctor = TextWithLabel(self.win, 'Doctor', 30, 140, 60)
-        self.patient_id = TextWithLabel(self.win, 'Patient ID', 30, 180, 60)
+        self.patient_id = TextWithLabel(self.win, 'Patient ID', 30, 180, 60,disabled=True)
+        self.patient_id.variable.set(self.user.person.person_id)
         self.search_id = TextWithLabel(self.win, 'search ID', 30, 260, 60)
         self.search_id.text_box.bind("<KeyRelease>", self.search_by_id)
 
