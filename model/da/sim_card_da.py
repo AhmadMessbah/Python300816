@@ -5,7 +5,7 @@ from model.entity.sim_card import SimCard
 
 class SimCardDa(Da):
     def save(self, sim_card):
-        if (sim_card.owner and self.find_sim_car_count_by_owner_id(sim_card.owner.user_id)< 3):
+        if (sim_card.owner and self.find_sim_card_count_by_owner_id(sim_card.owner.user_id)< 3):
             self.connect()
             self.cursor.execute("INSERT INTO SIM_CARD_TBL(NUMBER, OPERATOR, PRICE, OWNER_ID) VALUES(%s,%s,%s,%s)",
                                 [sim_card.number,
@@ -18,7 +18,7 @@ class SimCardDa(Da):
             raise ValueError("Error in Owner Or Cant Save Any More !!!")
 
     def edit(self, sim_card):
-        if (sim_card.owner and self.find_sim_car_count_by_owner_id(sim_card.owner.user_id)< 3):
+        if (sim_card.owner and self.find_sim_card_count_by_owner_id(sim_card.owner.user_id)< 3):
             self.connect()
             self.cursor.execute("UPDATE SIM_CARD_TBL SET NUMBER=%s, OPERATOR=%s, PRICE=%s, OWNER_ID=%s WHERE ID=%s",
                             [sim_card.number,
