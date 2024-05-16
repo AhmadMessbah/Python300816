@@ -51,30 +51,28 @@ class PersonView:
 
     def __init__(self, user):
         self.user = user
-        # todo : label is on previous form
-        self.win = Tk()
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-        self.win.geometry("600x300")
-        self.win.title("Person")
+        win = Tk()
+        win.geometry("600x300")
+        win.title("Person")
 
-        self.id = TextWithLabel(self.win, "Id", 20, 20, disabled=True)
-        self.name = TextWithLabel(self.win, "Name", 20, 60)
-        self.family = TextWithLabel(self.win, "Family", 20, 100)
-        self.search_family = TextWithLabel(self.win, "Family", 300, 270)
+        self.id = TextWithLabel(win, "Id", 20, 20, disabled=True)
+        self.name = TextWithLabel(win, "Name", 20, 60)
+        self.family = TextWithLabel(win, "Family", 20, 100)
+        self.search_family = TextWithLabel(win, "Family", 300, 270)
         self.search_family.text_box.bind("<KeyRelease>", self.find_by_family)
 
-        self.table = Table(self.win,
+        self.table = Table(win,
                       ["Id", "Name", "Family"],
                       [60, 100, 100],
                       250,
                       20,
                       self.select_row)
 
-        Button(self.win, text="Add", width=8, command=self.save_click).place(x=20, y=250)
-        Button(self.win, text="Edit", width=8, command=self.edit_click).place(x=100, y=250)
-        Button(self.win, text="Remove", width=8, command=self.remove_click).place(x=180, y=250)
+        Button(win, text="Add", width=8, command=self.save_click).place(x=20, y=250)
+        Button(win, text="Edit", width=8, command=self.edit_click).place(x=100, y=250)
+        Button(win, text="Remove", width=8, command=self.remove_click).place(x=180, y=250)
 
         self.reset_form()
 
-        self.win.mainloop()
+        win.mainloop()
 
