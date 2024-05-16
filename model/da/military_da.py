@@ -41,12 +41,12 @@ class MilitaryDa(Da):
         self.connection.commit()
         self.disconnect()
 
-    def find_all(self, person_da):
+    def find_all(self):
         self.connect()
         self.cursor.execute("SELECT * FROM MILITARY_TBL")
         military_tuple_list = self.cursor.fetchall()
         self.disconnect()
-
+        person_da = PersonDa()
         if military_tuple_list:
             military_list = []
             for military_tuple in military_tuple_list:
