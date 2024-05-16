@@ -41,8 +41,8 @@ class UserView:
         ret, message = UserController.edit(self.id.variable.get(),
                                            self.username.variable.get(),
                                            self.password.variable.get(),
-                                           self.locked.get(),
                                            self.status.get(),
+                                           self.locked.get(),
                                            self.person_id.variable.get())
         if ret:
             msg.showinfo("Edit User", "User Edited")
