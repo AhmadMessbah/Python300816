@@ -8,6 +8,8 @@ class LessonController:
     lesson_da = LessonDa()
     person_da = PersonDa()
 
+
+#TODO Date Invalid --> don't create touple
     @classmethod
     @exception_handling
     def save(cls, name, grade, year, month, day, teacher_id):
@@ -26,7 +28,8 @@ class LessonController:
     @exception_handling
     def edit(cls, lesson_id, name, grade, year, month, day, teacher_id):
         teacher = cls.person_da.find_by_id(teacher_id)
-        lesson = Lesson(name, grade, (year, month, day), teacher)
+        d = (int(year), int(month), int(day))
+        lesson = Lesson(name, grade, d, teacher)
         lesson.lesson_id = lesson_id
         old_lesson = cls.lesson_da.find_by_id(lesson_id)
         cls.lesson_da.edit(lesson)
