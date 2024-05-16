@@ -99,4 +99,3 @@ class SimCardView:
         win.mainloop()
 
 
-SimCardView(None)

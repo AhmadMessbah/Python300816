@@ -98,4 +98,3 @@ class UserView:
         win.mainloop()
 
 
-UserView()

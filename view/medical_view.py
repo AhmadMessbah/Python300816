@@ -84,7 +84,6 @@ class MedicalView:
         self.reset_form()
 
         win.mainloop()
-MedicalView(None)
 
 
 #todo: problem :edit , search by id
