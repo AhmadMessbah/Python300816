@@ -1,3 +1,3 @@
-from view.login_view import LoginView
+from view import LoginView
 
 login = LoginView()
