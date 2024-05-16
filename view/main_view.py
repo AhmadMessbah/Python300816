@@ -24,7 +24,7 @@ class MainView:
     def financial_click(self):
         financial_view = FinancialDocView(self.user)
 
-    # TODO NameError: name 'LessonView' is not defined. Did you mean: 'PersonView'?
+    # TODO NameError: name 'LessonView' is not defined.
     def lesson_click(self):
         lesson_view = LessonView(self.user)
 
