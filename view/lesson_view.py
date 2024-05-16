@@ -15,7 +15,6 @@ class LessonView:
         self.year.variable.set(2024)
         self.month.variable.set(1)
         self.day.variable.set(1)
-        self.teacher.variable.set("")
         status, lesson_list = LessonController.find_all()
         if status:
             self.table.refresh_table(lesson_list)
@@ -28,7 +27,7 @@ class LessonView:
         self.year.variable.set(lesson_date.year)
         self.month.variable.set(lesson_date.month)
         self.day.variable.set(lesson_date.day)
-        self.teacher.variable.set(lesson[4])
+
 
 
     def save_click(self):
@@ -103,7 +102,8 @@ class LessonView:
         self.year = TextWithLabel(self.win, "Year", 20, 140, 30, "", 4)
         self.month = TextWithLabel(self.win, "/Month", 90, 140, 45, "", 2)
         self.day = TextWithLabel(self.win, "/Day", 165, 140, 30, "", 2)
-        self.teacher = TextWithLabel(self.win, "Teacher", 20, 180)
+        self.teacher = TextWithLabel(self.win, "Teacher Id", 20, 180,disabled=True)
+        self.teacher.variable.set(self.user.person.person_id)
 
         self.search_name = TextWithLabel(self.win, "Find By Name", 250, 260, 100)
         self.search_name.text_box.bind("<KeyRelease>", self.find_by_name)

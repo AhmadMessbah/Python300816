@@ -6,7 +6,6 @@ from model.tools.decorators import exception_handling
 
 
 class FinancialDocController:
-    PersonDa = None
     financial_doc_da = FinancialDocDa()
     person_da = PersonDa()
 
