@@ -70,6 +70,7 @@ class SimCardView:
         self.win = Tk()
         self.win.geometry("600x300")
         self.win.title("SimCard")
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         self.id = TextWithLabel(self.win, "Id", 20, 20, disabled=True)
         self.number = TextWithLabel(self.win, "Number", 20, 60)

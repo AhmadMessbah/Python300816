@@ -66,10 +66,10 @@ class UserView:
         self.win.destroy()
         main_view = MainView(self.user)
 
-    def __init__(self, person):
+    def __init__(self, user):
         self.win = Tk()
-        self.person = person
-        Label(text=self.person.name + " " + self.person.family).place(x=0, y=0)
+        self.user = user
+        Label(text=self.user.person.name + " " + self.user.person.family).place(x=0, y=0)
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         self.win.geometry("750x310")
@@ -79,7 +79,7 @@ class UserView:
         self.username = TextWithLabel(self.win, "Username", 20, 60)
         self.password = TextWithLabel(self.win, "Password", 20, 100)
         self.person_id = TextWithLabel(self.win, "Person_id", 20, 180, disabled=True)
-        self.person_id.variable.set(self.person.person_id)
+        self.person_id.variable.set(self.user.person.person_id)
         self.search_username = TextWithLabel(self.win, "Username", 350, 260)
         self.search_username.text_box.bind("<KeyRelease>", self.find_by_username)
 

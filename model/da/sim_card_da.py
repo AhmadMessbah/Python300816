@@ -1,5 +1,5 @@
 from model.da.da import Da
-from model.da.user_da import UserDa
+from model.da.person_da import PersonDa
 from model.entity.sim_card import SimCard
 
 
@@ -44,8 +44,7 @@ class SimCardDa(Da):
         self.cursor.execute("SELECT * FROM SIM_CARD_TBL")
         sim_card_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        print(sim_card_tuple_list)
-        user_da = UserDa()
+        person_da = PersonDa()
         if sim_card_tuple_list:
             sim_card_list = []
             for sim_card_tuple in sim_card_tuple_list:
@@ -53,7 +52,7 @@ class SimCardDa(Da):
                     sim_card_tuple[1],
                     sim_card_tuple[2],
                     sim_card_tuple[3],
-                    user_da.find_by_id(sim_card_tuple[4]))
+                    person_da.find_by_id(sim_card_tuple[4]))
                 sim_card.sim_card_id = sim_card_tuple[0]
                 sim_card_list.append(sim_card)
             return sim_card_list
@@ -65,9 +64,9 @@ class SimCardDa(Da):
         self.cursor.execute("SELECT * FROM SIM_CARD_TBL WHERE ID=%s", [sim_card_id])
         sim_card_tuple = self.cursor.fetchone()
         self.disconnect()
-        user_da = UserDa()
+        person_da = PersonDa()
         if sim_card_tuple:
-            sim_card = SimCard(sim_card_tuple[1], sim_card_tuple[2],sim_card_tuple[3],user_da.find_by_id(sim_card_tuple[4]))
+            sim_card = SimCard(sim_card_tuple[1], sim_card_tuple[2],sim_card_tuple[3],person_da.find_by_id(sim_card_tuple[4]))
             sim_card.sim_card_id = sim_card_tuple[0]
             return sim_card
         else:
@@ -78,11 +77,11 @@ class SimCardDa(Da):
         self.cursor.execute("SELECT * FROM SIM_CARD_TBL WHERE OWNER_ID=%s", [owner_id])
         sim_card_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        user_da = UserDa()
+        person_da = PersonDa()
         if sim_card_tuple_list:
             sim_card_list = []
             for sim_card_tuple in sim_card_tuple_list:
-                sim_card = SimCard(sim_card_tuple[1], sim_card_tuple[2],sim_card_tuple[3],user_da.find_by_id(sim_card_tuple[4]))
+                sim_card = SimCard(sim_card_tuple[1], sim_card_tuple[2],sim_card_tuple[3],person_da.find_by_id(sim_card_tuple[4]))
                 sim_card.sim_card_id = sim_card_tuple[0]
                 sim_card_list.append(sim_card)
             return sim_card_list

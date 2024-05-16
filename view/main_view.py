@@ -10,7 +10,7 @@ class MainView:
     def user_click(self):
         self.win.destroy()
         from view import UserView
-        user_view = UserView()
+        user_view = UserView(self.user)
 
     def sim_click(self):
         self.win.destroy()
