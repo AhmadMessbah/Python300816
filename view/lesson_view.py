@@ -30,6 +30,7 @@ class LessonView:
         self.day.variable.set(lesson_date.day)
         self.teacher.variable.set(lesson[4])
 
+
     def save_click(self):
         status, message = LessonController.save(self.name.variable.get(),
                                                 self.grade.variable.get(),
@@ -85,6 +86,9 @@ class LessonView:
         self.user = user
         self.win = Tk()
         self.win.title("Lesson Viewer")
+
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         # center form
         x = (self.win.winfo_screenwidth() - 1050) // 2
