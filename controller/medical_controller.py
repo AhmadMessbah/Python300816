@@ -46,9 +46,6 @@ class MedicalRecordController:
     @classmethod
     @exception_handling
     def find_by_id(cls, id):
-        return True, cls.medical_da.find_by_id(id)
+        return True, cls.medical_da.find_by_id(int(id))
 
-    @classmethod
-    @exception_handling
-    def find_by_patient_id(cls, patient_id):
-        return True, cls.medical_da.find_by_patient_id(patient_id)
+

@@ -53,9 +53,16 @@ class MedicalView:
             msg.showerror("Error", message)
 
     def search_by_id(self, event):
-        status, medical_record_list = MedicalRecordController.find_by_id(self.search_id.variable.get())
-        if status:
-            self.table.refresh_table(medical_record_list)
+        if self.search_id.variable.get():
+            status, medical_record_list = MedicalRecordController.find_by_id(self.search_id.variable.get())
+            if status:
+                self.table.refresh_table([medical_record_list])
+        else:
+            status, medical_record_list = MedicalRecordController.find_all()
+            if status:
+                self.table.refresh_table(medical_record_list)
+
+
 
     def close_win(self):
         self.win.destroy()
