@@ -91,7 +91,9 @@ create table driving_license_tbl (
     serial_number varchar(255),
     date timestamp,
     city varchar(255),
-    expire_date timestamp
+    expire_date timestamp,
+    person_id int,
+    FOREIGN KEY (person_id) REFERENCES person_tbl(id)
 );
 
 create table medical_record(
