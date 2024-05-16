@@ -24,7 +24,6 @@ class ProductView:
         self.serial.variable.set(product[3])
         self.buy_price.variable.set(product[4])
 
-
     def save_click(self):
         status, message = ProductController.save(self.name.variable.get(),
                                                  self.brand.variable.get(),
@@ -85,7 +84,7 @@ class ProductView:
         self.person_id = TextWithLabel(self.win, "Person_id", 20, 220, disabled=True)
         self.person_id.variable.set(self.user.person.person_id)
 
-        self.search_person_id = TextWithLabel(self.win, "Person_id", 300, 270)
+        self.search_person_id = TextWithLabel(self.win, "product_id", 300, 270)
         self.search_person_id.text_box.bind("<KeyRelease>", self.find_by_person_id)
 
         self.table = Table(self.win,
@@ -102,6 +101,3 @@ class ProductView:
         self.reset_form()
 
         self.win.mainloop()
-
-
-
