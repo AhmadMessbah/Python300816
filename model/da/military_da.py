@@ -60,7 +60,7 @@ class MilitaryDa(Da):
         else:
             raise ValueError("No Record Found !")
 
-    def find_by_military_id(self, military_id):
+    def find_by_id(self, military_id):
         self.connect()
         self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE ID=%s", [military_id])
         military_tuple = self.cursor.fetchone()

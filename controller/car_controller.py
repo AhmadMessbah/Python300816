@@ -1,17 +1,17 @@
 from model.da.car_da import CarDa
-from model.da.user_da import UserDa
+from model.da.person_da import PersonDa
 from model.entity.car import Car
 from model.tools.decorators import exception_handling
 
 class CarController:
     car_da = CarDa()
-    user_da = UserDa()
+    person_da = PersonDa()
 
     @classmethod
     @exception_handling
     def save(cls, model, name, color, owner_id):
         if owner_id:
-            owner  = cls.user_da.find_by_id(owner_id)
+            owner  = cls.person_da.find_by_id(owner_id)
             car = Car(model, name, color, owner)
         else:
             car = Car(model, name, color)
@@ -22,7 +22,7 @@ class CarController:
     @classmethod
     @exception_handling
     def edit(cls, car_id, model, name, color, owner_id):
-        owner  = UserDa.find_by_id(owner_id)
+        owner = PersonDa.find_by_id(owner_id)
         car = Car( model, name, color, owner)
         car.car_id = car_id
         old_car = cls.car_da.find_by_id(car_id)
@@ -43,7 +43,7 @@ class CarController:
 
     @classmethod
     @exception_handling
-    def find_by_id(cls, car_id):
+    def find_by_model(cls, car_id):
         return True, cls.car_da.find_by_id(car_id)
 
     @classmethod

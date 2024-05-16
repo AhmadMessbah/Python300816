@@ -9,7 +9,7 @@ from view.main_view import MainView
 class MilitaryView:
 
     def reset_form(self):
-        self.id.variable.set("")
+        self.id.variable.set("0")
         self.serial_number.variable.set("")
         self.city.variable.set("")
         self.organ.variable.set("")
@@ -19,7 +19,7 @@ class MilitaryView:
         self.end_year.variable.set("")
         self.end_month.variable.set("")
         self.end_day.variable.set("")
-        self.soldier_id.variable.set(self.user.person.person_id)
+        self.soldier_id.variable.set(self.user.person.person_id)         #self.user.person.person_id
         status, military_list = MilitaryController.find_all()
         if status:
             self.table.refresh_table(military_list)
@@ -39,7 +39,7 @@ class MilitaryView:
         self.end_month.variable.set(int(military[5][5:7]))
         self.end_day.variable.set(int(military[5][8:]))
 
-        self.soldier_id.variable.set(int(military[6][14:15]))
+        self.soldier_id.variable.set(int(military[6][14:17].replace(",","")))
 
     def save_click(self):
         status, message = MilitaryController.save(self.serial_number.variable.get(),
@@ -101,7 +101,7 @@ class MilitaryView:
 
     def find_by_id(self, event):
         if self.search_id.variable.get():
-            status, military_list = MilitaryController.find_by_military_id(self.search_id.variable.get())
+            status, military_list = MilitaryController.find_by_id(self.search_id.variable.get())
             if status:
                 self.table.refresh_table([military_list])
         else:
@@ -168,4 +168,3 @@ class MilitaryView:
 
         self.reset_form()
         self.win.mainloop()
-

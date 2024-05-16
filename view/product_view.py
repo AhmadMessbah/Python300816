@@ -13,7 +13,6 @@ class ProductView:
         self.brand.variable.set("")
         self.serial.variable.set("")
         self.buy_price.variable.set("")
-        self.person_id.variable.set("")
         status, product_list = ProductController.find_all()
         if status:
             self.table.refresh_table(product_list)
@@ -24,7 +23,7 @@ class ProductView:
         self.brand.variable.set(product[2])
         self.serial.variable.set(product[3])
         self.buy_price.variable.set(product[4])
-        self.person_id.variable.set(product[5])
+
 
     def save_click(self):
         status, message = ProductController.save(self.name.variable.get(),
@@ -72,36 +71,37 @@ class ProductView:
 
     def __init__(self, user):
         self.user = user
-        win = Tk()
+        self.win = Tk()
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
         Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-        # self.win.protocol("WM_DELETE_WINDOW", self.close_win)
-        win.geometry("800x300")
-        win.title("Product")
+        self.win.geometry("800x300")
+        self.win.title("Product")
 
-        self.id = TextWithLabel(win, "Id", 20, 20, disabled=True)
-        self.name = TextWithLabel(win, "Name", 20, 60)
-        self.brand = TextWithLabel(win, "Brand", 20, 100)
-        self.serial = TextWithLabel(win, "Serial", 20, 140)
-        self.buy_price = TextWithLabel(win, "Buy_price", 20, 180)
-        self.person_id = TextWithLabel(win, "Person_id", 20, 220)
+        self.id = TextWithLabel(self.win, "Id", 20, 20, disabled=True)
+        self.name = TextWithLabel(self.win, "Name", 20, 60)
+        self.brand = TextWithLabel(self.win, "Brand", 20, 100)
+        self.serial = TextWithLabel(self.win, "Serial", 20, 140)
+        self.buy_price = TextWithLabel(self.win, "Buy_price", 20, 180)
+        self.person_id = TextWithLabel(self.win, "Person_id", 20, 220, disabled=True)
+        self.person_id.variable.set(self.user.person.person_id)
 
-        self.search_person_id = TextWithLabel(win, "Person_id", 300, 270)
+        self.search_person_id = TextWithLabel(self.win, "Person_id", 300, 270)
         self.search_person_id.text_box.bind("<KeyRelease>", self.find_by_person_id)
 
-        self.table = Table(win,
+        self.table = Table(self.win,
                            ["Id", "Name", "Brand", "Serial", "Buy_price", "Person_id"],
                            [60, 100, 100, 100, 100, 60],
                            250,
                            20,
                            self.select_row)
 
-        Button(win, text="Add", width=8, command=self.save_click).place(x=20, y=250)
-        Button(win, text="Edit", width=8, command=self.edit_click).place(x=100, y=250)
-        Button(win, text="Remove", width=8, command=self.remove_click).place(x=180, y=250)
+        Button(self.win, text="Add", width=8, command=self.save_click).place(x=20, y=250)
+        Button(self.win, text="Edit", width=8, command=self.edit_click).place(x=100, y=250)
+        Button(self.win, text="Remove", width=8, command=self.remove_click).place(x=180, y=250)
 
         self.reset_form()
 
-        win.mainloop()
+        self.win.mainloop()
 
 
 
