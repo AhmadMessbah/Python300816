@@ -1,11 +1,11 @@
 from model.da.car_da import CarDa
-from model.da.user_da import UserDa
+from model.da.person_da import PersonDa
 from model.entity.car import Car
 from model.tools.decorators import exception_handling
 
 class CarController:
     car_da = CarDa()
-    user_da = UserDa()
+    person_da = PersonDa()
 
     @classmethod
     @exception_handling
@@ -38,15 +38,15 @@ class CarController:
 
     @classmethod
     @exception_handling
-    def find_all(cls):
+    def find_all(cls,person_da=PersonDa()):
         return True, cls.car_da.find_all()
 
     @classmethod
     @exception_handling
-    def find_by_id(cls, car_id):
+    def find_by_model(cls, car_id,person_da=PersonDa()):
         return True, cls.car_da.find_by_id(car_id)
 
     @classmethod
     @exception_handling
-    def find_by_owner_id(cls, owner_id):
+    def find_by_owner_id(cls, owner_id, person_da=PersonDa()):
         return True, cls.car_da.find_by_owner_id(owner_id)
