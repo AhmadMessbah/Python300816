@@ -25,17 +25,7 @@ class MilitaryView:
         if status:
             self.table.refresh_table(military_list)
 
-    #TODO : Exception in Tkinter callback
-    #Traceback (most recent call last):
-    #  File "C:\Users\Cato\AppData\Local\Programs\Python\Python312\Lib\tkinter\__init__.py", line 1967, in __call__
-    #    return self.func(*args)
-    #           ^^^^^^^^^^^^^^^^
-    #  File "C:\Users\Cato\PycharmProjects\Python300816\view\component\table.py", line 34, in select_table
-    #    self.select_function(data)
-    #  File "C:\Users\Cato\PycharmProjects\Python300816\view\military_view.py", line 29, in select_row
-    #    self.id.variable.set(military[0])
-    #                         ~~~~~~~~^^^
-    # IndexError: string index out of range
+
     def select_row(self, military):
         self.id.variable.set(military[0])
         self.serial_number.variable.set(str("{:011d}".format(military[1])))
@@ -96,6 +86,7 @@ class MilitaryView:
             msg.showerror("Remove Error", message)
 
     def find_by_city(self, event):
+        #todo: 2024-05-16 15:33:46,103 - ERROR - MilitaryController.find_by_city('Mas',) [RAISED EXCEPTION] : MilitaryController.find_by_city() missing 1 required positional argument: 'person_da'
         status, military_list = MilitaryController.find_by_city(self.search_city.variable.get())
         if status:
             self.table.refresh_table(military_list)
@@ -111,11 +102,36 @@ class MilitaryView:
             self.table.refresh_table(military_list)
 
     def find_by_soldier_id(self, event):
+
+        #todo:Exception in Tkinter callback
+        #Traceback (most recent call last):
+        #  File "C:\Users\Cato\AppData\Local\Programs\Python\Python312\Lib\tkinter\__init__.py", line 1967, in __call__
+        #    return self.func(*args)
+        #          ^^^^^^^^^^^^^^^^
+        #  File "C:\Users\Cato\PycharmProjects\Python300816\view\military_view.py", line 106, in find_by_soldier_id
+        #    status, military_list = MilitaryController.find_by_soldier_id(self.search_soldier_id.variable.get())
+        #                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        #TypeError: MilitaryController.find_by_soldier_id() missing 1 required positional argument: 'soldier_id'
+
+
         status, military_list = MilitaryController.find_by_soldier_id(self.search_soldier_id.variable.get())
         if status:
             self.table.refresh_table(military_list)
 
     def find_by_id(self, event):
+
+        #"""todo:Exception in Tkinter callback
+        #Traceback (most recent call last):
+        # File "C:\Users\Cato\AppData\Local\Programs\Python\Python312\Lib\tkinter\__init__.py", line 1967, in __call__
+         # return self.func(*args)
+          #    ^^^^^^^^^^^^^^^^
+        #File "C:\Users\Cato\PycharmProjects\Python300816\view\military_view.py", line 112, in find_by_id
+        #  self.table.refresh_table(military_list)
+        # File "C:\Users\Cato\PycharmProjects\Python300816\view\component\table.py", line 28, in refresh_table
+         #  for data in data_list:
+        #TypeError: 'Military' object is not iterable
+        #"""
+
         status, military_list = MilitaryController.find_by_military_id(self.search_id.variable.get())
         if status:
             self.table.refresh_table(military_list)
@@ -133,6 +149,8 @@ class MilitaryView:
 
         # WIDGETS
         self.soldier_id = TextWithLabel(win, "Soldier ID", 20, 20, width=6)
+        #todo: 2024-05-16 15:30:58,455 - ERROR - MilitaryController.save('82111231214', 'Tehran', 'Organ', '2024', '5', '9', '2024', '5', '8', '1') [RAISED EXCEPTION] : int() argument must be a string, a bytes-like object or a real number, not 'Person'
+
         self.id = TextWithLabel(win, "ID", 140, 20, disabled=True, distance=25, width=6)
         self.serial_number = TextWithLabel(win, "Serial", 20, 60)
         self.city = TextWithLabel(win, "City", 20, 100)
@@ -160,19 +178,6 @@ class MilitaryView:
         self.end_month = TextWithLabel(win, "/", 130, 220, 12, disabled=False, width=4)
         self.end_day = TextWithLabel(win, "/", 165, 220, 12, disabled=False, width=4)
 
-        # todo: Exception in Tkinter callback
-        # Traceback (most recent call last):
-        #  File "C:\Users\Cato\AppData\Local\Programs\Python\Python312\Lib\tkinter\__init__.py", line 1967, in __call__
-        #    return self.func(*args)
-        #           ^^^^^^^^^^^^^^^^
-        #  File "C:\Users\Cato\PycharmProjects\Python300816\view\main_view.py", line 21, in military_click
-        #    military_view = MilitaryView(None)
-        #                    ^^^^^^^^^^^^^^^^^^
-        #  File "C:\Users\Cato\PycharmProjects\Python300816\view\military_view.py", line 158, in __init__
-        #    250,
-        #  File "C:\Users\Cato\AppData\Local\Programs\Python\Python312\Lib\tkinter\__init__.py", line 1504, in mainloop
-        #    self.tk.mainloop(n)
-        # KeyboardInterrupt
         self.table = Table(win,
                            ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Soldier ID"],
                            [60, 100, 100, 100, 100, 100, 320],
@@ -189,9 +194,4 @@ class MilitaryView:
 
         win.mainloop()
 
-MilitaryView(None)
-
-
-    #TODO (FROM LOG FILE):  2024-05-10 10:27:35,630 - ERROR - MilitaryController.find_by_military_id('',) [RAISED EXCEPTION] : No Record Found !
-    #when trying to search anything, the taken character is set '' instead of the one you have entered.
 MilitaryView(None)
