@@ -56,8 +56,8 @@ class SimCardView:
         else:
             msg.showerror("Remove Error", message)
 
-    def find_by_owner(self, event):
-        status, sim_card_list = SimCardController.find_by_owner(self.search_owner.variable.get())
+    def find_by_number(self, event):
+        status, sim_card_list = SimCardController.find_by_number(self.search_owner.variable.get())
         if status:
             self.table.refresh_table(sim_card_list)
 
