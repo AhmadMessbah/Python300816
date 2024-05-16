@@ -19,7 +19,7 @@ class MilitaryView:
         self.end_year.variable.set("")
         self.end_month.variable.set("")
         self.end_day.variable.set("")
-        self.soldier_id.variable.set("")         #self.user.person.person_id
+        self.soldier_id.variable.set(self.user.person.person_id)
         status, military_list = MilitaryController.find_all()
         if status:
             self.table.refresh_table(military_list)
@@ -128,7 +128,7 @@ class MilitaryView:
         self.win.geometry(f"1165x300+{x}+{y}")
 
         # WIDGETS
-        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, width=6)
+        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, width=6, disabled=True)
         self.id = TextWithLabel(self.win, "ID", 140, 20, disabled=True, distance=25, width=6)
         self.serial_number = TextWithLabel(self.win, "Serial", 20, 60)
         self.city = TextWithLabel(self.win, "City", 20, 100)
