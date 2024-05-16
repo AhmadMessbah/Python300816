@@ -3,6 +3,7 @@ import tkinter.messagebox as msg
 from controller.product_controller import ProductController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
+from view.main_view import MainView
 
 
 class ProductView:
@@ -65,9 +66,15 @@ class ProductView:
         if status:
             self.table.refresh_table(product_list)
 
+    def close_win(self):
+        self.win.destroy()
+        main_view = MainView(self.user)
+
     def __init__(self, user):
         self.user = user
         win = Tk()
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        # self.win.protocol("WM_DELETE_WINDOW", self.close_win)
         win.geometry("800x300")
         win.title("Product")
 
