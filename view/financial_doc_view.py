@@ -24,9 +24,9 @@ class FinancialDocView:
 
     def save_click(self):
         status, message = FinancialDocController.save(self.amount.variable.get(),
-                                                      self.date_time.now().variable.get(),
                                                       self.doc_type.variable.get(),
-                                                      self.description.variable.get())
+                                                      self.description.variable.get(),
+                                                      self.person_id.variable.get())
         if status:
             msg.showinfo("Save Document", "Document Saved")
             self.reset_form()
@@ -36,7 +36,6 @@ class FinancialDocView:
     def edit_click(self):
         status, message = FinancialDocController.edit(self.id.variable.get(),
                                                 self.amount.variable.get(),
-                                                self.date_time.variable.get(),
                                                 self.doc_type.variable.get(),
                                                 self.description.variable.get())
         if status:
@@ -58,13 +57,13 @@ class FinancialDocView:
         if status:
             self.table.refresh_table(financial_list)
 
-    # todo : add these function and comment
-    # def close_win(self):
-    #     self.win.destroy()
-    #     main_view = MainView(self.person)
 
-    def __init__(self, person):
-        self.person = person
+    # def close_win(self):
+         #self.win.destroy()
+        # main_view = MainView(self.person)
+
+    def __init__(self, user):
+        self.user = user
         win = Tk()
         win.geometry("800x300")
         win.title("Financial Document")
@@ -75,7 +74,8 @@ class FinancialDocView:
         self.search_date_time.text_box.bind("<KeyRelease>", self.find_by_date)
         self.doc_type = TextWithLabel(win, "doc type:", 20, 110)
         self.description = TextWithLabel(win, "description:", 20, 150)
-
+        self.person_id = TextWithLabel(win, "Person Id", 20, 190, disabled=True)
+        self.person_id.variable.set( self.user.person.person_id)
 
         self.table = Table(win,
                       ["Id", "amount", "date_time", "doc_type", "description"],
