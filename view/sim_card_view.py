@@ -57,7 +57,7 @@ class SimCardView:
             msg.showerror("Remove Error", message)
 
     def find_by_number(self, event):
-        status, sim_card_list = SimCardController.find_by_number(self.search_owner.variable.get())
+        status, sim_card_list = SimCardController.find_by_number(self.search_number.variable.get())
         if status:
             self.table.refresh_table(sim_card_list)
 
@@ -77,8 +77,8 @@ class SimCardView:
         self.price = TextWithLabel(self.win, "Price", 20, 140)
         self.owner = TextWithLabel(self.win, "Owner", 20, 180, disabled=True)
         self.owner.variable.set(self.user.person.person_id)
-        # self.search_owner = TextWithLabel(win, "SearchOwner", 300, 250)
-        # self.search_owner.text_box.bind("<KeyRelease>", self.find_by_owner)
+        self.search_number = TextWithLabel(self.win, "SearchNumber", 300, 250)
+        self.search_number.text_box.bind("<KeyRelease>", self.find_by_number)
 
         self.table = Table(self.win,
                            ["Id", "Number", "Operator", "Price", "Owner"],
