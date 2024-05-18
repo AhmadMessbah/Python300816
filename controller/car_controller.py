@@ -10,23 +10,23 @@ class CarController:
 
     @classmethod
     @exception_handling
-    def save(cls, model, name, color, owner_id):
+    def save(cls, model, car_brand, color, owner_id):
         color = int(color)
         if owner_id:
             owner = cls.person_da.find_by_id(owner_id)
-            car = Car(model, name, color, owner)
+            car = Car(model, car_brand, color, owner)
         else:
-            car = Car(model, name, color)
+            car = Car(model, car_brand, color)
 
         cls.car_da.save(car)
         return True, f"Car saved successfully\n{car}"
 
     @classmethod
     @exception_handling
-    def edit(cls, car_id, model, name, color, owner_id):
+    def edit(cls, car_id, model, car_brand, color, owner_id):
         color = int(color)
         owner = cls.person_da.find_by_id(owner_id)
-        car = Car(model, name, color, owner)
+        car = Car(model, car_brand, color, owner)
         car.car_id = car_id
         old_car = cls.car_da.find_by_id(car_id)
         cls.car_da.edit(car)
