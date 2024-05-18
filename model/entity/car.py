@@ -2,11 +2,12 @@ from model.entity.base import Base
 from model.tools.validator import Validator
 
 
+
 class Car(Base):
-    def __init__(self, model, name, color, owner=None):
-        self.card_id = None
+    def __init__(self, model, car_brand, color, owner=None):
+        self.car_id = None
         self.model = model
-        self.name = name
+        self.car_brand = car_brand
         self.color = color
         self.owner = owner
 
@@ -14,19 +15,19 @@ class Car(Base):
         return self._model
 
     def set_model(self, model):
-        self._model = Validator.name_validator(model, "Invalid model")
+        self._model = Validator.car_model_validator(model, "Invalid car model")
 
-    def get_name(self):
-        return self._name
+    def get_car_brand(self):
+        return self._car_brand
 
-    def set_name(self, name):
-        self._name = Validator.name_validator(name, "Invalid name")
+    def set_car_brand(self, car_brand):
+        self._car_brand = Validator.car_brand_validator(car_brand, "Invalid Brand")
 
     def get_color(self):
         return self._color
 
     def set_color(self, color):
-        self._color = Validator.name_validator(color, "Invalid color")
+        self._color = Validator.color_validator(color, "Invalid Color")
 
     def get_owner(self):
         return self._owner
@@ -35,6 +36,6 @@ class Car(Base):
         self._owner = owner
 
     model = property(get_model, set_model)
-    name = property(get_name, set_name)
+    car_brand = property(get_car_brand, set_car_brand)
     color = property(get_color, set_color)
     owner = property(get_owner, set_owner)

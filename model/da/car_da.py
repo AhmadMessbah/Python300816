@@ -8,9 +8,9 @@ class CarDa(Da):
     def save(self, car):
         if (car.owner and self.find_car_count_by_owner_id(car.owner.person_id)< 3):
             self.connect()
-            self.cursor.execute("INSERT INTO CAR_TBL(MODEL, NAME, COLOR, OWNER_ID) VALUES(%s,%s,%s,%s)",
+            self.cursor.execute("INSERT INTO CAR_TBL(MODEL, CAR_BRAND, COLOR, OWNER_ID) VALUES(%s,%s,%s,%s)",
                                 [car.model,
-                                 car.name,
+                                 car.car_brand,
                                  car.color,
                                  car.owner.person_id if car.owner else None])
             self.connection.commit()
@@ -21,9 +21,9 @@ class CarDa(Da):
     def edit(self, car):
         if (car.owner and self.find_car_count_by_owner_id(car.owner.person_id)< 3):
             self.connect()
-            self.cursor.execute("UPDATE CAR_TBL SET MODEL=%s, NAME=%s, COLOR=%s, OWNER_ID=%s WHERE ID=%s",
+            self.cursor.execute("UPDATE CAR_TBL SET MODEL=%s, CAR_BRAND=%s, COLOR=%s, OWNER_ID=%s WHERE ID=%s",
                             [car.model,
-                             car.name,
+                             car.car_brand,
                              car.color,
                              car.owner.person_id if car.owner else None,
                              car.car_id]
@@ -58,7 +58,7 @@ class CarDa(Da):
                 car_list.append(car)
             return car_list
         else:
-            raise ValueError("No Sim_Card Found !")
+            raise ValueError("No Car Found !")
 
     def find_by_id(self, car_id):
         self.connect()
@@ -92,10 +92,10 @@ class CarDa(Da):
     def find_car_count_by_owner_id(self, owner_id):
         self.connect()
         self.cursor.execute("SELECT * FROM CAR_COUNT WHERE OWNER_ID=%s", [owner_id])
-        sim_count = self.cursor.fetchone()
+        CAR_count = self.cursor.fetchone()
         self.disconnect()
-        if sim_count:
-            return int(sim_count[1])
+        if CAR_count:
+            return int(CAR_count[1])
         else:
             return 0
 

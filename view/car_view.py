@@ -5,15 +5,10 @@ from view.component.label_text import TextWithLabel
 from view.component.table import Table
 
 
-
-
-
-
-
 class CarView:
     def save_click(self):
         status, message = CarController.save(self.model.get(),
-                                                 self.name.get(),
+                                                 self.car_brand.get(),
                                                  self.color.get(),
                                                  self.owner.get()
                                                  )
@@ -24,7 +19,7 @@ class CarView:
 
     def reset_form(self):
         self.model.variable.set("")
-        self.name.variable.set("")
+        self.car_brand.variable.set("")
         self.color.variable.set("")
         self.owner.variable.set("")
         status, car_list = CarController.find_all()
@@ -34,13 +29,13 @@ class CarView:
 
     def select_row(self, car):
         self.model.variable.set(car[0])
-        self.name.variable.set(car[1])
+        self.car_brand.variable.set(car[1])
         self.color.variable.set(car[2])
         self.owner.variable.set(car[3])
 
     def edit_click(self):
         status, message = CarController.edit(self.model.variable.get(),
-                                                 self.name.variable.get(),
+                                                 self.car_brand.variable.get(),
                                                  self.color.variable.get(),
                                                  self.owner.variable.get()
                                                  )
@@ -73,9 +68,9 @@ class CarView:
         self.model = StringVar()
         Entry(win, textvariable=self.model).place(x=80, y=20)
 
-        Label(win, text="Name").place(x=20, y=60)
-        self.name = StringVar()
-        Entry(win, textvariable=self.name).place(x=80, y=60)
+        Label(win, text="Brand").place(x=20, y=60)
+        self.car_brand = StringVar()
+        Entry(win, textvariable=self.car_brand).place(x=80, y=60)
 
         Label(win, text="Color").place(x=20, y=100)
         self.color = StringVar()
@@ -87,14 +82,14 @@ class CarView:
 
         self.id = TextWithLabel(win, "Id", 20, 20, disabled=True)
         self.model = TextWithLabel(win, "CarModel", 20, 40)
-        self.name = TextWithLabel(win, "Name", 20, 60)
+        self.car_brand = TextWithLabel(win, "Brand", 20, 60)
         self.color = TextWithLabel(win, "Color", 20, 80)
         self.owner = TextWithLabel(win, "Owner", 20, 100)
         self.search_owner = TextWithLabel(win, "Owner", 300, 250)
         self.search_owner.text_box.bind("<KeyRelease>", self.find_by_owner)
 
         self.table = Table(win,
-                           ["Id", "Model", "Name", "Color", "Owner"],
+                           ["Id", "Model", "Brand", "Color", "Owner"],
                            [60, 100, 60, 80, 100],
                            250,
                            20,

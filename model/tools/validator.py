@@ -55,9 +55,9 @@ class Validator:
             raise ValueError(message)
 
     @classmethod
-    def operator_validator(cls, operator, message):
-        if isinstance(operator, str) and operator.lower() in ("irancell", "mci", "rightel", "shatel"):
-            return operator
+    def brand_validator(cls, brand, message):
+        if isinstance(brand, str) and brand.lower() in ("irancell", "mci", "rightel", "shatel"):
+            return brand
         else:
             raise ValueError(message)
 
@@ -94,5 +94,26 @@ class Validator:
     def serial_validator(cls, serial_number, message):
         if isinstance(serial_number, str) and re.match(r"^\w{2,30}$", serial_number):
             return serial_number
+        else:
+            raise ValueError(message)
+
+    @classmethod
+    def car_brand_validator(cls, car_brand, message):
+        if isinstance(car_brand, str) and car_brand.lower() in ("VOLVO", "BMW", "FORD", "HYUNDAI","JEEP","HONDA","FERRARI","TOYOTA","KIA","LEXUS","BENZ"):
+            return car_brand
+        else:
+            raise ValueError(message)
+
+    @classmethod
+    def color_validator(cls, color, message):
+        if re.match(r"^[a-zA-Z\s]", color):
+            return color
+        else:
+            raise ValueError(message)
+
+    @classmethod
+    def model_validator(cls, model, message):
+        if re.match(r"^[a-zA-Z\s]{2,15}$", model):
+            return model
         else:
             raise ValueError(message)
