@@ -15,7 +15,7 @@ class Car(Base):
         return self._model
 
     def set_model(self, model):
-        self._model = Validator.car_model_validator(model, "Invalid car model")
+        self._model = Validator.model_validator(model, "Invalid car model")
 
     def get_car_brand(self):
         return self._car_brand
