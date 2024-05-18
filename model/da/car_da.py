@@ -1,3 +1,4 @@
+
 from model.da.da import Da
 from model.da.person_da import PersonDa
 from model.entity.car import Car
@@ -24,8 +25,8 @@ class CarDa(Da):
                             [car.model,
                              car.name,
                              car.color,
-                             car.owner.person_id,
-                             car.owner.person_id if car.owner else None]
+                             car.owner.person_id if car.owner else None,
+                             car.car_id]
                             )
             self.connection.commit()
             self.disconnect()
@@ -44,7 +45,6 @@ class CarDa(Da):
         self.cursor.execute("SELECT * FROM CAR_TBL")
         car_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        print(car_tuple_list)
         person_da = PersonDa()
         if car_tuple_list:
             car_list = []
@@ -54,11 +54,11 @@ class CarDa(Da):
                     car_tuple[2],
                     car_tuple[3],
                     person_da.find_by_id(car_tuple[4]))
-                car.person_id = car_tuple[0]
+                car.car_id = car_tuple[0]
                 car_list.append(car)
             return car_list
         else:
-            raise ValueError("No Car Found !")
+            raise ValueError("No Sim_Card Found !")
 
     def find_by_id(self, car_id):
         self.connect()
@@ -82,9 +82,6 @@ class CarDa(Da):
         if car_tuple_list:
             car_list = []
             for car_tuple in car_tuple_list:
-
-                car = Car(car_tuple[1], car_tuple[2],car_tuple[3],person_da.find_by_id(car_tuple[4]))
-
                 car = Car(car_tuple[1], car_tuple[2],car_tuple[3],person_da.find_by_id(car_tuple[4]))
                 car.car_id = car_tuple[0]
                 car_list.append(car)
@@ -95,9 +92,14 @@ class CarDa(Da):
     def find_car_count_by_owner_id(self, owner_id):
         self.connect()
         self.cursor.execute("SELECT * FROM CAR_COUNT WHERE OWNER_ID=%s", [owner_id])
-        carr_count = self.cursor.fetchone()
+        sim_count = self.cursor.fetchone()
         self.disconnect()
-        if carr_count:
-            return int(carr_count[1])
+        if sim_count:
+            return int(sim_count[1])
         else:
             return 0
+
+
+
+
+
