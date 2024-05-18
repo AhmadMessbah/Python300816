@@ -3,6 +3,7 @@ from model.da.person_da import PersonDa
 from model.entity.car import Car
 from model.tools.decorators import exception_handling
 
+
 class CarController:
     car_da = CarDa()
     person_da = PersonDa()
@@ -10,8 +11,9 @@ class CarController:
     @classmethod
     @exception_handling
     def save(cls, model, name, color, owner_id):
+        color = int(color)
         if owner_id:
-            owner  = cls.person_da.find_by_id(owner_id)
+            owner = cls.person_da.find_by_id(owner_id)
             car = Car(model, name, color, owner)
         else:
             car = Car(model, name, color)
@@ -22,8 +24,9 @@ class CarController:
     @classmethod
     @exception_handling
     def edit(cls, car_id, model, name, color, owner_id):
-        owner = PersonDa.find_by_id(owner_id)
-        car = Car( model, name, color, owner)
+        color = int(color)
+        owner = cls.person_da.find_by_id(owner_id)
+        car = Car(model, name, color, owner)
         car.car_id = car_id
         old_car = cls.car_da.find_by_id(car_id)
         cls.car_da.edit(car)
@@ -32,6 +35,7 @@ class CarController:
     @classmethod
     @exception_handling
     def remove(cls, car_id):
+        car_id= int(car_id)
         car = cls.car_da.find_by_id(car_id)
         cls.car_da.remove(car_id)
         return True, f"car removed successfully\n{car}"
@@ -43,7 +47,7 @@ class CarController:
 
     @classmethod
     @exception_handling
-    def find_by_model(cls, car_id):
+    def find_by_id(cls, car_id):
         return True, cls.car_da.find_by_id(car_id)
 
     @classmethod
