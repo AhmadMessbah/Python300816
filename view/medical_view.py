@@ -19,7 +19,7 @@ class MedicalView:
         self.disease.variable.set("")
         self.medicine.variable.set("")
         self.doctor.variable.set("")
-        status, medical_records_list = MedicalRecordController.find_all()
+        status, medical_records_list = MedicalRecordController.find_by_patient_id(self.user.person.person_id)
         if status:
             self.table.refresh_table(medical_records_list)
 
