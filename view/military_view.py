@@ -9,6 +9,7 @@ from view.main_view import MainView
 class MilitaryView:
 
     def reset_form(self):
+        self.id.set("")
         self.serial_number.variable.set("")
         self.city.variable.set("")
         self.organ.variable.set("")
@@ -25,8 +26,7 @@ class MilitaryView:
 
 
     def select_row(self, military):
-        self.ID.set(military[0])
-        self.id.variable.set(military[0])
+        self.id.set(military[0])
         self.serial_number.variable.set(str("{:011d}".format(military[1])))
         self.city.variable.set(military[2])
         self.organ.variable.set(military[3])
@@ -57,7 +57,7 @@ class MilitaryView:
             msg.showerror("Save Error", message)
 
     def edit_click(self):
-        status, message = MilitaryController.edit(self.id.variable.get(),
+        status, message = MilitaryController.edit(self.id.get(),
                                                   self.serial_number.variable.get(),
                                                   self.city.variable.get(),
                                                   self.organ.variable.get(),
@@ -75,7 +75,7 @@ class MilitaryView:
             msg.showerror("Edit Error", message)
 
     def remove_click(self):
-        status, message = MilitaryController.remove(self.id.variable.get())
+        status, message = MilitaryController.remove(self.id.get())
         if status:
             msg.showinfo("Remove Record", "Person Removed")
             self.reset_form()
@@ -103,9 +103,8 @@ class MilitaryView:
         self.win.geometry(f"1165x300+{x}+{y}")
 
         # WIDGETS
-        self.ID = StringVar()
-        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, width=6, disabled=True)
-        self.id = TextWithLabel(self.win, "ID", 140, 20, disabled=True, distance=25, width=6)
+        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, disabled=True)
+        self.id = StringVar()
         self.serial_number = TextWithLabel(self.win, "Serial", 20, 60)
         self.city = TextWithLabel(self.win, "City", 20, 100)
         self.organ = TextWithLabel(self.win, "Organ", 20, 140)
