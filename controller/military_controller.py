@@ -63,17 +63,7 @@ class MilitaryController:
 
     @classmethod
     @exception_handling
-    def find_by_serial_number(cls, serial_number):
-        return True, cls.military_da.find_by_serial_number(serial_number)
-
-    @classmethod
-    @exception_handling
-    def find_by_organ(cls, organ):
-        return True, cls.military_da.find_by_organ(organ)
-
-    @classmethod
-    @exception_handling
-    def find_by_city(cls, city):
-        return True, cls.military_da.find_by_city(city)
+    def find_by_soldier_id(cls, soldier_id):
+        return True, cls.military_da.find_by_soldier_id(int(soldier_id))
 
 

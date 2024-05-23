@@ -76,9 +76,9 @@ class MilitaryDa(Da):
         else:
             raise ValueError("No Record Found !")
 
-    def find_by_serial_number(self, serial_number):
+    def find_by_soldier_id(self, soldier_id):
         self.connect()
-        self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE SERIAL_NUMBER LIKE %s", [serial_number + "%"])
+        self.cursor.execute('SELECT * FROM MILITARY_TBL WHERE soldier_id = %s', [soldier_id])
         military_tuple_list = self.cursor.fetchall()
         self.disconnect()
         person_da = PersonDa()
@@ -93,45 +93,7 @@ class MilitaryDa(Da):
                 military_list.append(military)
             return military_list
         else:
-            raise ValueError("No Serial Information Found !")
-
-    def find_by_organ(self, organ):
-        self.connect()
-        self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE ORGAN LIKE %s", [organ + "%"])
-        military_tuple_list = self.cursor.fetchall()
-        self.disconnect()
-        person_da = PersonDa()
-        if military_tuple_list:
-            military_list = []
-            for military_tuple in military_tuple_list:
-                military = Military(military_tuple[1], military_tuple[2],
-                                    military_tuple[3], military_tuple[4],
-                                    military_tuple[5],
-                                    person_da.find_by_id(military_tuple[6]))
-                military.military_id = military_tuple[0]
-                military_list.append(military)
-            return military_list
-        else:
-            raise ValueError("No Organ Information Found !")
-
-    def find_by_city(self, city):
-        self.connect()
-        self.cursor.execute("SELECT * FROM MILITARY_TBL WHERE CITY LIKE %s", [city + "%"])
-        military_tuple_list = self.cursor.fetchall()
-        self.disconnect()
-        person_da = PersonDa()
-        if military_tuple_list:
-            military_list = []
-            for military_tuple in military_tuple_list:
-                military = Military(military_tuple[1], military_tuple[2],
-                                    military_tuple[3], military_tuple[4],
-                                    military_tuple[5],
-                                    person_da.find_by_id(military_tuple[6]))
-                military.military_id = military_tuple[0]
-                military_list.append(military)
-            return military_list
-        else:
-            raise ValueError("No City Information Found !")
+            raise ValueError('No records found')
 
     def find_soldier_count_by_soldier_id(self, soldier_id):
         self.connect()
