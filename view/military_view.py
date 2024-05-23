@@ -79,9 +79,9 @@ class MilitaryView:
         self.win.resizable(width=False, height=False)
 
         # CENTER FORM
-        x = (self.win.winfo_screenwidth() - 1145) // 2
+        x = (self.win.winfo_screenwidth() - 845) // 2
         y = (self.win.winfo_screenheight() - 300) // 2
-        self.win.geometry(f"1145x300+{x}+{y}")
+        self.win.geometry(f"845x300+{x}+{y}")
 
         # MAIN_VIEW CONNECT
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
@@ -102,11 +102,10 @@ class MilitaryView:
         Label(self.win, text="End Date").place(x=20, y=220)
         self.end_calendar = PersianCalendar(self.win, 80, 220)
 
-
         # TABLE
         self.table = Table(self.win,
-                           ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Person Info"],
-                           [60, 100, 100, 100, 100, 100, 300],
+                           ["ID", "SERIAL NUMBER", "CITY", "ORGAN", "START DATE", "END DATE"],
+                           [60, 100, 100, 100, 100, 100],
                            250,
                            20,
                            self.select_row)
