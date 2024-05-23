@@ -49,7 +49,8 @@ class UserDa(Da):
                 user.user_id = user_tuple[0]
                 user.status = user_tuple[3]
                 user.locked = user_tuple[4]
-                user.person = person_da.find_by_id(user_tuple[5])
+                user.role = user_tuple[5]
+                user.person = person_da.find_by_id(user_tuple[6])
                 user_list.append(user)
             return user_list
         else:
@@ -66,8 +67,8 @@ class UserDa(Da):
             user.user_id = user_tuple[0]
             user.status = user_tuple[3]
             user.locked = user_tuple[4]
-            user.person = person_da.find_by_id(user_tuple[5])
-            person_da.find_by_id(user_tuple[5])
+            user.role = user_tuple[5]
+            user.person = person_da.find_by_id(user_tuple[6])
             return user
         else:
             raise ValueError("No User Found !")
@@ -85,7 +86,8 @@ class UserDa(Da):
                 user.user_id = user_tuple[0]
                 user.status = user_tuple[3]
                 user.locked = user_tuple[4]
-                user.person = person_da.find_by_id(user_tuple[5])
+                user.role = user_tuple[5]
+                user.person = person_da.find_by_id(user_tuple[6])
                 user_list.append(user)
             return user_list
         else:
@@ -104,7 +106,8 @@ class UserDa(Da):
                 user.user_id = user_tuple[0]
                 user.status = user_tuple[3]
                 user.locked = user_tuple[4]
-                user.person = person_da.find_by_id(user_tuple[5])
+                user.role = user_tuple[5]
+                user.person = person_da.find_by_id(user_tuple[6])
                 user_list.append(user)
             return user_list
         else:
@@ -121,7 +124,8 @@ class UserDa(Da):
             user.user_id = user_tuple[0]
             user.status = user_tuple[3]
             user.locked = user_tuple[4]
-            user.person = person_da.find_by_id(user_tuple[5])
+            user.role = user_tuple[5]
+            user.person = person_da.find_by_id(user_tuple[6])
             return user
         else:
             raise ValueError("No User Found !")

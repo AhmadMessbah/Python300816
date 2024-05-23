@@ -64,25 +64,9 @@ class CarView:
         win.geometry("600x300")
         win.title("Car")
 
-        Label(win, text="Model").place(x=20, y=20)
-        self.model = StringVar()
-        Entry(win, textvariable=self.model).place(x=80, y=20)
-
-        Label(win, text="Brand").place(x=20, y=60)
-        self.car_brand = StringVar()
-        Entry(win, textvariable=self.car_brand).place(x=80, y=60)
-
-        Label(win, text="Color").place(x=20, y=100)
-        self.color = StringVar()
-        Entry(win, textvariable=self.color).place(x=80, y=100)
-
-        Label(win, text="Owner").place(x=20, y=140)
-        self.owner = StringVar()
-        Entry(win, textvariable=self.owner).place(x=80, y=140)
-
         self.id = TextWithLabel(win, "Id", 20, 20, disabled=True)
-        self.model = TextWithLabel(win, "CarModel", 20, 40)
-        self.car_brand = TextWithLabel(win, "Brand", 20, 60)
+        self.model = TextWithLabel(win, "CarModel", 20, 60)
+        self.car_brand = TextWithLabel(win, "Brand", 20, 100)
         self.color = TextWithLabel(win, "Color", 20, 80)
         self.owner = TextWithLabel(win, "Owner", 20, 100)
         self.search_owner = TextWithLabel(win, "Owner", 300, 250)

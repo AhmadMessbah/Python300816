@@ -3,10 +3,11 @@ from model.tools.validator import Validator
 
 
 class Person(Base):
-    def __init__(self, name, family):
+    def __init__(self, name, family, birth_date):
         self.person_id = None
         self.name = name
         self.family = family
+        self.birth_date = birth_date
 
     def get_name(self):
         return self._name

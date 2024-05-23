@@ -20,14 +20,14 @@ class FinancialDocView:
         self.id.variable.set(financial_doc[0])
         self.amount.variable.set(financial_doc[1])
         self.date_time.variable.set(financial_doc[2])
-        self.doc_type.variable.set(financial_doc[3])
+        self.doc_type.set(financial_doc[3])
         self.description.variable.set(financial_doc[4])
 
     def save_click(self):
         status, message = FinancialDocController.save(int(self.amount.variable.get()),
-                                                      self.doc_type.variable.get(),
+                                                      self.doc_type.get(),
                                                       self.description.variable.get(),
-                                                      self.person_id.variable.get())
+                                                      self.user.person.person_id)
         if status:
             msg.showinfo("Save Document", "Document Saved")
             self.reset_form()
@@ -75,8 +75,8 @@ class FinancialDocView:
         self.doc_type.place(x=80, y=100, width=125)
         self.doc_type.current(0)
         self.description = TextWithLabel(win, "Describe:", 20, 140)
-        self.person_id = TextWithLabel(win, "Person Id", 20, 180, disabled=True)
-        self.person_id.variable.set(self.user.person.person_id)
+        self.person_id = TextWithLabel(win, "Person", 20, 180, disabled=True)
+        self.person_id.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
         self.search_date_time = TextWithLabel(win, "date time:", 300, 270)
         self.search_date_time.text_box.bind("<KeyRelease>", self.find_by_date)
 

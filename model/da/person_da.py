@@ -5,15 +5,15 @@ from model.entity.person import Person
 class PersonDa(Da):
     def save(self, person):
         self.connect()
-        self.cursor.execute("INSERT INTO PERSON_TBL(NAME, FAMILY) VALUES(%s,%s)",
-                            [person.name, person.family])
+        self.cursor.execute("INSERT INTO PERSON_TBL(NAME, FAMILY, BIRTH_DATE) VALUES(%s,%s,%s)",
+                            [person.name, person.family, person.birth_date])
         self.connection.commit()
         self.disconnect()
 
     def edit(self, person):
         self.connect()
-        self.cursor.execute("UPDATE PERSON_TBL SET NAME=%s, FAMILY=%s WHERE id=%s",
-                            [person.name, person.family, person.person_id])
+        self.cursor.execute("UPDATE PERSON_TBL SET NAME=%s, FAMILY=%s, BIRTH_DATE=%s WHERE id=%s",
+                            [person.name, person.family, person.birth_date, person.person_id])
         self.connection.commit()
         self.disconnect()
 
@@ -32,7 +32,7 @@ class PersonDa(Da):
         if person_tuple_list:
             person_list = []
             for person_tuple in person_tuple_list:
-                person = Person(person_tuple[1], person_tuple[2])
+                person = Person(person_tuple[1], person_tuple[2],  person_tuple[3])
                 person.person_id = person_tuple[0]
                 person_list.append(person)
             return person_list
@@ -45,11 +45,11 @@ class PersonDa(Da):
         person_tuple = self.cursor.fetchone()
         self.disconnect()
         if person_tuple:
-            person = Person(person_tuple[1], person_tuple[2])
+            person = Person(person_tuple[1], person_tuple[2], person_tuple[3])
             person.person_id = person_tuple[0]
             return person
         else:
-            raise ValueError("No Person Foundddddd !")
+            raise ValueError("No Person Found !")
 
     def find_by_family(self, family):
         self.connect()
@@ -59,7 +59,7 @@ class PersonDa(Da):
         if person_tuple_list:
             person_list = []
             for person_tuple in person_tuple_list:
-                person = Person(person_tuple[1], person_tuple[2])
+                person = Person(person_tuple[1], person_tuple[2],  person_tuple[3])
                 person.person_id = person_tuple[0]
                 person_list.append(person)
             return person_list

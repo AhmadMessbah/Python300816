@@ -3,11 +3,12 @@ import tkinter.messagebox as msg
 
 from controller.person_controller import PersonController
 from view.component.label_text import TextWithLabel
+from view.component.persian_calendar import PersianCalendar
 from view.component.table import Table
 from view.main_view import MainView
 
 
-class PersonView:
+class AdminView:
     def reset_form(self):
         self.id.variable.set("")
         self.name.variable.set("")
@@ -16,13 +17,17 @@ class PersonView:
         if status:
             self.table.refresh_table(person_list)
 
-    def select_row(self,person):
+    def select_row(self, person):
         self.id.variable.set(person[0])
         self.name.variable.set(person[1])
         self.family.variable.set(person[2])
+        print(person[3])
+        print(type(person[3]))
+        # self.birth_date.set_date(person[3])
 
     def save_click(self):
-        status, message = PersonController.save(self.name.variable.get(), self.family.variable.get())
+        status, message = PersonController.save(self.name.variable.get(), self.family.variable.get(),
+                                                self.birth_date.gregorian_date)
         if status:
             msg.showinfo("Save Person", "Person Saved")
             self.reset_form()
@@ -30,7 +35,8 @@ class PersonView:
             msg.showerror("Save Error", message)
 
     def edit_click(self):
-        status, message = PersonController.edit(self.id.variable.get(), self.name.variable.get(), self.family.variable.get())
+        status, message = PersonController.edit(self.id.variable.get(), self.name.variable.get(),
+                                                self.family.variable.get(), self.birth_date.gregorian_date)
         if status:
             msg.showinfo("Edit Person", "Person Edited")
             self.reset_form()
@@ -45,12 +51,11 @@ class PersonView:
         else:
             msg.showerror("Remove Error", message)
 
-    def find_by_family(self,event):
+    def find_by_family(self, event):
         status, person_list = PersonController.find_by_family(self.search_family.variable.get())
         if status:
             self.table.refresh_table(person_list)
 
-    # todo :add this function
     def close_win(self):
         self.win.destroy()
         main_view = MainView(self.user)
@@ -69,15 +74,19 @@ class PersonView:
         self.id = TextWithLabel(self.win, "Id", 20, 20, disabled=True)
         self.name = TextWithLabel(self.win, "Name", 20, 60)
         self.family = TextWithLabel(self.win, "Family", 20, 100)
+        Label(self.win, text="BirthDate").place(x=20,y=140)
+
+        self.birth_date = PersianCalendar(self.win, 80, 140, self.user.person.birth_date)
+
         self.search_family = TextWithLabel(self.win, "Family", 300, 270)
         self.search_family.text_box.bind("<KeyRelease>", self.find_by_family)
 
         self.table = Table(self.win,
-                      ["Id", "Name", "Family"],
-                      [60, 100, 100],
-                      250,
-                      20,
-                      self.select_row)
+                           ["Id", "Name", "Family", "BirthDate"],
+                           [60, 100, 100, 100],
+                           250,
+                           20,
+                           self.select_row)
 
         Button(self.win, text="Add", width=8, command=self.save_click).place(x=20, y=250)
         Button(self.win, text="Edit", width=8, command=self.edit_click).place(x=100, y=250)
@@ -86,4 +95,3 @@ class PersonView:
         self.reset_form()
 
         self.win.mainloop()
-

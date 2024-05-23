@@ -90,7 +90,7 @@ class MilitaryView:
         self.organ = TextWithLabel(self.win, "Organ", 20, 140)
 
         # PERSON ID
-        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, disabled=True)
+        self.soldier_id = TextWithLabel(self.win, "Person", 20, 20, disabled=True)
         self.soldier_id.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
 
         # DATE

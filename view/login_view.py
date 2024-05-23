@@ -2,6 +2,7 @@ import tkinter.messagebox as msg
 from tkinter import *
 
 from controller.user_controller import UserController
+from view.admin_view import AdminView
 from view.component.label_text import TextWithLabel
 from view.main_view import MainView
 
@@ -11,8 +12,12 @@ class LoginView:
         ret, user = UserController.find_by_username_and_password(self.username.variable.get(),
                                                                  self.password.variable.get())
         if ret:
-            self.win.destroy()
-            main_view = MainView(user)
+            if user.role == "user":
+                self.win.destroy()
+                main_view = MainView(user)
+            elif user.role == "admin":
+                self.win.destroy()
+                admin_view = AdminView(user)
         else:
             msg.showerror("Login Error", "Access Denied !!!")
 

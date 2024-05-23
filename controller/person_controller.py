@@ -9,15 +9,15 @@ class PersonController:
 
     @classmethod
     @exception_handling
-    def save(cls, name, family):
-        person = Person(name, family)
+    def save(cls, name, family,birth_date):
+        person = Person(name, family,birth_date)
         cls.person_da.save(person)
         return True, f"Person saved successfully {person}"
 
     @classmethod
     @exception_handling
-    def edit(cls, person_id, name, family):
-        person = Person(name, family)
+    def edit(cls, person_id, name, family, birth_date):
+        person = Person(name, family,birth_date)
         person.person_id = person_id
         old_person = cls.person_da.find_by_id(person_id)
         cls.person_da.edit(person)

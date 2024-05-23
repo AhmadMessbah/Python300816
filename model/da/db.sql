@@ -5,7 +5,8 @@ create table person_tbl
 (
     id     int primary key auto_increment,
     name   nvarchar(30) not null,
-    family nvarchar(30) not null
+    family nvarchar(30) not null,
+    birth_date date
 );
 
 -- Lesson
@@ -81,6 +82,7 @@ create table user_tbl(
     status tinyint not null ,
     locked tinyint not null ,
     person_id int,
+    role nvarchar(15),
     FOREIGN KEY (person_id) REFERENCES person_tbl(id)
 );
 
@@ -89,9 +91,9 @@ create table user_tbl(
 create table driving_license_tbl (
     id int primary key auto_increment,
     serial_number varchar(255),
-    date timestamp,
+    date date,
     city varchar(255),
-    expire_date timestamp,
+    expire_date date,
     person_id int,
     FOREIGN KEY (person_id) REFERENCES person_tbl(id)
 );

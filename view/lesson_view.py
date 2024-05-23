@@ -25,9 +25,7 @@ class LessonView:
         self.name.variable.set(lesson[1])
         self.grade.variable.set(lesson[2])
         lesson_date = datetime.strptime(lesson[3], "%Y-%m-%d")
-        self.year.variable.set(lesson_date.year)
-        self.month.variable.set(lesson_date.month)
-        self.day.variable.set(lesson_date.day)
+        self.calendar.set_date(lesson_date)
 
     def save_click(self):
         status, message = LessonController.save(self.name.variable.get(),
@@ -79,7 +77,6 @@ class LessonView:
         self.win = Tk()
         self.win.title("Lesson Viewer")
 
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         # center form
@@ -91,13 +88,10 @@ class LessonView:
         self.name = TextWithLabel(self.win, "Name", 20, 60)
         self.grade = TextWithLabel(self.win, "Grade", 20, 100)
 
-        # self.year = TextWithLabel(self.win, "Year", 20, 140, 30, "", 4)
-        # self.month = TextWithLabel(self.win, "/Month", 90, 140, 45, "", 2)
-        # self.day = TextWithLabel(self.win, "/Day", 165, 140, 30, "", 2)
         Label(self.win, text="Date").place(x=20, y=140)
         self.calendar = PersianCalendar(self.win, 80, 140)
         self.teacher = TextWithLabel(self.win, "Teacher Id", 20, 180, disabled=True)
-        self.teacher.variable.set(self.user.person.person_id)
+        self.teacher.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
 
         self.search_name = TextWithLabel(self.win, "Find Lesson Name", 250, 260, 120)
         self.search_name.text_box.bind("<KeyRelease>", self.find_by_name_for_teacher)

@@ -55,30 +55,28 @@ class MainView:
     def __init__(self, user):
         self.user = user
         self.win = Tk()
-        self.win.geometry("270x650")
+        self.win.geometry("270x590")
         self.win.title("Python App")
         Label(text=user.person.name + " " + user.person.family, font=("Arial", 16)).place(x=50, y=5)
 
         Button(self.win, text="Profile", width=15, bg="lightblue", height=2, font=("Arial", 13),
                command=self.person_click).place(x=50, y=40)
-        Button(self.win, text="User", width=15, bg="lightblue", height=2, font=("Arial", 13),
-               command=self.user_click).place(x=50, y=100)
         Button(self.win, text="SimCard", width=15, bg="lightblue", height=2, font=("Arial", 13),
-               command=self.sim_click).place(x=50, y=160)
+               command=self.sim_click).place(x=50, y=100)
         Button(self.win, text="Military", width=15, bg="lightblue", height=2, font=("Arial", 13),
-               command=self.military_click).place(x=50, y=220)
+               command=self.military_click).place(x=50, y=160)
         Button(self.win, text="Medical", width=15, bg="lightblue", height=2, font=("Arial", 13),
-               command=self.medical_click).place(x=50, y=280)
+               command=self.medical_click).place(x=50, y=220)
         Button(self.win, text="Product", width=15, bg="lightblue", height=2, font=("Arial", 13),
-               command=self.product_click).place(x=50, y=340)
+               command=self.product_click).place(x=50, y=280)
         Button(self.win, text="Financial", width=15, bg="lightblue", height=2, font=("Arial", 13),
-               command=self.financial_click).place(x=50, y=400)
+               command=self.financial_click).place(x=50, y=340)
         Button(self.win, text="Lesson", width=15, bg="lightblue", height=2, font=("Arial", 13),
-               command=self.lesson_click).place(x=50, y=460)
+               command=self.lesson_click).place(x=50, y=400)
         Button(self.win, text="Car", width=15, bg="lightblue", height=2, font=("Arial", 13),
-               command=self.car_click).place(x=50, y=520)
+               command=self.car_click).place(x=50, y=460)
         Button(self.win, text="DrivingLicense", width=15, bg="lightblue", height=2, font=("Arial", 13),
-               command=self.driving_license_click).place(x=50, y=580)
+               command=self.driving_license_click).place(x=50, y=520)
 
         self.win.mainloop()
 

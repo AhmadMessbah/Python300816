@@ -72,7 +72,6 @@ class ProductView:
         self.user = user
         self.win = Tk()
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.geometry("800x300")
         self.win.title("Product")
 
@@ -81,15 +80,15 @@ class ProductView:
         self.brand = TextWithLabel(self.win, "Brand", 20, 100)
         self.serial = TextWithLabel(self.win, "Serial", 20, 140)
         self.buy_price = TextWithLabel(self.win, "Buy_price", 20, 180)
-        self.person_id = TextWithLabel(self.win, "Person_id", 20, 220, disabled=True)
-        self.person_id.variable.set(self.user.person.person_id)
+        self.person_id = TextWithLabel(self.win, "Person", 20, 220, disabled=True)
+        self.person_id.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
 
         self.search_person_id = TextWithLabel(self.win, "product_id", 300, 270)
         self.search_person_id.text_box.bind("<KeyRelease>", self.find_by_person_id)
 
         self.table = Table(self.win,
-                           ["Id", "Name", "Brand", "Serial", "Buy_price", "Person_id"],
-                           [60, 100, 100, 100, 100, 60],
+                           ["Id", "Name", "Brand", "Serial", "Buy_price"],
+                           [60, 100, 100, 100, 100],
                            250,
                            20,
                            self.select_row)

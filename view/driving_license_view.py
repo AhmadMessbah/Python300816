@@ -14,7 +14,6 @@ class DrivingLicenseView:
         self.date.variable.set("")
         self.city.variable.set("")
         self.expire_date.variable.set("")
-        self.person.variable.set("")
         status, dl_list = DrivingLicenseController.find_by_person_id(self.user.person.person_id)
         if status:
             self.table.refresh_table(dl_list)
@@ -25,7 +24,6 @@ class DrivingLicenseView:
         self.date.variable.set(driving_license[2])
         self.city.variable.set(driving_license[3])
         self.expire_date.variable.set(driving_license[4])
-        self.person.variable.set(driving_license[5])
 
     def save_click(self):
         status, message = DrivingLicenseController.save(self.serial_number.variable.get(),
@@ -63,7 +61,7 @@ class DrivingLicenseView:
 
     def find_by_serial_number(self, event):
         status, serial_number = DrivingLicenseController.find_by_serial_number_and_person_id(
-            self.search_searial_number.variable.get(), self.user.person.person_id)
+            self.search_serial_number.variable.get(), self.user.person.person_id)
         if status:
             self.table.refresh_table(serial_number)
 
@@ -74,39 +72,39 @@ class DrivingLicenseView:
 
     def __init__(self, user):
         self.user = user
-        win = Tk()
-        win.title("Panel")
+        self.win = Tk()
+        self.win.title("Panel")
 
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         # center form
-        x = (win.winfo_screenwidth() - 1050) // 2
-        y = (win.winfo_screenheight() - 300) // 2
-        win.geometry(f"1000x400+{x}+{y}")
+        x = (self.win.winfo_screenwidth() - 1050) // 2
+        y = (self.win.winfo_screenheight() - 300) // 2
+        self.win.geometry(f"1000x400+{x}+{y}")
 
-        self.id = TextWithLabel(win, "ID", 30, 20, disabled=True)
-        self.serial_number = TextWithLabel(win, "SerialNumber", 30, 50)
-        self.date = TextWithLabel(win, "Date", 30, 100)
-        self.city = TextWithLabel(win, "City", 30, 150)
-        self.expire_date = TextWithLabel(win, "ExpireDate", 30, 200)
-        self.person = TextWithLabel(win, "Person", 30, 250)
+        self.id = TextWithLabel(self.win, "ID", 30, 20, disabled=True)
+        self.serial_number = TextWithLabel(self.win, "SerialNumber", 30, 50)
+        self.date = TextWithLabel(self.win, "Date", 30, 100)
+        self.city = TextWithLabel(self.win, "City", 30, 150)
+        self.expire_date = TextWithLabel(self.win, "ExpireDate", 30, 200)
+        self.person = TextWithLabel(self.win, "Person", 30, 250, disabled=True)
+        self.person.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
 
-        self.search_searial_number = TextWithLabel(win, "Find By Serial Number", 250, 300, 100)
-        self.search_searial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
+        self.search_serial_number = TextWithLabel(self.win, "Find By Serial Number", 250, 300, 100)
+        self.search_serial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
 
-        self.table = Table(win,
+        self.table = Table(self.win,
                            ["Id", "SerialNumber", "Date", "city", "ExpireDate"],
                            [60, 150, 150, 80, 150],
                            250,
                            20,
                            self.select_row)
 
-        Button(win, text="New", width=10, command=self.reset_form, bg='#86CA93', fg='black').place(x=20, y=300)
-        Button(win, text="Save", width=10, command=self.save_click).place(x=100, y=300)
-        Button(win, text="Edit", width=10, command=self.edit_click).place(x=20, y=350)
-        Button(win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=100, y=350)
+        Button(self.win, text="New", width=10, command=self.reset_form, bg='#86CA93', fg='black').place(x=20, y=300)
+        Button(self.win, text="Save", width=10, command=self.save_click).place(x=100, y=300)
+        Button(self.win, text="Edit", width=10, command=self.edit_click).place(x=20, y=350)
+        Button(self.win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=100, y=350)
 
         self.reset_form()
 
-        win.mainloop()
+        self.win.mainloop()

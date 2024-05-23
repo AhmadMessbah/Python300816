@@ -1,20 +1,19 @@
 import tkinter.ttk
 import datetime
 from tkinter import ttk
+from datetime import datetime
 
 from persiantools.jdatetime import JalaliDate
 
 
 class PersianCalendar:
     def set_date(self, date):
-        year,month,day = date
+        self.gregorian_date = date
+        self.persian_date = JalaliDate(date)
 
-        self.gregorian_date = JalaliDate(*date).to_gregorian()
-        self.persian_date = JalaliDate(*date)
-
-        self.year.set(year if year else self.persian_date.year)
-        self.month.set(month if month else self.persian_date.month)
-        self.day.set(day if day else self.persian_date.day)
+        self.year.set(self.persian_date.year)
+        self.month.set(self.persian_date.month)
+        self.day.set(self.persian_date.day)
 
     def change_date(self, event):
         y = int(self.year.get())
@@ -30,8 +29,8 @@ class PersianCalendar:
 
     def __init__(self, master, x, y, date=None, width=4, distance=40):
         if date:
-            self.gregorian_date = JalaliDate(*date).to_gregorian()
-            self.persian_date = JalaliDate(*date)
+            self.gregorian_date = date
+            self.persian_date = JalaliDate(self.gregorian_date)
         else:
             self.gregorian_date = JalaliDate.today().to_gregorian()
             self.persian_date = JalaliDate.today()
