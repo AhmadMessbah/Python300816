@@ -1,7 +1,8 @@
 from controller.medical_controller import MedicalRecordController
+from view.medical_view import MedicalView
 
 #passed-(save)
-#status,message = MedicalRecordController.save("cold","jkhnjhhk","ahmadi",3)
+#status,message = MedicalRecordController.save("rrrrrr","rrrrrrr","hhhhh",3)
 
 #passed-(remove)
 #status,message = MedicalRecordController.remove("4")
@@ -16,10 +17,9 @@ from controller.medical_controller import MedicalRecordController
 #status,message=MedicalRecordController.find_by_patient_id("3")
 
 
-#todo :test pass nashode-error
-status, message = MedicalRecordController.edit("6", "anfolanza", "aaaaa", "mirhosseini", "4")
+#status, message = MedicalRecordController.edit("5", "kkkkk", "aaaaa", "mirhosseini", "2")
 
-if status:
-    print(message)
-else:
-    print(message)
+#if status:
+ #   print(message)
+#else:
+ #   print(message)

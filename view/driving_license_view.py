@@ -4,6 +4,7 @@ import tkinter.messagebox as msg
 from controller.driving_license_controller import DrivingLicenseController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
+from view.main_view import MainView
 
 
 class DrivingLicenseView:
@@ -66,15 +67,23 @@ class DrivingLicenseView:
         if status:
             self.table.refresh_table(serial_number)
 
+    def close_win(self):
+        self.win.destroy()
+        main_view = MainView(self.user)
+
+
     def __init__(self, user):
         self.user = user
         win = Tk()
         win.title("Panel")
 
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
+
         # center form
         x = (win.winfo_screenwidth() - 1050) // 2
         y = (win.winfo_screenheight() - 300) // 2
-        win.geometry(f"850x500+{x}+{y}")
+        win.geometry(f"1000x400+{x}+{y}")
 
         self.id = TextWithLabel(win, "ID", 30, 20, disabled=True)
         self.serial_number = TextWithLabel(win, "SerialNumber", 30, 50)
@@ -83,20 +92,20 @@ class DrivingLicenseView:
         self.expire_date = TextWithLabel(win, "ExpireDate", 30, 200)
         self.person = TextWithLabel(win, "Person", 30, 250)
 
-        self.search_searial_number = TextWithLabel(win, "Find By Serial Number", 250, 260, 100)
+        self.search_searial_number = TextWithLabel(win, "Find By Serial Number", 250, 300, 100)
         self.search_searial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
 
         self.table = Table(win,
-                           ["Id", "SerialNumber", "Date", "city", "ExpireDate", "Person"],
-                           [60, 150, 150, 80, 150, 220],
+                           ["Id", "SerialNumber", "Date", "city", "ExpireDate"],
+                           [60, 150, 150, 80, 150],
                            250,
                            20,
                            self.select_row)
 
         Button(win, text="New", width=10, command=self.reset_form, bg='#86CA93', fg='black').place(x=20, y=300)
         Button(win, text="Save", width=10, command=self.save_click).place(x=100, y=300)
-        Button(win, text="Edit", width=10, command=self.edit_click).place(x=180, y=300)
-        Button(win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=260, y=300)
+        Button(win, text="Edit", width=10, command=self.edit_click).place(x=20, y=350)
+        Button(win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=100, y=350)
 
         self.reset_form()
 

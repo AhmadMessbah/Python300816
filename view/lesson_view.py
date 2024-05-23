@@ -20,6 +20,8 @@ class LessonView:
 
         if status:
             self.table.refresh_table(lesson_list)
+        else:
+            self.table.refresh_table([])
 
     def select_row(self, lesson):
         self.id.variable.set(lesson[0])
@@ -36,7 +38,7 @@ class LessonView:
                                                 self.year.variable.get(),
                                                 self.month.variable.get(),
                                                 self.day.variable.get(),
-                                                self.teacher.variable.get()
+                                                self.user.person.person_id
                                                 )
         if status:
             msg.showinfo("Save Lesson", "Lesson Saved")
@@ -51,7 +53,7 @@ class LessonView:
                                                 self.year.variable.get(),
                                                 self.month.variable.get(),
                                                 self.day.variable.get(),
-                                                self.teacher.variable.get()
+                                                self.user.person.person_id
                                                 )
         if status:
             msg.showinfo("Edit Lesson", "Lesson Edited")
@@ -68,7 +70,7 @@ class LessonView:
             msg.showerror("Remove Error", message)
 
     def find_by_name_for_teacher(self, event):
-        teacher_id = int(self.teacher.variable.get())
+        teacher_id = self.user.person.person_id
         status, lesson_list = LessonController.find_by_name_for_teacher(self.search_name.variable.get(), teacher_id)
         if status:
             self.table.refresh_table(lesson_list)
@@ -84,7 +86,6 @@ class LessonView:
         self.win = Tk()
         self.win.title("Lesson Viewer")
 
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         # center form
@@ -100,14 +101,14 @@ class LessonView:
         self.month = TextWithLabel(self.win, "/Month", 90, 140, 45, "", 2)
         self.day = TextWithLabel(self.win, "/Day", 165, 140, 30, "", 2)
         self.teacher = TextWithLabel(self.win, "Teacher Id", 20, 180, disabled=True)
-        self.teacher.variable.set(self.user.person.person_id)
+        self.teacher.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
 
         self.search_name = TextWithLabel(self.win, "Find Lesson Name", 250, 260, 120)
         self.search_name.text_box.bind("<KeyRelease>", self.find_by_name_for_teacher)
 
         self.table = Table(self.win,
-                           ["Id", "Name", "Grade", "Date", "Teacher"],
-                           [60, 150, 150, 80, 150],
+                           ["Id", "Name", "Grade", "Date"],
+                           [60, 150, 150, 80],
                            250,
                            20,
                            self.select_row)

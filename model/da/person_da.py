@@ -12,7 +12,7 @@ class PersonDa(Da):
 
     def edit(self, person):
         self.connect()
-        self.cursor.execute("UPDATE PERSON_TBL SET NAME=%s, FAMILY=%s WHERE ID=%s",
+        self.cursor.execute("UPDATE PERSON_TBL SET NAME=%s, FAMILY=%s WHERE id=%s",
                             [person.name, person.family, person.person_id])
         self.connection.commit()
         self.disconnect()
@@ -49,7 +49,7 @@ class PersonDa(Da):
             person.person_id = person_tuple[0]
             return person
         else:
-            raise ValueError("No Person Found !")
+            raise ValueError("No Person Foundddddd !")
 
     def find_by_family(self, family):
         self.connect()
