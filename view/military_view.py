@@ -84,7 +84,6 @@ class MilitaryView:
         self.win.geometry(f"1145x300+{x}+{y}")
 
         # MAIN_VIEW CONNECT
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         # WIDGETS
