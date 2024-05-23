@@ -107,8 +107,8 @@ class LessonView:
         self.search_name.text_box.bind("<KeyRelease>", self.find_by_name_for_teacher)
 
         self.table = Table(self.win,
-                           ["Id", "Name", "Grade", "Date", "Teacher"],
-                           [60, 150, 150, 80, 150],
+                           ["Id", "Name", "Grade", "Date"],
+                           [60, 150, 150, 80],
                            250,
                            20,
                            self.select_row)
