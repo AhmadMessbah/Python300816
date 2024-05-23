@@ -92,6 +92,7 @@ class SimCardView:
                            20,
                            self.select_row)
 
+
         Button(self.win, text="New", width=10, command=self.reset_form, bg='#86CA93', fg='black').place(x=20, y=220)
         Button(self.win, text="Add", width=8, command=self.save_click).place(x=20, y=250)
         Button(self.win, text="Edit", width=8, command=self.edit_click).place(x=100, y=250)
