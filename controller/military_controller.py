@@ -10,55 +10,22 @@ class MilitaryController:
 
     @classmethod
     @exception_handling
-    def save(cls,
-             serial_number,
-             city,
-             organ,
-             start_year,
-             start_month,
-             start_day,
-             end_year,
-             end_month,
-             end_day,
-             soldier_id):
+    def save(cls, serial_number, city, organ, start_date, end_date, soldier_id):
         if soldier_id:
             soldier = cls.person_da.find_by_id(int(soldier_id))
-            military = Military(serial_number,
-                                city,
-                                organ,
-                                (int(start_year), int(start_month), int(start_day)),
-                                (int(end_year), int(end_month), int(end_day)),
-                                soldier)
+            military = Military(serial_number, city, organ, start_date, end_date, soldier)
         else:
-            military = Military(serial_number,
-                                city,
-                                organ,
-                                (int(start_year), int(start_month), int(start_day)),
-                                (int(end_year), int(end_month), int(end_day)))
+            military = Military(serial_number, city, organ, start_date, end_date)
+
         cls.military_da.save(military)
         return True, f"Record saved successfully {military}"
 
     @classmethod
     @exception_handling
-    def edit(cls,
-             military_id,
-             serial_number,
-             city,
-             organ,
-             start_year,
-             start_month,
-             start_day,
-             end_year,
-             end_month,
-             end_day,
-             soldier_id):
+    def edit(cls, military_id, serial_number, city, organ, start_date, end_date, soldier_id):
+
         soldier = cls.person_da.find_by_id(int(soldier_id))
-        military = Military(serial_number,
-                            city,
-                            organ,
-                            (int(start_year), int(start_month), int(start_day)),
-                            (int(end_year), int(end_month), int(end_day)),
-                            soldier)
+        military = Military(serial_number, city, organ, start_date, end_date, soldier)
         military.military_id = military_id
         old_military = cls.military_da.find_by_id(military_id)
         cls.military_da.edit(military)
