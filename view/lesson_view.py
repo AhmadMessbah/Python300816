@@ -33,7 +33,7 @@ class LessonView:
         status, message = LessonController.save(self.name.variable.get(),
                                                 self.grade.variable.get(),
                                                 self.calendar.gregorian_date,
-                                                self.user.person.person_id
+                                                self.teacher.variable.get()
                                                 )
         if status:
             msg.showinfo("Save Lesson", "Lesson Saved")
@@ -46,7 +46,7 @@ class LessonView:
                                                 self.name.variable.get(),
                                                 self.grade.variable.get(),
                                                 self.calendar.gregorian_date,
-                                                self.user.person.person_id
+                                                self.teacher.variable.get()
                                                 )
         if status:
             msg.showinfo("Edit Lesson", "Lesson Edited")
@@ -63,7 +63,7 @@ class LessonView:
             msg.showerror("Remove Error", message)
 
     def find_by_name_for_teacher(self, event):
-        teacher_id = self.user.person.person_id
+        teacher_id = int(self.teacher.variable.get())
         status, lesson_list = LessonController.find_by_name_for_teacher(self.search_name.variable.get(), teacher_id)
         if status:
             self.table.refresh_table(lesson_list)
@@ -79,12 +79,13 @@ class LessonView:
         self.win = Tk()
         self.win.title("Lesson Viewer")
 
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         # center form
-        x = (self.win.winfo_screenwidth() - 1050) // 2
+        x = (self.win.winfo_screenwidth() - 700) // 2
         y = (self.win.winfo_screenheight() - 300) // 2
-        self.win.geometry(f"850x300+{x}+{y}")
+        self.win.geometry(f"700x300+{x}+{y}")
 
         self.id = TextWithLabel(self.win, "ID", 20, 20, disabled=True)
         self.name = TextWithLabel(self.win, "Name", 20, 60)
@@ -96,7 +97,7 @@ class LessonView:
         Label(self.win, text="Date").place(x=20, y=140)
         self.calendar = PersianCalendar(self.win, 80, 140)
         self.teacher = TextWithLabel(self.win, "Teacher Id", 20, 180, disabled=True)
-        self.teacher.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
+        self.teacher.variable.set(self.user.person.person_id)
 
         self.search_name = TextWithLabel(self.win, "Find Lesson Name", 250, 260, 120)
         self.search_name.text_box.bind("<KeyRelease>", self.find_by_name_for_teacher)

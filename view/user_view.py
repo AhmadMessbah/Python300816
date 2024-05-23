@@ -91,15 +91,16 @@ class UserView:
         ttk.Checkbutton(text='Locked', variable=self.locked).place(x=150, y=140)
 
         self.table = Table(self.win,
-                           ["Id", "Username", "Password", "Status", "Locked", "person_id"],
-                           [60, 100, 110, 60, 60, 60],
+                           ["Id", "Username", "Password", "Status", "Locked"],
+                           [60, 100, 110, 60, 60],
                            290,
                            20,
                            self.select_row)
 
-        Button(self.win, text="Add", width=8, command=self.save_click).place(x=20, y=260)
-        Button(self.win, text="Edit", width=8, command=self.edit_click).place(x=100, y=260)
-        Button(self.win, text="Remove", width=8, command=self.remove_click).place(x=180, y=260)
+        Button(self.win, text="New", width=10, command=self.reset_form).place(x=50, y=220)
+        Button(self.win, text="Add", width=10, command=self.save_click).place(x=150, y=220)
+        Button(self.win, text="Edit", width=10, command=self.edit_click).place(x=50, y=260)
+        Button(self.win, text="Remove", width=10, command=self.remove_click).place(x=150, y=260)
 
         self.reset_form()
 
