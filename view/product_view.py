@@ -84,7 +84,6 @@ class ProductView:
         Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.geometry("800x320")
         self.win.title("Product")
-
         self.id = TextWithLabel(self.win, "Id :", 20, 20, disabled=True)
         self.name = TextWithLabel(self.win, "Name :", 20, 60)
         self.brand = TextWithLabel(self.win, "Brand :", 20, 100)
