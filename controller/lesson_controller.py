@@ -64,3 +64,4 @@ class LessonController:
     @exception_handling
     def find_teacher_count_by_teacher_id(cls, teacher_id):
         return True, cls.lesson_da.find_teacher_count_by_teacher_id(teacher_id)
+
