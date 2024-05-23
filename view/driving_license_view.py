@@ -74,14 +74,14 @@ class DrivingLicenseView:
         # center form
         x = (win.winfo_screenwidth() - 1050) // 2
         y = (win.winfo_screenheight() - 300) // 2
-        win.geometry(f"850x300+{x}+{y}")
+        win.geometry(f"850x500+{x}+{y}")
 
-        self.id = TextWithLabel(win, "ID", 20, 20, disabled=True)
-        self.serial_number = TextWithLabel(win, "SerialNumber", 20, 50)
-        self.date = TextWithLabel(win, "Date", 20, 100)
-        self.city = TextWithLabel(win, "City", 20, 150)
-        self.expire_date = TextWithLabel(win, "ExpireDate", 20, 200)
-        self.person = TextWithLabel(win, "Person", 20, 250)
+        self.id = TextWithLabel(win, "ID", 30, 20, disabled=True)
+        self.serial_number = TextWithLabel(win, "SerialNumber", 30, 50)
+        self.date = TextWithLabel(win, "Date", 30, 100)
+        self.city = TextWithLabel(win, "City", 30, 150)
+        self.expire_date = TextWithLabel(win, "ExpireDate", 30, 200)
+        self.person = TextWithLabel(win, "Person", 30, 250)
 
         self.search_searial_number = TextWithLabel(win, "Find By Serial Number", 250, 260, 100)
         self.search_searial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
