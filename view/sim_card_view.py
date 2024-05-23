@@ -1,16 +1,16 @@
 import tkinter.messagebox as msg
 from tkinter import *
+from tkinter import ttk
 from controller.sim_card_controller import SimCardController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
 from view.main_view import MainView
 
 
-
 class SimCardView:
     def reset_form(self):
         self.number.variable.set("")
-        self.operator.variable.set("")
+        self.operator.set("")
         self.price.variable.set("")
 
         status, sim_card_list = SimCardController.find_by_owner_id(self.user.person.person_id)
@@ -26,7 +26,7 @@ class SimCardView:
     def save_click(self):
         status, message = SimCardController.save(
             self.number.variable.get(),
-            self.operator.variable.get(),
+            self.operator.get(),
             self.price.variable.get(),
             self.owner.variable.get()
         )
@@ -57,8 +57,8 @@ class SimCardView:
         else:
             msg.showerror("Remove Error", message)
 
-    def find_by_number(self, event):
-        status, sim_card_list = SimCardController.find_by_number(self.search_number.variable.get())
+    def find_by_owner_id(self, event):
+        status, sim_card_list = SimCardController.find_by_owner_id(self.search_number.variable.get())
         if status:
             self.table.refresh_table(sim_card_list)
 
@@ -69,18 +69,21 @@ class SimCardView:
     def __init__(self, user):
         self.user = user
         self.win = Tk()
-        self.win.geometry("600x300")
+        self.win.geometry("700x300")
         self.win.title("SimCard")
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         self.id = TextWithLabel(self.win, "Id", 20, 20, disabled=True)
         self.number = TextWithLabel(self.win, "Number", 20, 60)
         self.operator = TextWithLabel(self.win, "Operator", 20, 100)
+        self.operator = ttk.Combobox(self.win)
+        self.operator["values"] = ["MCI", "Irancell", "Rightel", "Shatel"]
+        self.operator.place (x=80, y=100,)
         self.price = TextWithLabel(self.win, "Price", 20, 140)
         self.owner = TextWithLabel(self.win, "Owner", 20, 180, disabled=True)
         self.owner.variable.set(self.user.person.person_id)
         self.search_number = TextWithLabel(self.win, "SearchNumber", 300, 250)
-        self.search_number.text_box.bind("<KeyRelease>", self.find_by_number)
+        self.search_number.text_box.bind("<KeyRelease>", self.find_by_owner_id)
 
         self.table = Table(self.win,
                            ["Id", "Number", "Operator", "Price", "Owner"],
@@ -89,6 +92,7 @@ class SimCardView:
                            20,
                            self.select_row)
 
+        Button(self.win, text="New", width=10, command=self.reset_form, bg='#86CA93', fg='black').place(x=20, y=220)
         Button(self.win, text="Add", width=8, command=self.save_click).place(x=20, y=250)
         Button(self.win, text="Edit", width=8, command=self.edit_click).place(x=100, y=250)
         Button(self.win, text="Remove", width=8, command=self.remove_click).place(x=180, y=250)
