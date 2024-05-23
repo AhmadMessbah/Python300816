@@ -87,8 +87,8 @@ class DrivingLicenseView:
         self.search_searial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
 
         self.table = Table(win,
-                           ["Id", "SerialNumber", "Date", "city", "ExpireDate", "Person"],
-                           [60, 150, 150, 80, 150, 220],
+                           ["Id", "SerialNumber", "Date", "city", "ExpireDate"],
+                           [60, 150, 150, 80, 150],
                            250,
                            20,
                            self.select_row)
