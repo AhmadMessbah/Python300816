@@ -10,7 +10,13 @@ class MilitaryController:
 
     @classmethod
     @exception_handling
-    def save(cls, serial_number, city, organ, start_year, start_month, start_day, end_year, end_month, end_day, soldier_id):
+    def save(cls,
+             serial_number,
+             city,
+             organ,
+             start_year, start_month, start_day,
+             end_year, end_month, end_day,
+             soldier_id):
         if soldier_id:
             soldier = cls.person_da.find_by_id(int(soldier_id))
             military = Military(serial_number,
@@ -30,8 +36,14 @@ class MilitaryController:
 
     @classmethod
     @exception_handling
-    def edit(cls, military_id, serial_number, city, organ,start_year, start_month, start_day, end_year, end_month, end_day, soldier_id):
-        #Person-Connect
+    def edit(cls,
+             military_id,
+             serial_number,
+             city,
+             organ,
+             start_year, start_month, start_day,
+             end_year, end_month, end_day,
+             soldier_id):
         soldier = cls.person_da.find_by_id(int(soldier_id))
         military = Military(serial_number,
                             city,
@@ -42,7 +54,7 @@ class MilitaryController:
         military.military_id = military_id
         old_military = cls.military_da.find_by_id(military_id)
         cls.military_da.edit(military)
-        return True, (f"Record edited successfullyFrom : {old_military}\nTo: {military}")
+        return True, f"Record edited successfullyFrom : {old_military}\nTo: {military}"
 
     @classmethod
     @exception_handling

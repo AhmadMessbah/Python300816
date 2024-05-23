@@ -24,7 +24,6 @@ class MilitaryView:
         if status:
             self.table.refresh_table(military_list)
 
-
     def select_row(self, military):
         self.id.set(military[0])
         self.serial_number.variable.set(str("{:011d}".format(military[1])))
@@ -89,22 +88,23 @@ class MilitaryView:
     def __init__(self, user):
         self.user = user
         self.win = Tk()
-
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
-
-
         self.win.title("MilitaryRecord")
         self.win.resizable(width=False, height=False)
+
+        # MAIN_VIEW CONNECT
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         # CENTER FORM
         x = (self.win.winfo_screenwidth() - 1165) // 2
         y = (self.win.winfo_screenheight() - 300) // 2
         self.win.geometry(f"1165x300+{x}+{y}")
 
+        # VARIABLE
+        self.id = StringVar()
+
         # WIDGETS
         self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, disabled=True)
-        self.id = StringVar()
         self.serial_number = TextWithLabel(self.win, "Serial", 20, 60)
         self.city = TextWithLabel(self.win, "City", 20, 100)
         self.organ = TextWithLabel(self.win, "Organ", 20, 140)
@@ -120,16 +120,16 @@ class MilitaryView:
         self.end_day = TextWithLabel(self.win, "/", 165, 220, 12, disabled=False, width=4)
 
         self.table = Table(self.win,
-                           ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Person Information"],
+                           ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Person Info"],
                            [60, 100, 100, 100, 100, 100, 320],
                            250,
                            20,
                            self.select_row)
 
+        # BUTTONS
         Button(self.win, text="Add", width=7, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
         Button(self.win, text="Edit", width=7, command=self.edit_click, bg="#e2e2e2").place(x=85, y=260)
         Button(self.win, text="Remove", width=7, command=self.remove_click, bg="#e2e2e2").place(x=155, y=260)
 
         self.reset_form()
         self.win.mainloop()
-
