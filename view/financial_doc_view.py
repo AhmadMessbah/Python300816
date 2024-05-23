@@ -5,6 +5,7 @@ import tkinter.ttk as ttk
 from controller.financial_doc_controller import FinancialDocController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
+from view.main_view import MainView
 
 
 class FinancialDocView:
@@ -38,7 +39,7 @@ class FinancialDocView:
     def edit_click(self):
         status, message = FinancialDocController.edit(self.id.variable.get(),
                                                       int(self.amount.variable.get()),
-                                                      self.doc_type.variable.get(),
+                                                      self.doc_type.get(),
                                                       self.description.variable.get())
         if status:
             msg.showinfo("Edit Document", "Document Edited")
@@ -59,9 +60,9 @@ class FinancialDocView:
         if status:
             self.table.refresh_table(financial_list)
 
-    # def close_win(self):
-    # self.win.destroy()
-    # main_view = MainView(self.person)
+    def close_win(self):
+       self.win.destroy()
+       main_view = MainView(self.person)
 
     def __init__(self, user):
         self.user = user
@@ -78,6 +79,7 @@ class FinancialDocView:
         self.description = TextWithLabel(win, "Describe:", 20, 140)
         self.person_id = TextWithLabel(win, "Person", 20, 180, disabled=True)
         self.person_id.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
+        self.date_time = TextWithLabel(win, "Date", 20, 220)
         self.search_date_time = TextWithLabel(win, "date time:", 300, 270)
         self.search_date_time.text_box.bind("<KeyRelease>", self.find_by_date)
 
