@@ -14,8 +14,12 @@ class MilitaryController:
              serial_number,
              city,
              organ,
-             start_year, start_month, start_day,
-             end_year, end_month, end_day,
+             start_year,
+             start_month,
+             start_day,
+             end_year,
+             end_month,
+             end_day,
              soldier_id):
         if soldier_id:
             soldier = cls.person_da.find_by_id(int(soldier_id))
@@ -41,8 +45,12 @@ class MilitaryController:
              serial_number,
              city,
              organ,
-             start_year, start_month, start_day,
-             end_year, end_month, end_day,
+             start_year,
+             start_month,
+             start_day,
+             end_year,
+             end_month,
+             end_day,
              soldier_id):
         soldier = cls.person_da.find_by_id(int(soldier_id))
         military = Military(serial_number,
