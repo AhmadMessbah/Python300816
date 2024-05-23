@@ -20,6 +20,8 @@ class LessonView:
 
         if status:
             self.table.refresh_table(lesson_list)
+        else:
+            self.table.refresh_table([])
 
     def select_row(self, lesson):
         self.id.variable.set(lesson[0])
