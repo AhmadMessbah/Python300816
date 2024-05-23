@@ -13,9 +13,11 @@ class ProductView:
         self.brand.variable.set("")
         self.serial.variable.set("")
         self.buy_price.variable.set("")
-        status, product_list = ProductController.find_all()
+        status, product_list = ProductController.find_by_person_id(self.user.person.person_id)
         if status:
             self.table.refresh_table(product_list)
+        else:
+            self.table.refresh_table([])
 
     def select_row(self, product):
         self.id.variable.set(product[0])
@@ -59,8 +61,15 @@ class ProductView:
         else:
             msg.showerror("Remove Error", message)
 
-    def find_by_person_id(self, event):
-        status, product_list = ProductController.find_by_person_id(self.search_person_id.variable.get())
+    def reset_click(self):
+        self.name.variable.set("")
+        self.brand.variable.set("")
+        self.serial.variable.set("")
+        self.buy_price.variable.set("")
+
+    def find_by_product_id(self, event):
+        status, product_list = ProductController.find_by_person_and_product_id(self.user.person.person_id,
+                                                                               self.search_person_id.variable.get())
         if status:
             self.table.refresh_table(product_list)
 
@@ -72,31 +81,32 @@ class ProductView:
         self.user = user
         self.win = Tk()
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
-        self.win.geometry("800x300")
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        self.win.geometry("800x320")
         self.win.title("Product")
 
-        self.id = TextWithLabel(self.win, "Id", 20, 20, disabled=True)
-        self.name = TextWithLabel(self.win, "Name", 20, 60)
-        self.brand = TextWithLabel(self.win, "Brand", 20, 100)
-        self.serial = TextWithLabel(self.win, "Serial", 20, 140)
-        self.buy_price = TextWithLabel(self.win, "Buy_price", 20, 180)
-        self.person_id = TextWithLabel(self.win, "Person", 20, 220, disabled=True)
-        self.person_id.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
+        self.id = TextWithLabel(self.win, "Id :", 20, 20, disabled=True)
+        self.name = TextWithLabel(self.win, "Name :", 20, 60)
+        self.brand = TextWithLabel(self.win, "Brand :", 20, 100)
+        self.serial = TextWithLabel(self.win, "Serial :", 20, 140)
+        self.buy_price = TextWithLabel(self.win, "Buy Price :", 20, 180)
+        self.person_id = TextWithLabel(self.win, "Person id :", 20, 220, disabled=True)
+        self.person_id.variable.set(self.user.person.person_id)
 
-        self.search_person_id = TextWithLabel(self.win, "product_id", 300, 270)
-        self.search_person_id.text_box.bind("<KeyRelease>", self.find_by_person_id)
+        self.search_person_id = TextWithLabel(self.win, "Product id : ", 280, 270, distance=80)
+        self.search_person_id.text_box.bind("<KeyRelease>", self.find_by_product_id)
 
         self.table = Table(self.win,
-                           ["Id", "Name", "Brand", "Serial", "Buy_price"],
+                           ["Id", "Name", "Brand", "Serial", "Buy Price"],
                            [60, 100, 100, 100, 100],
-                           250,
+                           280,
                            20,
                            self.select_row)
 
-
-        Button(self.win, text="Add", width=8, command=self.save_click).place(x=20, y=250)
-        Button(self.win, text="Edit", width=8, command=self.edit_click).place(x=100, y=250)
-        Button(self.win, text="Remove", width=8, command=self.remove_click).place(x=180, y=250)
+        Button(self.win, text="Add", width=10, command=self.save_click, bg="lightgreen").place(x=20, y=250)
+        Button(self.win, text="Edit", width=10, command=self.edit_click, bg="lightblue").place(x=20, y=285)
+        Button(self.win, text="Remove", width=10, command=self.remove_click, bg="red").place(x=125, y=250)
+        Button(self.win, text="Reset", width=10, command=self.reset_click, bg="gray").place(x=125, y=285)
 
         self.reset_form()
 

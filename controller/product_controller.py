@@ -48,6 +48,13 @@ class ProductController:
     def find_by_id(cls, product_id):
         return True, cls.product_da.find_by_id(product_id)
 
+    @classmethod
+    @exception_handling
     def find_by_person_id(cls, person_id):
         return True, cls.product_da.find_by_person_id(person_id)
+
+    @classmethod
+    @exception_handling
+    def find_by_person_and_product_id(cls, person_id, product_id):
+        return True, cls.product_da.find_by_person_and_product_id(person_id, product_id)
 

@@ -3,7 +3,7 @@ from model.tools.validator import Validator
 
 
 class Product(Base):
-    def __init__(self, name, brand, serial, buy_price, person = None):
+    def __init__(self, name, brand, serial, buy_price, person = None ):
         self.product_id = None
         self.name = name
         self.brand = brand

@@ -101,7 +101,28 @@ class ProductDa(Da):
 
     def find_by_person_id(self, person_id):
         self.connect()
-        self.cursor.execute("SELECT * FROM product_tbl WHERE person_id=%s", [person_id])
+        self.cursor.execute("SELECT * FROM product_tbl WHERE person_id=%s",
+                            [person_id])
+        products_tuple_list = self.cursor.fetchall()
+        self.disconnect()
+        person_da = PersonDa()
+        if products_tuple_list:
+            product_list = []
+            for product_tuple in products_tuple_list:
+                product = Product(product_tuple[1],
+                                  product_tuple[2],
+                                  product_tuple[3],
+                                  product_tuple[4],
+                                  person_da.find_by_id(product_tuple[5]))
+                product.product_id = product_tuple[0]
+                product_list.append(product)
+            return product_list
+        else:
+            raise ValueError("No products found !")
+
+    def find_by_person_and_product_id(self, person_id, product_id):
+        self.connect()
+        self.cursor.execute("SELECT * FROM product_tbl WHERE person_id=%s and id like %s", [person_id, product_id+"%"])
         products_tuple_list = self.cursor.fetchall()
         self.disconnect()
         person_da = PersonDa()
