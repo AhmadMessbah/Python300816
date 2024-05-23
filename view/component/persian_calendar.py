@@ -5,7 +5,6 @@ from datetime import datetime
 
 from persiantools.jdatetime import JalaliDate
 
-
 class PersianCalendar:
     def set_date(self, date):
         self.gregorian_date = date
