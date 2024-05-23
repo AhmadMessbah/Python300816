@@ -9,7 +9,6 @@ from view.main_view import MainView
 class MilitaryView:
 
     def reset_form(self):
-        self.id.variable.set("0")
         self.serial_number.variable.set("")
         self.city.variable.set("")
         self.organ.variable.set("")
@@ -20,12 +19,13 @@ class MilitaryView:
         self.end_month.variable.set("")
         self.end_day.variable.set("")
         self.soldier_id.variable.set(self.user.person.person_id)
-        status, military_list = MilitaryController.find_all()
+        status, military_list = MilitaryController.find_by_soldier_id(self.user.person.person_id)
         if status:
             self.table.refresh_table(military_list)
 
 
     def select_row(self, military):
+        self.ID.set(military[0])
         self.id.variable.set(military[0])
         self.serial_number.variable.set(str("{:011d}".format(military[1])))
         self.city.variable.set(military[2])
@@ -38,8 +38,6 @@ class MilitaryView:
         self.end_year.variable.set(int(military[5][0:4]))
         self.end_month.variable.set(int(military[5][5:7]))
         self.end_day.variable.set(int(military[5][8:]))
-
-        self.soldier_id.variable.set(int(military[6][14:17].replace(",","")))
 
     def save_click(self):
         status, message = MilitaryController.save(self.serial_number.variable.get(),
@@ -84,39 +82,16 @@ class MilitaryView:
         else:
             msg.showerror("Remove Error", message)
 
-    def find_by_city(self, event):
-        status, military_list = MilitaryController.find_by_city(self.search_city.variable.get())
-        if status:
-            self.table.refresh_table(military_list)
-
-    def find_by_organ(self, event):
-        status, military_list = MilitaryController.find_by_organ(self.search_organ.variable.get())
-        if status:
-            self.table.refresh_table(military_list)
-
-    def find_by_serial_number(self, event):
-        status, military_list = MilitaryController.find_by_serial_number(self.search_serial_number.variable.get())
-        if status:
-            self.table.refresh_table(military_list)
-
-    def find_by_id(self, event):
-        if self.search_id.variable.get():
-            status, military_list = MilitaryController.find_by_id(self.search_id.variable.get())
-            if status:
-                self.table.refresh_table([military_list])
-        else:
-            self.table.refresh_table(MilitaryController.find_all()[1])
-
-#    def close_win(self):
-#        self.win.destroy()
-#        main_view = MainView(self.user)
+    def close_win(self):
+        self.win.destroy()
+        main_view = MainView(self.user)
 
     def __init__(self, user):
         self.user = user
         self.win = Tk()
 
-#        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-#        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
 
         self.win.title("MilitaryRecord")
@@ -128,21 +103,12 @@ class MilitaryView:
         self.win.geometry(f"1165x300+{x}+{y}")
 
         # WIDGETS
+        self.ID = StringVar()
         self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, width=6, disabled=True)
         self.id = TextWithLabel(self.win, "ID", 140, 20, disabled=True, distance=25, width=6)
         self.serial_number = TextWithLabel(self.win, "Serial", 20, 60)
         self.city = TextWithLabel(self.win, "City", 20, 100)
         self.organ = TextWithLabel(self.win, "Organ", 20, 140)
-
-        # SEARCH
-        self.search_city = TextWithLabel(self.win, "Find By City", 250, 260, distance=80, width=13)
-        self.search_city.text_box.bind("<KeyRelease>", self.find_by_city)
-        self.search_organ = TextWithLabel(self.win, "Find By Organ", 425, 260, distance=90, width=13)
-        self.search_organ.text_box.bind("<KeyRelease>", self.find_by_organ)
-        self.search_serial_number = TextWithLabel(self.win, "Find by Serial", 610, 260, distance=85, width=13)
-        self.search_serial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
-        self.search_id = TextWithLabel(self.win, "Search ID", 1035, 260, distance=63, width=5)
-        self.search_id.text_box.bind("<KeyRelease>", self.find_by_id)
 
         # START DATE
         self.start_year = TextWithLabel(self.win, "Start Date", 20, 180, disabled=False, width=8)
@@ -161,10 +127,9 @@ class MilitaryView:
                            20,
                            self.select_row)
 
-        Button(self.win, text="Add", width=5, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
-        Button(self.win, text="Edit", width=5, command=self.edit_click, bg="#e2e2e2").place(x=70, y=260)
-        Button(self.win, text="Remove", width=7, command=self.remove_click, bg="#e2e2e2").place(x=125, y=260)
-        Button(self.win, text="♻️", width=2, command=self.reset_form, bg="#e2e2e2").place(x=193, y=260)
+        Button(self.win, text="Add", width=7, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
+        Button(self.win, text="Edit", width=7, command=self.edit_click, bg="#e2e2e2").place(x=85, y=260)
+        Button(self.win, text="Remove", width=7, command=self.remove_click, bg="#e2e2e2").place(x=155, y=260)
 
         self.reset_form()
         self.win.mainloop()
