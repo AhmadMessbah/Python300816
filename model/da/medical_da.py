@@ -66,7 +66,7 @@ class MedicalDa(Da):
 
     def find_by_id(self, id):
         self.connect()
-        self.cursor.execute('SELECT * FROM medical_record WHERE id = %s', [id])
+        self.cursor.execute('SELECT * FROM medical_record WHERE id like %s', [id])
         tuple_record = self.cursor.fetchone()
         self.disconnect()
         person_da = PersonDa()
