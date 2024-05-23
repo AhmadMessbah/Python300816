@@ -8,8 +8,6 @@ class LessonController:
     lesson_da = LessonDa()
     person_da = PersonDa()
 
-
-#TODO Date Invalid --> don't create touple
     @classmethod
     @exception_handling
     def save(cls, name, grade, year, month, day, teacher_id):
@@ -47,7 +45,6 @@ class LessonController:
     def find_all(cls):
         return True, cls.lesson_da.find_all()
 
-
     @classmethod
     @exception_handling
     def find_by_id(cls, lesson_id):
@@ -55,9 +52,8 @@ class LessonController:
 
     @classmethod
     @exception_handling
-    def find_by_name(cls, name):
-        print(cls.lesson_da.find_by_name(name))
-        return True, cls.lesson_da.find_by_name(name)
+    def find_by_name_for_teacher(cls, name, teacher_id):
+        return True, cls.lesson_da.find_by_name_for_teacher(name, teacher_id)
 
     @classmethod
     @exception_handling
@@ -68,4 +64,3 @@ class LessonController:
     @exception_handling
     def find_teacher_count_by_teacher_id(cls, teacher_id):
         return True, cls.lesson_da.find_teacher_count_by_teacher_id(teacher_id)
-
