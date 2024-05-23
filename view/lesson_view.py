@@ -67,8 +67,9 @@ class LessonView:
         else:
             msg.showerror("Remove Error", message)
 
-    def find_by_name(self, event):
-        status, lesson_list = LessonController.find_by_name(self.search_name.variable.get())
+    def find_by_name_for_teacher(self, event):
+        teacher_id = int(self.teacher.variable.get())
+        status, lesson_list = LessonController.find_by_name_for_teacher(self.search_name.variable.get(), teacher_id)
         if status:
             self.table.refresh_table(lesson_list)
             if self.search_name.variable.get() == '':
@@ -102,7 +103,7 @@ class LessonView:
         self.teacher.variable.set(self.user.person.person_id)
 
         self.search_name = TextWithLabel(self.win, "Find Lesson Name", 250, 260, 120)
-        self.search_name.text_box.bind("<KeyRelease>", self.find_by_name)
+        self.search_name.text_box.bind("<KeyRelease>", self.find_by_name_for_teacher)
 
         self.table = Table(self.win,
                            ["Id", "Name", "Grade", "Date", "Teacher"],

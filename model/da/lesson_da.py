@@ -66,9 +66,9 @@ class LessonDa(Da):
         else:
             raise ValueError("No lesson Found !")
 
-    def find_by_name(self, name):
+    def find_by_name_for_teacher(self, name, teacher_id):
         self.connect()
-        self.cursor.execute("SELECT * FROM LESSON_TBL WHERE NAME LIKE %s", [name + "%"])
+        self.cursor.execute("SELECT * FROM LESSON_TBL WHERE (NAME LIKE %s) AND (teacher_id=%s)", [name + "%", teacher_id])
         lesson_tuple_list = self.cursor.fetchall()
         self.disconnect()
         person_da = PersonDa()

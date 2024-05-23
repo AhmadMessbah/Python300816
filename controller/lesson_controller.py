@@ -52,15 +52,13 @@ class LessonController:
 
     @classmethod
     @exception_handling
-    def find_by_name(cls, name):
-        print(cls.lesson_da.find_by_name(name))
-        return True, cls.lesson_da.find_by_name(name)
+    def find_by_name_for_teacher(cls, name, teacher_id):
+        return True, cls.lesson_da.find_by_name_for_teacher(name, teacher_id)
 
     @classmethod
     @exception_handling
     def find_by_teacher(cls, teacher_id):
         return True, cls.lesson_da.find_by_teacher(teacher_id)
-
 
     @classmethod
     @exception_handling
