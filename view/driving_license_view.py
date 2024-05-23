@@ -4,6 +4,7 @@ import tkinter.messagebox as msg
 from controller.driving_license_controller import DrivingLicenseController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
+from view.main_view import MainView
 
 
 class DrivingLicenseView:
@@ -66,10 +67,18 @@ class DrivingLicenseView:
         if status:
             self.table.refresh_table(serial_number)
 
+    def close_win(self):
+        self.win.destroy()
+        main_view = MainView(self.user)
+
+
     def __init__(self, user):
         self.user = user
         win = Tk()
         win.title("Panel")
+
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         # center form
         x = (win.winfo_screenwidth() - 1050) // 2
