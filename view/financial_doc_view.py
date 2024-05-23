@@ -87,7 +87,7 @@ class FinancialDocView:
                            20,
                            self.select_row)
 
-        Button(win, text="New", width=8, command=self.reset_form(), bg="lightgreen").place(x=35, y=240)
+        Button(win, text="New", width=8, command=self.reset_form, bg="lightgreen").place(x=35, y=240)
         Button(win, text="Save", width=8, command=self.save_click).place(x=140, y=240)
         Button(win, text="Edit", width=8, command=self.edit_click).place(x=35, y=280)
         Button(win, text="Remove", width=8, command=self.remove_click, bg="red").place(x=140, y=280)
