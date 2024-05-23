@@ -79,6 +79,21 @@ class DrivingLicenseDa(Da):
         else:
             raise ValueError("No driving license Found !")
 
+
+    def find_by_serial_number_and_person_id(self, serial_number, person_id):
+        self.connect()
+        self.cursor.execute("SELECT * FROM driving_license_tbl WHERE serial_number=%s and person_id=%s", [serial_number,person_id])
+        drivnglicenc_tuple = self.cursor.fetchone()
+        self.disconnect()
+        person_da = PersonDa()
+        if drivnglicenc_tuple:
+            drivingLicense = DrivingLicense(drivnglicenc_tuple[1], drivnglicenc_tuple[2], drivnglicenc_tuple[3],
+                                            drivnglicenc_tuple[4], person_da.find_by_id(drivnglicenc_tuple[5]))
+            drivingLicense.id = drivnglicenc_tuple[0]
+            return drivingLicense
+        else:
+            raise ValueError("No driving license Found !")
+
     def find_by_person_id(self, person_id):
         self.connect()
         self.cursor.execute("SELECT * FROM driving_license_tbl where person_id=%s", [person_id])
