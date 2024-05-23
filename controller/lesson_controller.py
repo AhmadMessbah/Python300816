@@ -11,24 +11,21 @@ class LessonController:
 
     @classmethod
     @exception_handling
-    def save(cls, name, grade, year, month, day, teacher_id):
+    def save(cls, name, grade, date, teacher_id):
         if teacher_id:
             teacher = cls.person_da.find_by_id(teacher_id)
-            d = (int(year), int(month), int(day))
-            lesson = Lesson(name, grade, d, teacher)
+            lesson = Lesson(name, grade, date, teacher)
         else:
-            d = (int(year), int(month), int(day))
-            lesson = Lesson(name, grade, d)
+            lesson = Lesson(name, grade, date)
 
         cls.lesson_da.save(lesson)
         return True, f"Lesson saved successfully\n{lesson}"
 
     @classmethod
     @exception_handling
-    def edit(cls, lesson_id, name, grade, year, month, day, teacher_id):
+    def edit(cls, lesson_id, name, grade, date, teacher_id):
         teacher = cls.person_da.find_by_id(teacher_id)
-        d = (int(year), int(month), int(day))
-        lesson = Lesson(name, grade, d, teacher)
+        lesson = Lesson(name, grade, date, teacher)
         lesson.lesson_id = lesson_id
         old_lesson = cls.lesson_da.find_by_id(lesson_id)
         cls.lesson_da.edit(lesson)

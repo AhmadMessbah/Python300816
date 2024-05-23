@@ -3,6 +3,7 @@ from tkinter import *
 import tkinter.messagebox as msg
 from controller.lesson_controller import LessonController
 from view.component.label_text import TextWithLabel
+from view.component.persian_calendar import PersianCalendar
 from view.component.table import Table
 from view.main_view import MainView
 
@@ -12,9 +13,6 @@ class LessonView:
         self.id.variable.set("0")
         self.name.variable.set("")
         self.grade.variable.set("")
-        self.year.variable.set(2024)
-        self.month.variable.set(1)
-        self.day.variable.set(1)
 
         status, lesson_list = LessonController.find_by_teacher(self.user.person.person_id)
 
@@ -35,9 +33,7 @@ class LessonView:
     def save_click(self):
         status, message = LessonController.save(self.name.variable.get(),
                                                 self.grade.variable.get(),
-                                                self.year.variable.get(),
-                                                self.month.variable.get(),
-                                                self.day.variable.get(),
+                                                self.calendar.gregorian_date,
                                                 self.user.person.person_id
                                                 )
         if status:
@@ -50,9 +46,7 @@ class LessonView:
         status, message = LessonController.edit(self.id.variable.get(),
                                                 self.name.variable.get(),
                                                 self.grade.variable.get(),
-                                                self.year.variable.get(),
-                                                self.month.variable.get(),
-                                                self.day.variable.get(),
+                                                self.calendar.gregorian_date,
                                                 self.user.person.person_id
                                                 )
         if status:
@@ -97,9 +91,11 @@ class LessonView:
         self.name = TextWithLabel(self.win, "Name", 20, 60)
         self.grade = TextWithLabel(self.win, "Grade", 20, 100)
 
-        self.year = TextWithLabel(self.win, "Year", 20, 140, 30, "", 4)
-        self.month = TextWithLabel(self.win, "/Month", 90, 140, 45, "", 2)
-        self.day = TextWithLabel(self.win, "/Day", 165, 140, 30, "", 2)
+        # self.year = TextWithLabel(self.win, "Year", 20, 140, 30, "", 4)
+        # self.month = TextWithLabel(self.win, "/Month", 90, 140, 45, "", 2)
+        # self.day = TextWithLabel(self.win, "/Day", 165, 140, 30, "", 2)
+        Label(self.win, text="Date").place(x=20, y=140)
+        self.calendar = PersianCalendar(self.win, 80, 140)
         self.teacher = TextWithLabel(self.win, "Teacher Id", 20, 180, disabled=True)
         self.teacher.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
 
@@ -107,8 +103,8 @@ class LessonView:
         self.search_name.text_box.bind("<KeyRelease>", self.find_by_name_for_teacher)
 
         self.table = Table(self.win,
-                           ["Id", "Name", "Grade", "Date", "Teacher"],
-                           [60, 150, 150, 80, 150],
+                           ["Id", "Name", "Grade", "Date"],
+                           [60, 150, 150, 80],
                            250,
                            20,
                            self.select_row)
