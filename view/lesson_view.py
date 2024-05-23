@@ -15,7 +15,9 @@ class LessonView:
         self.year.variable.set(2024)
         self.month.variable.set(1)
         self.day.variable.set(1)
-        status, lesson_list = LessonController.find_all()
+
+        status, lesson_list = LessonController.find_by_teacher(self.user.person.person_id)
+
         if status:
             self.table.refresh_table(lesson_list)
 
@@ -27,8 +29,6 @@ class LessonView:
         self.year.variable.set(lesson_date.year)
         self.month.variable.set(lesson_date.month)
         self.day.variable.set(lesson_date.day)
-
-
 
     def save_click(self):
         status, message = LessonController.save(self.name.variable.get(),
@@ -71,11 +71,8 @@ class LessonView:
         status, lesson_list = LessonController.find_by_name(self.search_name.variable.get())
         if status:
             self.table.refresh_table(lesson_list)
-
-    def find_by_teacher(self, event):
-        status, lesson_list = LessonController.find_by_teacher(self.search_teacher.variable.get())
-        if status:
-            self.table.refresh_table(lesson_list)
+            if self.search_name.variable.get() == '':
+                self.reset_form()
 
     def close_win(self):
         self.win.destroy()
@@ -98,17 +95,14 @@ class LessonView:
         self.name = TextWithLabel(self.win, "Name", 20, 60)
         self.grade = TextWithLabel(self.win, "Grade", 20, 100)
 
-
         self.year = TextWithLabel(self.win, "Year", 20, 140, 30, "", 4)
         self.month = TextWithLabel(self.win, "/Month", 90, 140, 45, "", 2)
         self.day = TextWithLabel(self.win, "/Day", 165, 140, 30, "", 2)
-        self.teacher = TextWithLabel(self.win, "Teacher Id", 20, 180,disabled=True)
+        self.teacher = TextWithLabel(self.win, "Teacher Id", 20, 180, disabled=True)
         self.teacher.variable.set(self.user.person.person_id)
 
-        self.search_name = TextWithLabel(self.win, "Find By Name", 250, 260, 100)
+        self.search_name = TextWithLabel(self.win, "Find Lesson Name", 250, 260, 120)
         self.search_name.text_box.bind("<KeyRelease>", self.find_by_name)
-        self.search_teacher = TextWithLabel(self.win, "Find By Teacher", 550, 260, 100)
-        self.search_teacher.text_box.bind("<KeyRelease>", self.find_by_teacher)
 
         self.table = Table(self.win,
                            ["Id", "Name", "Grade", "Date", "Teacher"],
@@ -120,10 +114,9 @@ class LessonView:
         Button(self.win, text="New", width=10, command=self.reset_form, bg='#86CA93', fg='black').place(x=20, y=220)
         Button(self.win, text="Save", width=10, command=self.save_click).place(x=120, y=220)
         Button(self.win, text="Edit", width=10, command=self.edit_click).place(x=20, y=260)
-        Button(self.win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=120, y=260)
+        Button(self.win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=120,
+                                                                                                             y=260)
 
         self.reset_form()
 
         self.win.mainloop()
-
-
