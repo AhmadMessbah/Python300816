@@ -74,7 +74,7 @@ class DrivingLicenseView:
         # center form
         x = (win.winfo_screenwidth() - 1050) // 2
         y = (win.winfo_screenheight() - 300) // 2
-        win.geometry(f"850x500+{x}+{y}")
+        win.geometry(f"1000x400+{x}+{y}")
 
         self.id = TextWithLabel(win, "ID", 30, 20, disabled=True)
         self.serial_number = TextWithLabel(win, "SerialNumber", 30, 50)
@@ -83,7 +83,7 @@ class DrivingLicenseView:
         self.expire_date = TextWithLabel(win, "ExpireDate", 30, 200)
         self.person = TextWithLabel(win, "Person", 30, 250)
 
-        self.search_searial_number = TextWithLabel(win, "Find By Serial Number", 250, 260, 100)
+        self.search_searial_number = TextWithLabel(win, "Find By Serial Number", 250, 300, 100)
         self.search_searial_number.text_box.bind("<KeyRelease>", self.find_by_serial_number)
 
         self.table = Table(win,
@@ -95,8 +95,8 @@ class DrivingLicenseView:
 
         Button(win, text="New", width=10, command=self.reset_form, bg='#86CA93', fg='black').place(x=20, y=300)
         Button(win, text="Save", width=10, command=self.save_click).place(x=100, y=300)
-        Button(win, text="Edit", width=10, command=self.edit_click).place(x=180, y=300)
-        Button(win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=260, y=300)
+        Button(win, text="Edit", width=10, command=self.edit_click).place(x=20, y=350)
+        Button(win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=100, y=350)
 
         self.reset_form()
 
