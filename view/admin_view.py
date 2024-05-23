@@ -22,9 +22,7 @@ class AdminView:
         self.id.variable.set(person[0])
         self.name.variable.set(person[1])
         self.family.variable.set(person[2])
-        print(person[3])
-        print(type(person[3]))
-        # self.birth_date.set_date(person[3])
+        self.birth_date.set_date(person[3])
 
     def save_click(self):
         status, message = PersonController.save(self.name.variable.get(), self.family.variable.get(),
@@ -65,8 +63,6 @@ class AdminView:
         self.user = user
         self.win = Tk()
 
-        # todo : add these two line
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         self.win.geometry("600x300")

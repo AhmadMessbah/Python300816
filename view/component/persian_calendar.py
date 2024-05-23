@@ -1,14 +1,17 @@
 import tkinter.ttk
 
 from tkinter import ttk
-from datetime import datetime
+from datetime import datetime, date
 
 from persiantools.jdatetime import JalaliDate
 
+
 class PersianCalendar:
-    def set_date(self, date):
-        self.gregorian_date = date
-        self.persian_date = JalaliDate(date)
+    def set_date(self, d_date):
+        if type(d_date) == str:
+            d_date = datetime.strptime(d_date.replace("/", "-"), '%Y-%m-%d')
+        self.gregorian_date = d_date
+        self.persian_date = JalaliDate(d_date)
 
         self.year.set(self.persian_date.year)
         self.month.set(self.persian_date.month)
