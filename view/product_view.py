@@ -103,6 +103,7 @@ class ProductView:
                            20,
                            self.select_row)
 
+
         Button(self.win, text="Add", width=10, command=self.save_click, bg="lightgreen").place(x=20, y=250)
         Button(self.win, text="Edit", width=10, command=self.edit_click, bg="lightblue").place(x=20, y=285)
         Button(self.win, text="Remove", width=10, command=self.remove_click, bg="red").place(x=125, y=250)
