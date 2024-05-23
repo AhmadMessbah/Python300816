@@ -87,7 +87,7 @@ class LessonDa(Da):
 
     def find_by_teacher(self, teacher_id):
         self.connect()
-        self.cursor.execute("SELECT * FROM LESSON_TBL WHERE TEACHER_ID LIKE %s", [teacher_id + "%"])
+        self.cursor.execute("SELECT * FROM LESSON_TBL WHERE TEACHER_ID=%s", [teacher_id])
         lesson_tuple_list = self.cursor.fetchall()
         self.disconnect()
         person_da = PersonDa()
@@ -103,6 +103,7 @@ class LessonDa(Da):
             return lesson_list
         else:
             raise ValueError("No Teacher Found !")
+
 
     def find_teacher_count_by_teacher_id(self, teacher_id):
         self.connect()
