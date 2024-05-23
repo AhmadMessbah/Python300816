@@ -34,14 +34,13 @@ class FinancialDocDa(Da):
         self.cursor.execute("SELECT * FROM FinancialDoc_tbl")
         financial_tuple_list = self.cursor.fetchall()
         self.disconnect()
-        print(financial_tuple_list)
         person_da = PersonDa()
         if financial_tuple_list:
             financial_list = []
             for financial_tuple in financial_tuple_list:
                 financial_doc = FinancialDoc(financial_tuple[1], financial_tuple[2], financial_tuple[3],
                                              financial_tuple[4])
-                financial_doc.financial_doc_id = financial_list[0]
+                financial_doc.financial_doc_id = financial_tuple[0]
                 financial_doc.person = person_da.find_by_id(financial_tuple[5])
                 financial_list.append(financial_doc)
             return financial_list
@@ -73,7 +72,7 @@ class FinancialDocDa(Da):
             for financial_tuple in financial_tuple_list:
                 financial_doc = FinancialDoc(financial_tuple[1], financial_tuple[2], financial_tuple[3],
                                              financial_tuple[4])
-                financial_doc.financial_doc_id = financial_list[0]
+                financial_doc.financial_doc_id = financial_tuple[0]
                 financial_doc.person = person_da.find_by_id(financial_tuple[5])
                 financial_list.append(financial_doc)
             return financial_list
@@ -91,7 +90,7 @@ class FinancialDocDa(Da):
             for financial_tuple in financial_tuple_list:
                 financial_doc = FinancialDoc(financial_tuple[1], financial_tuple[2], financial_tuple[3],
                                              financial_tuple[4])
-                financial_doc.financial_doc_id = financial_list[0]
+                financial_doc.financial_doc_id = financial_tuple[0]
                 financial_doc.person = person_da.find_by_id(financial_tuple[5])
                 financial_list.append(financial_doc)
             return financial_list

@@ -80,7 +80,7 @@ class FinancialDocView:
         self.person_id = TextWithLabel(win, "Person", 20, 180, disabled=True)
         self.person_id.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
         self.date_time = TextWithLabel(win, "Date", 20, 220)
-        self.search_date_time = TextWithLabel(win, "date time:", 300, 270)
+        self.search_date_time = TextWithLabel(win, "date time:", 300, 270,disabled=True)
         self.search_date_time.text_box.bind("<KeyRelease>", self.find_by_date)
 
         self.table = Table(win,
