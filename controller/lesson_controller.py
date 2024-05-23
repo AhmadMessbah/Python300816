@@ -4,7 +4,6 @@ from model.entity.lesson import Lesson
 from model.tools.decorators import exception_handling
 
 
-
 class LessonController:
     lesson_da = LessonDa()
     person_da = PersonDa()

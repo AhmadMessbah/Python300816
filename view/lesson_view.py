@@ -7,7 +7,6 @@ from view.component.persian_calendar import PersianCalendar
 from view.component.table import Table
 from view.main_view import MainView
 
-
 class LessonView:
     def reset_form(self):
         self.id.variable.set("0")
