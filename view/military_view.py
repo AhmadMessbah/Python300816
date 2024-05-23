@@ -9,6 +9,7 @@ from view.main_view import MainView
 class MilitaryView:
 
     def reset_form(self):
+        self.id.set("")
         self.serial_number.variable.set("")
         self.city.variable.set("")
         self.organ.variable.set("")
@@ -23,10 +24,8 @@ class MilitaryView:
         if status:
             self.table.refresh_table(military_list)
 
-
     def select_row(self, military):
-        self.ID.set(military[0])
-        self.id.variable.set(military[0])
+        self.id.set(military[0])
         self.serial_number.variable.set(str("{:011d}".format(military[1])))
         self.city.variable.set(military[2])
         self.organ.variable.set(military[3])
@@ -57,7 +56,7 @@ class MilitaryView:
             msg.showerror("Save Error", message)
 
     def edit_click(self):
-        status, message = MilitaryController.edit(self.id.variable.get(),
+        status, message = MilitaryController.edit(self.id.get(),
                                                   self.serial_number.variable.get(),
                                                   self.city.variable.get(),
                                                   self.organ.variable.get(),
@@ -75,7 +74,7 @@ class MilitaryView:
             msg.showerror("Edit Error", message)
 
     def remove_click(self):
-        status, message = MilitaryController.remove(self.id.variable.get())
+        status, message = MilitaryController.remove(self.id.get())
         if status:
             msg.showinfo("Remove Record", "Person Removed")
             self.reset_form()
@@ -89,23 +88,23 @@ class MilitaryView:
     def __init__(self, user):
         self.user = user
         self.win = Tk()
-
-        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
-        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
-
-
         self.win.title("MilitaryRecord")
         self.win.resizable(width=False, height=False)
+
+        # MAIN_VIEW CONNECT
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
+        self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         # CENTER FORM
         x = (self.win.winfo_screenwidth() - 1165) // 2
         y = (self.win.winfo_screenheight() - 300) // 2
         self.win.geometry(f"1165x300+{x}+{y}")
 
+        # VARIABLE
+        self.id = StringVar()
+
         # WIDGETS
-        self.ID = StringVar()
-        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, width=6, disabled=True)
-        self.id = TextWithLabel(self.win, "ID", 140, 20, disabled=True, distance=25, width=6)
+        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, disabled=True)
         self.serial_number = TextWithLabel(self.win, "Serial", 20, 60)
         self.city = TextWithLabel(self.win, "City", 20, 100)
         self.organ = TextWithLabel(self.win, "Organ", 20, 140)
@@ -121,16 +120,16 @@ class MilitaryView:
         self.end_day = TextWithLabel(self.win, "/", 165, 220, 12, disabled=False, width=4)
 
         self.table = Table(self.win,
-                           ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Person Information"],
+                           ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Person Info"],
                            [60, 100, 100, 100, 100, 100, 320],
                            250,
                            20,
                            self.select_row)
 
+        # BUTTONS
         Button(self.win, text="Add", width=7, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
         Button(self.win, text="Edit", width=7, command=self.edit_click, bg="#e2e2e2").place(x=85, y=260)
         Button(self.win, text="Remove", width=7, command=self.remove_click, bg="#e2e2e2").place(x=155, y=260)
 
         self.reset_form()
         self.win.mainloop()
-
