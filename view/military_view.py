@@ -25,6 +25,7 @@ class MilitaryView:
 
 
     def select_row(self, military):
+        self.ID.set(military[0])
         self.id.variable.set(military[0])
         self.serial_number.variable.set(str("{:011d}".format(military[1])))
         self.city.variable.set(military[2])
@@ -102,6 +103,7 @@ class MilitaryView:
         self.win.geometry(f"1165x300+{x}+{y}")
 
         # WIDGETS
+        self.ID = StringVar()
         self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, width=6, disabled=True)
         self.id = TextWithLabel(self.win, "ID", 140, 20, disabled=True, distance=25, width=6)
         self.serial_number = TextWithLabel(self.win, "Serial", 20, 60)
@@ -126,8 +128,8 @@ class MilitaryView:
                            self.select_row)
 
         Button(self.win, text="Add", width=7, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
-        Button(self.win, text="Edit", width=7, command=self.edit_click, bg="#e2e2e2").place(x=90, y=260)
-        Button(self.win, text="Remove", width=7, command=self.remove_click, bg="#e2e2e2").place(x=145, y=260)
+        Button(self.win, text="Edit", width=7, command=self.edit_click, bg="#e2e2e2").place(x=85, y=260)
+        Button(self.win, text="Remove", width=7, command=self.remove_click, bg="#e2e2e2").place(x=155, y=260)
 
         self.reset_form()
         self.win.mainloop()
