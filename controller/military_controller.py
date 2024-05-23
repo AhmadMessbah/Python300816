@@ -78,5 +78,10 @@ class MilitaryController:
 
     @classmethod
     @exception_handling
-    def find_by_soldier_id(cls, soldier_id):
-        return True, cls.military_da.find_by_soldier_id(int(soldier_id))
+    def find_by_id(cls, military_id):
+        return True, cls.military_da.find_by_id(military_id)
+
+    @classmethod
+    @exception_handling
+    def find_by_person(cls, soldier_id):
+        return True, cls.military_da.find_by_person(int(soldier_id))
