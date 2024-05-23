@@ -16,6 +16,9 @@ class FinancialDocView:
         status, financial_list = FinancialDocController.find_all()
         if status:
             self.table.refresh_table(financial_list)
+        else:
+            self.table.refresh_table([])
+
 
     def select_row(self, financial_doc):
         self.id.variable.set(financial_doc[0])
