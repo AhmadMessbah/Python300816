@@ -28,6 +28,10 @@ class MilitaryView:
         self.serial_number.variable.set(str("{:011d}".format(military[1])))
         self.city.variable.set(military[2])
         self.organ.variable.set(military[3])
+        start_date = datetime.strptime(military[4], "%Y-%m-%d")
+        self.start_calendar.set_date(start_date)
+        end_date = datetime.strptime(military[5], "%Y-%m-%d")
+        self.end_calendar.set_date(end_date)
 
     def save_click(self):
         status, message = MilitaryController.save(self.serial_number.variable.get(),
