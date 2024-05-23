@@ -1,7 +1,9 @@
+from datetime import datetime
 from tkinter import *
 import tkinter.messagebox as msg
 from controller.military_controller import MilitaryController
 from view.component.label_text import TextWithLabel
+from view.component.persian_calendar import PersianCalendar
 from view.component.table import Table
 from view.main_view import MainView
 
@@ -13,16 +15,13 @@ class MilitaryView:
         self.serial_number.variable.set("")
         self.city.variable.set("")
         self.organ.variable.set("")
-        self.start_year.variable.set("")
-        self.start_month.variable.set("")
-        self.start_day.variable.set("")
-        self.end_year.variable.set("")
-        self.end_month.variable.set("")
-        self.end_day.variable.set("")
-        self.soldier_id.variable.set(self.user.person.person_id)
+
         status, military_list = MilitaryController.find_by_person(self.user.person.person_id)
+
         if status:
             self.table.refresh_table(military_list)
+        else:
+            self.table.refresh_table([])
 
     def select_row(self, military):
         self.id.set(military[0])
@@ -30,25 +29,13 @@ class MilitaryView:
         self.city.variable.set(military[2])
         self.organ.variable.set(military[3])
 
-        self.start_year.variable.set(int(military[4][0:4]))
-        self.start_month.variable.set(int(military[4][5:7]))
-        self.start_day.variable.set(int(military[4][8:]))
-
-        self.end_year.variable.set(int(military[5][0:4]))
-        self.end_month.variable.set(int(military[5][5:7]))
-        self.end_day.variable.set(int(military[5][8:]))
-
     def save_click(self):
         status, message = MilitaryController.save(self.serial_number.variable.get(),
                                                   self.city.variable.get(),
                                                   self.organ.variable.get(),
-                                                  self.start_year.variable.get(),
-                                                  self.start_month.variable.get(),
-                                                  self.start_day.variable.get(),
-                                                  self.end_year.variable.get(),
-                                                  self.end_month.variable.get(),
-                                                  self.end_day.variable.get(),
-                                                  self.soldier_id.variable.get())
+                                                  self.start_calendar.gregorian_date,
+                                                  self.end_calendar.gregorian_date,
+                                                  self.user.person.person_id)
         if status:
             msg.showinfo("Save Record", "Record Saved")
             self.reset_form()
@@ -60,13 +47,9 @@ class MilitaryView:
                                                   self.serial_number.variable.get(),
                                                   self.city.variable.get(),
                                                   self.organ.variable.get(),
-                                                  self.start_year.variable.get(),
-                                                  self.start_month.variable.get(),
-                                                  self.start_day.variable.get(),
-                                                  self.end_year.variable.get(),
-                                                  self.end_month.variable.get(),
-                                                  self.end_day.variable.get(),
-                                                  self.soldier_id.variable.get())
+                                                  self.start_calendar.gregorian_date,
+                                                  self.end_calendar.gregorian_date,
+                                                  self.user.person.person_id)
         if status:
             msg.showinfo("Edit Record", "Record Edited")
             self.reset_form()
@@ -91,37 +74,35 @@ class MilitaryView:
         self.win.title("MilitaryRecord")
         self.win.resizable(width=False, height=False)
 
+        # CENTER FORM
+        x = (self.win.winfo_screenwidth() - 1145) // 2
+        y = (self.win.winfo_screenheight() - 300) // 2
+        self.win.geometry(f"1145x300+{x}+{y}")
+
         # MAIN_VIEW CONNECT
         Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
-        # CENTER FORM
-        x = (self.win.winfo_screenwidth() - 1165) // 2
-        y = (self.win.winfo_screenheight() - 300) // 2
-        self.win.geometry(f"1165x300+{x}+{y}")
-
-        # VARIABLE
-        self.id = StringVar()
-
         # WIDGETS
-        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, disabled=True)
+        self.id = StringVar()
         self.serial_number = TextWithLabel(self.win, "Serial", 20, 60)
         self.city = TextWithLabel(self.win, "City", 20, 100)
         self.organ = TextWithLabel(self.win, "Organ", 20, 140)
 
-        # START DATE
-        self.start_year = TextWithLabel(self.win, "Start Date", 20, 180, disabled=False, width=8)
-        self.start_month = TextWithLabel(self.win, "/", 130, 180, 12, disabled=False, width=4)
-        self.start_day = TextWithLabel(self.win, "/", 165, 180, 12, disabled=False, width=4)
+        # PERSON ID
+        self.soldier_id = TextWithLabel(self.win, "Person ID", 20, 20, disabled=True)
+        self.soldier_id.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
 
-        # END DATE
-        self.end_year = TextWithLabel(self.win, "End Date", 20, 220, disabled=False, width=8)
-        self.end_month = TextWithLabel(self.win, "/", 130, 220, 12, disabled=False, width=4)
-        self.end_day = TextWithLabel(self.win, "/", 165, 220, 12, disabled=False, width=4)
+        # DATE
+        Label(self.win, text="Start Date").place(x=20, y=180)
+        self.start_calendar = PersianCalendar(self.win, 80, 180)
+        Label(self.win, text="End Date").place(x=20, y=220)
+        self.end_calendar = PersianCalendar(self.win, 80, 220)
 
+        # TABLE
         self.table = Table(self.win,
                            ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Person Info"],
-                           [60, 100, 100, 100, 100, 100, 320],
+                           [60, 100, 100, 100, 100, 100, 300],
                            250,
                            20,
                            self.select_row)
