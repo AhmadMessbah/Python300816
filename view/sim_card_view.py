@@ -6,6 +6,7 @@ from view.component.table import Table
 from view.main_view import MainView
 
 
+
 class SimCardView:
     def reset_form(self):
         self.number.variable.set("")

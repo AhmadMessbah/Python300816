@@ -2,6 +2,7 @@ from model.entity.base import Base
 from model.tools.validator import Validator
 
 
+
 class User(Base):
     def __init__(self, username, password):
         self.user_id = None

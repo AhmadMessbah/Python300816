@@ -9,6 +9,7 @@ from view.main_view import MainView
 
 class LoginView:
     def login_click(self):
+
         ret, user = UserController.find_by_username_and_password(self.username.variable.get(),
                                                                  self.password.variable.get())
         if ret:

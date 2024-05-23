@@ -34,6 +34,7 @@ class FinancialDocView:
         else:
             msg.showerror("Save Error", message)
 
+
     def edit_click(self):
         status, message = FinancialDocController.edit(self.id.variable.get(),
                                                       int(self.amount.variable.get()),

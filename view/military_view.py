@@ -99,6 +99,7 @@ class MilitaryView:
         Label(self.win, text="End Date").place(x=20, y=220)
         self.end_calendar = PersianCalendar(self.win, 80, 220)
 
+
         # TABLE
         self.table = Table(self.win,
                            ["ID", "Serial Number", "City", "Organ", "Start Date", "End Date", "Person Info"],

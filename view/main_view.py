@@ -1,6 +1,7 @@
 from tkinter import *
 
 
+
 class MainView:
     def person_click(self):
         self.win.destroy()

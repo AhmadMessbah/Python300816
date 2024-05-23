@@ -38,6 +38,7 @@ class DrivingLicenseView:
         else:
             msg.showerror("Save Error", message)
 
+
     def edit_click(self):
         status, message = DrivingLicenseController.edit(self.serial_number.variable.get(),
                                                         self.date.variable.get(),

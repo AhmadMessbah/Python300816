@@ -96,6 +96,7 @@ class MedicalView:
         Button(self.win, text='edit', width=6, command=self.edit_click).place(x=95, y=220)
         Button(self.win, text='remove', width=6, command=self.remove_click).place(x=165, y=220)
 
+
         self.reset_form()
 
         self.win.mainloop()

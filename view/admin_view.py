@@ -8,6 +8,7 @@ from view.component.table import Table
 from view.main_view import MainView
 
 
+
 class AdminView:
     def reset_form(self):
         self.id.variable.set("")
