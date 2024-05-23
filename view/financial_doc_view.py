@@ -82,6 +82,7 @@ class FinancialDocView:
         self.search_date_time = TextWithLabel(win, "Date time:", 300, 270)
         self.search_date_time.text_box.bind("<KeyRelease>", self.find_by_date)
 
+
         self.table = Table(win,
                            ["Id", "Amount", "Date", "Doc Type", "Describe"],
                            [50, 100, 100, 100, 150],
