@@ -71,31 +71,31 @@ class MedicalView:
     def __init__(self, user):
         self.user = user
         self.win = Tk()
+        Label(text=user.person.name + " " + user.person.family).place(x=0, y=0)
         self.win.protocol("WM_DELETE_WINDOW", self.close_win)
 
         self.win.title('Medical Record')
-        self.win.geometry('660x300')
+        self.win.geometry('620x300')
 
         self.id = TextWithLabel(self.win, 'Record ID', 30, 20, 60, disabled=True)
         self.disease = TextWithLabel(self.win, 'Disease', 30, 60, 60)
         self.medicine = TextWithLabel(self.win, 'Medicine', 30, 100, 60)
         self.doctor = TextWithLabel(self.win, 'Doctor', 30, 140, 60)
-        self.patient_id = TextWithLabel(self.win, 'Patient', 30, 180, 60,disabled=True)
-        self.patient_id.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
-        self.search_id = TextWithLabel(self.win, 'search ID', 30, 260, 60)
+        self.patient_id = TextWithLabel(self.win, 'Patient ID', 30, 180, 60,disabled=True)
+        self.patient_id.variable.set(self.user.person.person_id)
+        self.search_id = TextWithLabel(self.win, 'Search ID', 30, 260, 60)
         self.search_id.text_box.bind("<KeyRelease>", self.search_by_id)
 
         self.table = Table(self.win,
-                      ['record ID', 'disease', 'medicine', 'doctor', 'Patient ID'],
-                      [70, 70, 70, 70, 100],
+                      ['Record ID', 'Disease', 'Medicine', 'Doctor'],
+                      [70, 90, 90, 90],
                       250,
                       20,
                       self.select_row)
 
-        Button(self.win, text='save', width=6, command=self.save_click).place(x=30, y=220)
-        Button(self.win, text='edit', width=6, command=self.edit_click).place(x=95, y=220)
-        Button(self.win, text='remove', width=6, command=self.remove_click).place(x=165, y=220)
-
+        Button(self.win, text='Save', width=6, command=self.save_click).place(x=30, y=220)
+        Button(self.win, text='Edit', width=6, command=self.edit_click).place(x=95, y=220)
+        Button(self.win, text='Remove', width=6, command=self.remove_click).place(x=165, y=220)
 
         self.reset_form()
 
