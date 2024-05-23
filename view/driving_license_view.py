@@ -14,25 +14,25 @@ class DrivingLicenseView:
         self.city.variable.set("")
         self.expire_date.variable.set("")
         self.person.variable.set("")
-        status, dl_list = DrivingLicenseController.find_all()
+        status, dl_list = DrivingLicenseController.find_by_person_id(self.user.person.person_id)
         if status:
             self.table.refresh_table(dl_list)
 
-    def select_row(self, drivingLicense):
-        self.id.variable.set(drivingLicense[0])
-        self.serial_number.variable.set(drivingLicense[1])
-        self.date.variable.set(drivingLicense[2])
-        self.city.variable.set(drivingLicense[3])
-        self.expire_date.variable.set(drivingLicense[4])
-        self.person.variable.set(drivingLicense[5])
+    def select_row(self, driving_license):
+        self.id.variable.set(driving_license[0])
+        self.serial_number.variable.set(driving_license[1])
+        self.date.variable.set(driving_license[2])
+        self.city.variable.set(driving_license[3])
+        self.expire_date.variable.set(driving_license[4])
+        self.person.variable.set(driving_license[5])
 
     def save_click(self):
         status, message = DrivingLicenseController.save(self.serial_number.variable.get(),
-                                                self.date.variable.get(),
-                                                self.city.variable.get(),
-                                                self.expire_date.variable.get(),
-                                                self.person.variable.get()
-                                                )
+                                                        self.date.variable.get(),
+                                                        self.city.variable.get(),
+                                                        self.expire_date.variable.get(),
+                                                        self.person.variable.get()
+                                                        )
         if status:
             msg.showinfo("Save DrivingLicense", "DrivingLicense Saved")
             self.reset_form()
@@ -41,11 +41,11 @@ class DrivingLicenseView:
 
     def edit_click(self):
         status, message = DrivingLicenseController.edit(self.serial_number.variable.get(),
-                                                self.date.variable.get(),
-                                                self.city.variable.get(),
-                                                self.expire_date.variable.get(),
-                                                self.person.variable.get()
-                                                )
+                                                        self.date.variable.get(),
+                                                        self.city.variable.get(),
+                                                        self.expire_date.variable.get(),
+                                                        self.person.variable.get()
+                                                        )
         if status:
             msg.showinfo("Edit DrivingLicense", "DrivingLicense Edited")
             self.reset_form()
@@ -61,7 +61,8 @@ class DrivingLicenseView:
             msg.showerror("Remove Error", message)
 
     def find_by_serial_number(self, event):
-        status, serial_number = DrivingLicenseController.find_by_seridal_number(self.search_searial_number.variable.get())
+        status, serial_number = DrivingLicenseController.find_by_serial_number_and_person_id(
+            self.search_searial_number.variable.get(), self.user.person.person_id)
         if status:
             self.table.refresh_table(serial_number)
 
@@ -93,12 +94,10 @@ class DrivingLicenseView:
                            self.select_row)
 
         Button(win, text="New", width=10, command=self.reset_form, bg='#86CA93', fg='black').place(x=20, y=300)
-        Button(win, text="Save", width=10, command=self.save_click).place(x=120, y=350)
-        Button(win, text="Edit", width=10, command=self.edit_click).place(x=20, y=400)
-        Button(win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=120, y=450)
+        Button(win, text="Save", width=10, command=self.save_click).place(x=100, y=300)
+        Button(win, text="Edit", width=10, command=self.edit_click).place(x=180, y=300)
+        Button(win, text="Remove", width=10, command=self.remove_click, bg='#F23C3C', fg='black').place(x=260, y=300)
 
         self.reset_form()
 
         win.mainloop()
-
-
