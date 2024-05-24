@@ -97,7 +97,6 @@ class MilitaryView:
         self.soldier_id.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
 
         # DATE
-        #وقتی به تاریخ ها مقدار اولیه میدم چه در تاپل و چه با رشته کل جدول از کار میفته todo:
         Label(self.win, text="Start Date").place(x=20, y=180)
         self.start_calendar = PersianCalendar(self.win, 80, 180)
         Label(self.win, text="End Date").place(x=20, y=220)
@@ -112,10 +111,10 @@ class MilitaryView:
                            self.select_row)
 
         # BUTTONS
-        Button(self.win, text="Add", width=5, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
-        Button(self.win, text="Edit", width=5, command=self.edit_click, bg="#e2e2e2").place(x=70, y=260)
-        Button(self.win, text="Remove", width=7, command=self.remove_click, bg="#e2e2e2").place(x=125, y=260)
-        Button(self.win, text="♻️", width=2, command=self.reset_form, bg="#e2e2e2").place(x=193, y=260)
+        Button(self.win, text="SAVE", width=5, command=self.save_click, bg="#e2e2e2").place(x=15, y=260)
+        Button(self.win, text="EDIT", width=5, command=self.edit_click, bg="#e2e2e2").place(x=70, y=260)
+        Button(self.win, text="REMOVE", width=7, command=self.remove_click, bg="#e2e2e2").place(x=125, y=260)
+        Button(self.win, text="RESET", width=5, command=self.reset_form, bg="#b57ede", activebackground="#ffcc65").place(x=193, y=260)
 
         self.reset_form()
         self.win.mainloop()
