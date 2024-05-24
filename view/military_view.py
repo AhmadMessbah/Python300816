@@ -15,6 +15,8 @@ class MilitaryView:
         self.serial_number.variable.set("")
         self.city.variable.set("")
         self.organ.variable.set("")
+        self.start_date.set_date(datetime.strptime("2021-03-21", "%Y-%m-%d"))
+        self.end_date.set_date(datetime.strptime("2021-03-21", "%Y-%m-%d"))
 
         status, military_list = MilitaryController.find_by_person(self.user.person.person_id)
 
@@ -28,17 +30,15 @@ class MilitaryView:
         self.serial_number.variable.set(str("{:011d}".format(military[1])))
         self.city.variable.set(military[2])
         self.organ.variable.set(military[3])
-        start_date = datetime.strptime(military[4], "%Y-%m-%d")
-        self.start_calendar.set_date(start_date)
-        end_date = datetime.strptime(military[5], "%Y-%m-%d")
-        self.end_calendar.set_date(end_date)
+        self.start_date.set_date(datetime.strptime(military[4], "%Y-%m-%d"))
+        self.end_date.set_date(datetime.strptime(military[5], "%Y-%m-%d"))
 
     def save_click(self):
         status, message = MilitaryController.save(self.serial_number.variable.get(),
                                                   self.city.variable.get(),
                                                   self.organ.variable.get(),
-                                                  self.start_calendar.gregorian_date,
-                                                  self.end_calendar.gregorian_date,
+                                                  self.start_date.gregorian_date,
+                                                  self.end_date.gregorian_date,
                                                   self.user.person.person_id)
         if status:
             msg.showinfo("Save Record", "Record Saved")
@@ -51,8 +51,8 @@ class MilitaryView:
                                                   self.serial_number.variable.get(),
                                                   self.city.variable.get(),
                                                   self.organ.variable.get(),
-                                                  self.start_calendar.gregorian_date,
-                                                  self.end_calendar.gregorian_date,
+                                                  self.start_date.gregorian_date,
+                                                  self.end_date.gregorian_date,
                                                   self.user.person.person_id)
         if status:
             msg.showinfo("Edit Record", "Record Edited")
@@ -98,9 +98,11 @@ class MilitaryView:
 
         # DATE
         Label(self.win, text="Start Date").place(x=20, y=180)
-        self.start_calendar = PersianCalendar(self.win, 80, 180)
+        self.start_date = PersianCalendar(self.win, 80, 180)
         Label(self.win, text="End Date").place(x=20, y=220)
-        self.end_calendar = PersianCalendar(self.win, 80, 220)
+        self.end_date = PersianCalendar(self.win, 80, 220)
+        self.start_date.set_date(datetime.strptime("2021-03-21", "%Y-%m-%d"))
+        self.end_date.set_date(datetime.strptime("2021-03-21", "%Y-%m-%d"))
 
         # TABLE
         self.table = Table(self.win,
