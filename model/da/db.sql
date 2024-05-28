@@ -110,6 +110,7 @@ create table medical_record
     disease    nvarchar(20) not null,
     medicine   nvarchar(20) not null,
     doctor     nvarchar(20),
+    date_time date not null,
     patient_id int,
     FOREIGN KEY (patient_id) REFERENCES person_tbl (id)
 );

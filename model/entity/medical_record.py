@@ -3,11 +3,12 @@ from model.tools.validator import Validator
 
 
 class MedicalRecord(Base):
-    def __init__(self, disease, medicine, doctor, patient=None):
+    def __init__(self, disease, medicine, doctor, date_time, patient=None):
         self.id = None
         self.disease = disease
         self.medicine = medicine
         self.doctor = doctor
+        self.date_time = date_time
         self.patient = patient
 
     def get_disease(self):
@@ -29,6 +30,12 @@ class MedicalRecord(Base):
         medical_record_validator = Validator()
         self._doctor = medical_record_validator.name_validator(doctor, "invalid name")
 
+    def get_date_time(self):
+        return self._date_time
+
+    def set_date_time(self, date_time):
+        self._date_time = Validator.date_validator(date_time, "invalid date_time")
+
     def get_patient(self):
         return self._patient
 
@@ -38,4 +45,5 @@ class MedicalRecord(Base):
     disease = property(get_disease, set_disease)
     medicine = property(get_medicine, set_medicine)
     doctor = property(get_doctor, set_doctor)
+    date_time = property(get_date_time, set_date_time)
     patient = property(get_patient, set_patient)

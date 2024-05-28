@@ -11,10 +11,11 @@ class MedicalDa(Da):
 
             self.connect()
             self.cursor.execute(
-                'INSERT INTO medical_record (disease, medicine, doctor,patient_id) VALUES (%s,%s,%s,%s)',
+                'INSERT INTO medical_record (disease, medicine, doctor,date_time,patient_id) VALUES (%s,%s,%s,%s,%s)',
                 [medical_record.disease,
                  medical_record.medicine,
                  medical_record.doctor,
+                 medical_record.date_time,
                  medical_record.patient.person_id if medical_record.patient else None])
             self.connection.commit()
             self.disconnect()
@@ -27,10 +28,11 @@ class MedicalDa(Da):
 
             self.connect()
             self.cursor.execute(
-                'UPDATE medical_record set disease = %s, medicine = %s, doctor = %s , patient_id = %s WHERE id = %s',
+                'UPDATE medical_record set disease = %s, medicine = %s, doctor = %s ,date_time = %s , patient_id = %s WHERE id = %s',
                 [medical_record.disease,
                  medical_record.medicine,
                  medical_record.doctor,
+                 medical_record.date_time,
                  medical_record.patient.person_id if medical_record.patient else None,
                  medical_record.id])
             self.connection.commit()
@@ -57,7 +59,8 @@ class MedicalDa(Da):
                     tuple_record[1],
                     tuple_record[2],
                     tuple_record[3],
-                    person_da.find_by_id(tuple_record[4]))
+                    tuple_record[4],
+                    person_da.find_by_id(tuple_record[5]))
                 medical_records.id = tuple_record[0]
                 medical_records_list.append(medical_records)
             return medical_records_list
@@ -71,8 +74,11 @@ class MedicalDa(Da):
         self.disconnect()
         person_da = PersonDa()
         if tuple_record:
-            medical_records = MedicalRecord(tuple_record[1], tuple_record[2], tuple_record[3],
-                                            person_da.find_by_id(tuple_record[4]))
+            medical_records = MedicalRecord(tuple_record[1],
+                                            tuple_record[2],
+                                            tuple_record[3],
+                                            tuple_record[4],
+                                            person_da.find_by_id(tuple_record[5]))
             medical_records.id = tuple_record[0]
             return medical_records
         else:
@@ -91,7 +97,8 @@ class MedicalDa(Da):
                     tuple_record[1],
                     tuple_record[2],
                     tuple_record[3],
-                    person_da.find_by_id(tuple_record[4]))
+                    tuple_record[4],
+                    person_da.find_by_id(tuple_record[5]))
                 medical_records.id = tuple_record[0]
                 medical_records_list.append(medical_records)
             return medical_records_list
