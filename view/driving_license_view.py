@@ -5,15 +5,16 @@ from controller.driving_license_controller import DrivingLicenseController
 from view.component.label_text import TextWithLabel
 from view.component.table import Table
 from view.main_view import MainView
+from view.component.persian_calendar import PersianCalendar
 
 
 class DrivingLicenseView:
     def reset_form(self):
         self.id.variable.set("0")
         self.serial_number.variable.set("")
-        self.date.variable.set("")
+        self.date.variable.set(datetime.strptime("2021-03-21", "%Y-%m-%d"))
         self.city.variable.set("")
-        self.expire_date.variable.set("")
+        self.expire_date.variable.set(datetime.strptime("2021-03-21", "%Y-%m-%d"))
         status, dl_list = DrivingLicenseController.find_by_person_id(self.user.person.person_id)
         if status:
             self.table.refresh_table(dl_list)
@@ -21,15 +22,15 @@ class DrivingLicenseView:
     def select_row(self, driving_license):
         self.id.variable.set(driving_license[0])
         self.serial_number.variable.set(driving_license[1])
-        self.date.variable.set(driving_license[2])
+        self.date.variable.set(datetime.strptime(driving_license[2], "%Y-%m-%d"))
         self.city.variable.set(driving_license[3])
-        self.expire_date.variable.set(driving_license[4])
+        self.expire_date.variable.set(datetime.strptime(driving_license[4], "%Y-%m-%d"))
 
     def save_click(self):
         status, message = DrivingLicenseController.save(self.serial_number.variable.get(),
-                                                        self.date.variable.get(),
+                                                        self.date.gregorian_date,
                                                         self.city.variable.get(),
-                                                        self.expire_date.variable.get(),
+                                                        self.expire_date.gregorian_date,
                                                         self.person.variable.get()
                                                         )
         if status:
@@ -41,9 +42,9 @@ class DrivingLicenseView:
 
     def edit_click(self):
         status, message = DrivingLicenseController.edit(self.serial_number.variable.get(),
-                                                        self.date.variable.get(),
+                                                        self.date.gregorian_date,
                                                         self.city.variable.get(),
-                                                        self.expire_date.variable.get(),
+                                                        self.expire_date.gregorian_date,
                                                         self.person.variable.get()
                                                         )
         if status:
@@ -85,9 +86,16 @@ class DrivingLicenseView:
 
         self.id = TextWithLabel(self.win, "ID", 30, 20, disabled=True)
         self.serial_number = TextWithLabel(self.win, "SerialNumber", 30, 50)
-        self.date = TextWithLabel(self.win, "Date", 30, 100)
+
+        self.date = PersianCalendar(self.win,30, 100)
+
         self.city = TextWithLabel(self.win, "City", 30, 150)
-        self.expire_date = TextWithLabel(self.win, "ExpireDate", 30, 200)
+
+        self.expire_date = PersianCalendar(self.win, 30, 200)
+
+        self.date.set_date(datetime.strptime("2021-03-21", "%Y-%m-%d"))
+        self.expire_date.set_date(datetime.strptime("2024-03-21", "%Y-%m-%d"))
+
         self.person = TextWithLabel(self.win, "Person", 30, 250, disabled=True)
         self.person.variable.set(f"{self.user.person.person_id} - {self.user.person.name} {self.user.person.family}")
 

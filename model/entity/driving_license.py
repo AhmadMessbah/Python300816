@@ -21,7 +21,7 @@ class DrivingLicense(Base):
         return self._date
 
     def set_date(self, date):
-        self._date = date
+        self._date =  Validator.date_validator(date, "Invalid End Date")
 
     def get_city(self):
         return self._city
@@ -33,7 +33,7 @@ class DrivingLicense(Base):
         return self._expire_date
 
     def set_expire_date(self, expire_date):
-        self._expire_date = expire_date
+        self._expire_date =  Validator.date_validator(expire_date, "Invalid End Date")
 
     def get_person(self):
         return self._person
