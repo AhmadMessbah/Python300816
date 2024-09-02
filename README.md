@@ -30,3 +30,4 @@ Tasks :
         - SimCard
         - Car
         - DrivingLicense
+        - MilitaryRecord
